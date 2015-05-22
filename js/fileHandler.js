@@ -28,8 +28,11 @@ function handleFileSelect(evt) {
 function processData(allText) {
     var allTextLines = allText.split(/\r\n|\n/);
     var lines = [];
-    for (var i = 0; i < allTextLines.length; ++i)
-        lines.push(allTextLines[i].split(', '));
+    var edge;
+    for (var i = 0; i < allTextLines.length; ++i) {
+        edge = allTextLines[i].split(',');
+        lines.push([edge[0].trim(), edge[1].trim()]);
+    }
     var nodesDataJson = getNodesDataAsJSON(lines);
     var edgesDataJson = getEdgesDataAsJSON(lines);
 
