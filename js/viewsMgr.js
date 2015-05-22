@@ -1,6 +1,7 @@
 function showGraph() {
     $("#graph").show();
     $("#centralityMenu").show();
+    $("#resultTable").html("");
 }
 
 function hideGraph() {
