@@ -18,8 +18,8 @@ function handleFileSelect(evt) {
     reader.onload = (function (theFile) {
         return function (e) {
             var graphData = processData(e.target.result);
-            console.log(calculateResults(graphData));
-            draw(graphData, document.getElementById("graph"));
+            globalGraph = new GraphMgr(graphData);
+            globalGraph.draw(document.getElementById("graph"));
             showGraph();
             hideFileLoader();
         };
