@@ -8,12 +8,16 @@
     <script type="text/javascript" src="js/cytoscape.js"></script>
     <script type="text/javascript" src="js/fileHandler.js"></script>
     <script type="text/javascript" src="js/graphDrawer.js"></script>
+    <script type="text/javascript" src="js/viewsMgr.js"></script>
+    <script type="text/javascript" src="js/centralityMgr.js"></script>
 </head>
 <body>
-<input type="file" id="fileLoader" name="files[]" multiple/>
-<output id="list"></output>
+
+<input id="fileLoader" type="file" name="files[]"/>
 
 <div id="graph"></div>
-
+<div id="centralityMenu">
+    <button type="button" onclick="showFileLoader()">Wczytaj nowy plik</button>
+</div>
 </body>
 </html>

@@ -1,9 +1,8 @@
 $(document).ready(function () {
-
     $("#fileLoader").change(function (evt) {
         handleFileSelect(evt);
     });
-
+    hideGraph();
 });
 
 function handleFileSelect(evt) {
@@ -20,6 +19,8 @@ function handleFileSelect(evt) {
         return function (e) {
             var graphData = processData(e.target.result);
             draw(graphData, document.getElementById("graph"));
+            showGraph();
+            hideFileLoader();
         };
     })(file);
     reader.readAsText(file);
