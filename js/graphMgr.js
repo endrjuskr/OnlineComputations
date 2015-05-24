@@ -9,7 +9,8 @@ function GraphMgr(graphData) {
                     css: {
                         'content': 'data(id)',
                         'text-valign': 'center',
-                        'text-halign': 'center'
+                        'text-halign': 'center',
+                        'font-size': 'small'
                     }
                 },
                 {
@@ -36,7 +37,7 @@ function GraphMgr(graphData) {
                     }
                 }
             ],
-            elements: this.graphData,
+            elements: this.graphData.graph,
             layout: {
                 name: 'cose',
                 padding: 5
