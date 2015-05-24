@@ -2,19 +2,21 @@ function showGraph() {
     $("#graph").show();
     $("#centralityMenu").show();
     $("#resultTable").html("");
+    $(".row").show();
 }
 
 function hideGraph() {
     $("#graph").hide();
     $("#centralityMenu").hide();
+    $(".row").hide();
 }
 
 function hideFileLoader() {
-    $("#fileLoader").hide();
+    $("#fileLoaderButton").hide();
 }
 
 function showFileLoader() {
     $("#fileLoader").val("");
-    $("#fileLoader").show();
+    $("#fileLoaderButton").show();
     hideGraph();
 }
