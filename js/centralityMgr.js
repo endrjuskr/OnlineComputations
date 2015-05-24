@@ -1,12 +1,14 @@
 function calculateResults() {
     var graph = globalGraph.graphData;
     var result = new Array();
-    var degree = calculateDegree(graph);
-    var algorithm1 = calculateCentralityAlgorithm1(graph);
+    var degree = calculateDegree(graph.graph);
+    var algorithm1 = calculateCentralityAlgorithm1(graph.graph);
+    var algorithm2 = calculateCentralityAlgorithm2(graph);
     var degreeResult = new Array();
     var algorithm1Result = new Array();
-    for (var i = 0; i < graph.nodes.length; ++i) {
-        var node = graph.nodes[i].data.id;
+    var algorithm2Result = new Array();
+    for (var i = 0; i < graph.graph.nodes.length; ++i) {
+        var node = graph.graph.nodes[i].data.id;
         algorithm1Result.push({
             key: node,
             value: algorithm1[node]
@@ -15,15 +17,24 @@ function calculateResults() {
             key: node,
             value: degree[node]
         });
+        algorithm2Result.push({
+            key: node,
+            value: algorithm2[node]
+        });
     }
     result.push({
-        title: "degree",
+        title: "Degree",
         values: degreeResult
     });
 
     result.push({
-        title: "centrality algorithm 1",
+        title: "Centrality algorithm 1",
         values: algorithm1Result
+    });
+
+    result.push({
+        title: "Centrality algorithm 2 (k = " + graph.params["k"] + ")",
+        values: algorithm2Result
     });
 
     generateResultTable(result);
@@ -63,13 +74,33 @@ function calculateCentralityAlgorithm1(graph) {
     var sv = new Array();
     for (var i = 0; i < graph.nodes.length; ++i) {
         var node = graph.nodes[i];
-        sv[node.data.id] = 1 / degree[node.data.id];
+        sv[node.data.id] = 1 / (1 + degree[node.data.id]);
         for (var j = 0; j < neighbours[node.data.id].length; ++j) {
             var neighbour = neighbours[node.data.id][j];
-            sv[node.data.id] = 1 / degree[neighbour];
+            sv[node.data.id] += 1 / (1 + degree[neighbour]);
         }
     }
     return sv;
+}
+
+function calculateCentralityAlgorithm2(graphWithParams) {
+    var graph = graphWithParams.graph;
+    var params = graphWithParams.params;
+    var degree = calculateDegree(graph);
+    var neighbours = calculateNeighbours(graph);
+    var k = parseInt(params["k"]);
+    console.log(k);
+    var sv = new Array();
+    for (var i = 0; i < graph.nodes.length; ++i) {
+        var node = graph.nodes[i];
+        sv[node.data.id] = Math.min(1, k / (1 + degree[node.data.id]));
+        for (var j = 0; j < neighbours[node.data.id].length; ++j) {
+            var neighbour = neighbours[node.data.id][j];
+            sv[node.data.id] += Math.max(0, (degree[neighbour] - k + 1) / (degree[neighbour] * (1 + degree[neighbour])));
+        }
+    }
+    return sv;
+
 }
 
 

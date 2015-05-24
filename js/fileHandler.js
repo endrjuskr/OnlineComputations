@@ -33,31 +33,37 @@ function handleFileSelect(evt) {
 
 function processData(allText) {
     var allTextLines = allText.split(/\r\n|\n/);
-    var lines = [];
+    var lines = new Array();
     var edge;
-    for (var i = 0; i < allTextLines.length; ++i) {
+    var nodes = new Array();
+    var nodesCount = parseInt(allTextLines[0]);
+    for (var i = 1; i <= nodesCount ; ++i) {
+        var weight = parseInt(allTextLines[i]);
+        nodes.push([i.toString(), weight]);
+    }
+    var edgesCount = parseInt(allTextLines[nodesCount + 1]);
+    for (var i = nodesCount + 2; i <= nodesCount + edgesCount + 1; ++i) {
         edge = allTextLines[i].split(',');
         lines.push([edge[0].trim(), edge[1].trim()]);
     }
-    var nodesDataJson = getNodesDataAsJSON(lines);
-    var edgesDataJson = getEdgesDataAsJSON(lines);
 
-    return {nodes: nodesDataJson, edges: edgesDataJson};
-}
-
-function getNodesDataAsJSON(lines) {
-    var nodesData = [];
-    for (var i = 0; i < lines.length; ++i) {
-        var line = lines[i];
-        if (nodesData.indexOf(line[0]) < 0)
-            nodesData.push(line[0]);
-        if (nodesData.indexOf(line[1]) < 0)
-            nodesData.push(line[1]);
+    var paramList = new Array();
+    for (var i = nodesCount + edgesCount + 2; i < allTextLines.length; ++i) {
+        param = allTextLines[i].split(',');
+        paramList[param[0]] = param[1];
     }
 
+    var nodesDataJson = getNodesDataAsJSON(nodes);
+    var edgesDataJson = getEdgesDataAsJSON(lines);
+
+    return { graph: { nodes: nodesDataJson, edges: edgesDataJson }, params: paramList };
+}
+
+function getNodesDataAsJSON(nodes) {
     var nodesDataJSON = [];
-    for (var j = 0; j < nodesData.length; ++j)
-        nodesDataJSON.push({data: {id: nodesData[j]}})
+    for (var j = 0; j < nodes.length; ++j) {
+        nodesDataJSON.push({ data: { id: nodes[j][0], wieght: nodes[j][1] } });
+    }
 
     return nodesDataJSON;
 }
@@ -66,7 +72,7 @@ function getEdgesDataAsJSON(lines) {
     var edgesDataJSON = [];
     for (var i = 0; i < lines.length; ++i) {
         var line = lines[i];
-        edgesDataJSON.push({data: {id: i.toString(), source: line[0], target: line[1]}});
+        edgesDataJSON.push({data: {id: "e" + i.toString(), source: line[0], target: line[1]}});
     }
     return edgesDataJSON;
 }
