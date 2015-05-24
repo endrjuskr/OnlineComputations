@@ -5,10 +5,14 @@ $(document).ready(function () {
     hideGraph();
 });
 
+function uploadFile() {
+    $("#fileLoader").click();
+}
+
 function handleFileSelect(evt) {
     var file = evt.target.files[0];
 
-    if (!file.type.match('(.*)/csv')) {
+    if (!file.name.match('(.*).csv')) {
         console.log("niepoprawny rodzaj pliku");
         return;
     }

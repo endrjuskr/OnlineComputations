@@ -75,19 +75,28 @@ function calculateCentralityAlgorithm1(graph) {
 
 function generateResultTable(resultDataJSON) {
     var tableHTML = "";
+    tableHTML += "<table class=\"table table-striped\">";
+    tableHTML += "<thead><tr><th>Node</th>";
     for (var i = 0; i < resultDataJSON.length; ++i) {
         var centralityMethod = resultDataJSON[i];
-        tableHTML += "<table>";
-        tableHTML += "<caption>" + centralityMethod.title + "</caption>";
-        for (var j = 0; j < centralityMethod.values.length; ++j) {
-            var centralityResult = centralityMethod.values[j];
-            tableHTML += "<tr>";
-            tableHTML += "<td>" + centralityResult.key + "</td>";
-            tableHTML += "<td>" + centralityResult.value + "</td>";
-            tableHTML += "</tr>"
-        }
-        tableHTML += "</table>";
+        tableHTML += "<th>" + centralityMethod.title + "</th>";
     }
+
+    tableHTML += "</tr></thead>";
+    tableHTML += "<tbody>";
+    for (var i = 0; i < resultDataJSON[0].values.length; ++i) {
+        var point = resultDataJSON[0].values[i];
+        tableHTML += "<tr><td>" + point.key + "</td>";
+
+        for (var j = 0; j < resultDataJSON.length; ++j) {
+            var value = resultDataJSON[j].values[i];
+            tableHTML += "<td>" + value.value + "</td>";
+        }
+        tableHTML += "</tr>";
+    }
+
+    tableHTML += "</tbody>";
+    tableHTML += "</table>";
 
     $("#resultTable").html(tableHTML);
 }

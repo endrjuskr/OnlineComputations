@@ -25,9 +25,6 @@ function GraphMgr(graphData) {
                 },
                 {
                     selector: 'edge',
-                    css: {
-                        'target-arrow-shape': 'triangle'
-                    }
                 },
                 {
                     selector: ':selected',
