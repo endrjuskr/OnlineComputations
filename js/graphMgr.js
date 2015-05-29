@@ -1,7 +1,8 @@
 function GraphMgr(graphData) {
     this.graphData = graphData;
+    this.printedGraph = null;
     this.draw = function (graphElement) {
-        var cy = cytoscape({
+        this.printedGraph = cytoscape({
             container: graphElement,
             style: [
                 {
@@ -44,6 +45,36 @@ function GraphMgr(graphData) {
             }
         });
     };
+    this.addNode = function () {
+        this.printedGraph.add({
+            group: "nodes",
+            position: {x: 200, y: 200}
+        });
+        this.printedGraph.fit()
+    };
+    this.removeNodes = function () {
+        var selectedNodes = this.printedGraph.$('node:selected');
+        if (selectedNodes.length > 0)
+            this.printedGraph.remove(selectedNodes);
+        else
+            alert("Nie zaznaczono żadnego wierzchołka!");
+    };
+    this.addEdge = function () {
+        var selectedNodes = this.printedGraph.$('node:selected');
+        if (selectedNodes.length != 2) {
+            alert("Wybierz dokładnie dwa wierzchołki");
+            return;
+        }
+        var edges = this.printedGraph.$('edge');
+        this.printedGraph.add({
+            group: "edges",
+            data: {
+                id: "e" + edges.length.toString(),
+                source: selectedNodes[0]._private.data.id,
+                target: selectedNodes[1]._private.data.id
+            }
+        });
+    }
 }
 
 var globalGraph;
