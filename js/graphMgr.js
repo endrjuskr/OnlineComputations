@@ -59,7 +59,7 @@ function GraphMgr(graphData) {
     this.removeNodes = function () {
         var selectedNodes = this.printedGraph.$('node:selected');
         if (selectedNodes.length == 0) {
-            alert("Nie zaznaczono żadnego wierzchołka!");
+            alert("There is no node selected!");
             return;
         }
         this.printedGraph.remove(selectedNodes);
@@ -68,7 +68,7 @@ function GraphMgr(graphData) {
     this.addEdge = function () {
         var selectedNodes = this.printedGraph.$('node:selected');
         if (selectedNodes.length != 2) {
-            alert("Wybierz dokładnie dwa wierzchołki");
+            alert("Please choose exactly two nodes!");
             return;
         }
         var edges = this.printedGraph.$('edge');

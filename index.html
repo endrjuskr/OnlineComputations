@@ -8,6 +8,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/heroic-features.css" rel="stylesheet">
 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/graphMgr.js"></script>
@@ -118,12 +121,16 @@
     <div>
         <div id="graph"></div>
         <div id="centralityMenu">
-            <button onclick="globalGraph.fitPosition()">Wyrównaj</button>
-            <button onclick="globalGraph.addNode()">Nowy node</button>
-            <button onclick="globalGraph.addEdge()">Nowy edge</button>
-            <button onclick="globalGraph.removeNodes()">Usuń zaznaczone wierzchołki</button>
+
             <a class="btn btn-primary btn-large" onclick="calculateResults()">Run computations!</a>
             <a class="btn btn-primary btn-large" onclick="showFileLoader()">Upload new file</a>
+            <br/>
+            <hr>
+
+            <button class="btn btn-info" onclick="globalGraph.fitPosition()">Rearrange</button>
+            <button class="btn btn-success" onclick="globalGraph.addNode()">Add node</button>
+            <button class="btn btn-success" onclick="globalGraph.addEdge()">Add edge</button>
+            <button class="btn btn-danger" onclick="globalGraph.removeNodes()">Remove selected nodes</button>
 
             <div id="resultTable" style="border-bottom: 1px solid lightgray"></div>
         </div>
