@@ -45,19 +45,25 @@ function GraphMgr(graphData) {
             }
         });
     };
+    this.fitPosition = function () {
+        this.printedGraph.fit();
+    };
     this.addNode = function () {
         this.printedGraph.add({
             group: "nodes",
             position: {x: 200, y: 200}
         });
-        this.printedGraph.fit()
+        this.fitPosition();
+        this.reloadGraphData();
     };
     this.removeNodes = function () {
         var selectedNodes = this.printedGraph.$('node:selected');
-        if (selectedNodes.length > 0)
-            this.printedGraph.remove(selectedNodes);
-        else
+        if (selectedNodes.length == 0) {
             alert("Nie zaznaczono żadnego wierzchołka!");
+            return;
+        }
+        this.printedGraph.remove(selectedNodes);
+        this.reloadGraphData();
     };
     this.addEdge = function () {
         var selectedNodes = this.printedGraph.$('node:selected');
@@ -74,6 +80,26 @@ function GraphMgr(graphData) {
                 target: selectedNodes[1]._private.data.id
             }
         });
+        this.reloadGraphData();
+    };
+    this.reloadGraphData = function () {
+        var graphElems = this.printedGraph._private.elements;
+        var nodesArray = new Array();
+        var edgesArray = new Array();
+        for (var i = 0; i < graphElems.length; ++i) {
+            var elem = graphElems[i];
+            if (elem.isNode())
+                nodesArray.push({data: {id: elem._private.data.id, weight: elem._private.data.weight}});
+            else if (elem.isEdge())
+                edgesArray.push({
+                    data: {
+                        id: elem._private.data.id,
+                        source: elem._private.data.source,
+                        target: elem._private.data.target
+                    }
+                });
+        }
+        this.graphData = {graph: {nodes: nodesArray, edges: edgesArray}, params: this.graphData.params};
     }
 }
 

@@ -37,7 +37,7 @@ function processData(allText) {
     var edge;
     var nodes = new Array();
     var nodesCount = parseInt(allTextLines[0]);
-    for (var i = 1; i <= nodesCount ; ++i) {
+    for (var i = 1; i <= nodesCount; ++i) {
         var weight = parseInt(allTextLines[i]);
         nodes.push([i.toString(), weight]);
     }
@@ -56,13 +56,13 @@ function processData(allText) {
     var nodesDataJson = getNodesDataAsJSON(nodes);
     var edgesDataJson = getEdgesDataAsJSON(lines);
 
-    return { graph: { nodes: nodesDataJson, edges: edgesDataJson }, params: paramList };
+    return {graph: {nodes: nodesDataJson, edges: edgesDataJson}, params: paramList};
 }
 
 function getNodesDataAsJSON(nodes) {
     var nodesDataJSON = [];
     for (var j = 0; j < nodes.length; ++j) {
-        nodesDataJSON.push({ data: { id: nodes[j][0], wieght: nodes[j][1] } });
+        nodesDataJSON.push({data: {id: nodes[j][0], weight: nodes[j][1]}});
     }
 
     return nodesDataJSON;
