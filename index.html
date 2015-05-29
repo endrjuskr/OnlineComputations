@@ -4,14 +4,30 @@
     <link href="css/main.css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <title>Online Computations</title>
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/heroic-features.css" rel="stylesheet">
+
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/graphMgr.js"></script>
+    <script type="text/javascript" src="js/cytoscape.js"></script>
+    <script type="text/javascript" src="js/fileHandler.js"></script>
+    <script type="text/javascript" src="js/viewsMgr.js"></script>
+    <script type="text/javascript" src="js/centralityMgr.js"></script>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
+<<<<<<< Updated upstream
                         (i[r].q = i[r].q || []).push(arguments)
                     }, i[r].l = 1 * new Date();
+=======
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+>>>>>>> Stashed changes
             a = s.createElement(o),
                     m = s.getElementsByTagName(o)[0];
             a.async = 1;
@@ -21,43 +37,90 @@
 
         ga('create', 'UA-63328693-1', 'auto');
         ga('send', 'pageview');
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 </head>
 <body>
 <div class="container">
     <header class="jumbotron hero-spacer">
-        <h1>Welcome to Online Computations!</h1>
+        <h2 id="title">On-line Computation Toolbox</h2>
 
-        <p>Please provide us graph in edge notations and we will do some magic with it!</p>
-
-        <p>
-
-        <div class="btn-wrap">
-            <input id="fileLoader" type="file" name="files[]"/>
-            <a class="btn btn-lg btn-success" id="fileLoaderButton" onclick="uploadFile()">Upload file!</a>
-        </div>
-        </p>
-        <p>
-            File needs to be in csv. <br/>
-            Here is file format: <br/>
-
-        <p class="fileFormat">
-            number of nodes <br/>
-            list of nodes' weights <br/>
-            number of edges <br/>
-            list of edges <br/>
-            list of additional parameters <br/>
-        </p>
-        </p>
+        <h3 id="subtitle">Our on-line toolbox computes a choice of game-theoretic centralities in polynomial time.</h3>
     </header>
-    <hr>
+    <h3 style="text-align: center">You can either:</h3>
+
+    <div class="btn-wrap">
+            <span data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                  aria-controls="collapseExample">
+                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                        title="Use one of the pre-defined networks">
+                    Use pre-defined
+                </button>
+            </span>
+        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                title="Define a new network from scratches using our simple on-line interface">
+            Define graph
+        </button>
+        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                title="Upload a network from a file (PAJEK, CSV formats)"
+                onclick="uploadFile()">
+            Upload
+        </button>
+
+        <input id="fileLoader" type="file" name="files[]"/>
+        <!--<a class="btn btn-lg btn-success" id="fileLoaderButton" \>Upload file!</a>-->
+    </div>
+
+
+    <div class="collapse" id="collapseExample">
+        <div class="well">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Zachary’s Karate Club</h3>
+                    <button type="button" class="btn btn-primary">Choose</button>
+                </div>
+                <div class="panel-body">
+                    Social network of friendships between 34 members of a karate club at a US university in the 1970s.
+                    Please cite W. W. Zachary, An information flow model for conflict and fission in small groups,
+                    Journal
+                    of Anthropological Research 33, 452-473 (1977).
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dolphin Social Network</h3>
+                    <button type="button" class="btn btn-primary">Choose</button>
+                </div>
+                <div class="panel-body">
+                    An undirected social network of frequent associations between 62 dolphins in a community living off
+                    Doubtful Sound, New Zealand. Please cite D. Lusseau, K. Schneider, O. J. Boisseau, P. Haase, E.
+                    Slooten, and S. M. Dawson, Behavioral Ecology and Sociobiology 54, 396-405 (2003).
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Les Miserables</h3>
+                    <button type="button" class="btn btn-primary">Choose</button>
+                </div>
+                <div class="panel-body">
+                    Coappearance network of characters in the novel Les Miserables. Please cite D. E. Knuth, The
+                    Stanford GraphBase: A Platform for Combinatorial Computing, Addison-Wesley, Reading, MA (1993).
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Title -->
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12" style="border-top: 1px solid lightgray">
             <h3>Results</h3>
         </div>
     </div>
-    <!-- /.row -->
+
     <!-- Page Features -->
     <div>
         <div id="graph"></div>
@@ -67,12 +130,10 @@
             <button onclick="globalGraph.removeNodes()">Usuń zaznaczone wierzchołki</button>
             <a class="btn btn-primary btn-large" onclick="calculateResults()">Run computations!</a>
             <a class="btn btn-primary btn-large" onclick="showFileLoader()">Upload new file</a>
-
-            <div id="resultTable"></div>
+            <div id="resultTable" style="border-bottom: 1px solid lightgray"></div>
         </div>
     </div>
-    <!-- /.row -->
-    <hr>
+
     <!-- Footer -->
     <footer>
         <div class="row">
@@ -82,13 +143,5 @@
         </div>
     </footer>
 </div>
-
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/graphMgr.js"></script>
-<script type="text/javascript" src="js/cytoscape.js"></script>
-<script type="text/javascript" src="js/fileHandler.js"></script>
-<script type="text/javascript" src="js/viewsMgr.js"></script>
-<script type="text/javascript" src="js/centralityMgr.js"></script>
 </body>
 </html>

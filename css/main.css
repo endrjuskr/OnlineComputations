@@ -9,6 +9,7 @@ input {
 
 .btn-wrap {
     text-align: center;
+    margin: 50px 0;
 }
 
 #centralityMenu {
@@ -24,4 +25,27 @@ input {
 .fileFormat {
     font-size: small;
     text-align: center;
+}
+
+#title {
+    text-align: center;
+}
+
+#subtitle {
+    text-align: center;
+}
+
+.btn-wrap .btn-success {
+    width: 200px;
+    margin: 0 10px;
+}
+
+.collapse h3 {
+    display: inline-block;
+}
+
+.collapse .btn {
+    float: right;
+    margin-top: -7px;
+    margin-right: -12px;
 }
