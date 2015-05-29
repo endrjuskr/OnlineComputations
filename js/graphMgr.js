@@ -1,6 +1,7 @@
 function GraphMgr(graphData) {
     this.graphData = graphData;
     this.printedGraph = null;
+    $("#kParam").attr({"max": this.graphData.graph.nodes.length});
     this.draw = function (graphElement) {
         this.printedGraph = cytoscape({
             container: graphElement,
@@ -100,6 +101,7 @@ function GraphMgr(graphData) {
                 });
         }
         this.graphData = {graph: {nodes: nodesArray, edges: edgesArray}, params: this.graphData.params};
+        $("#kParam").attr({"max": this.graphData.graph.nodes.length});
     }
 }
 

@@ -22,8 +22,8 @@
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
             a = s.createElement(o),
                     m = s.getElementsByTagName(o)[0];
             a.async = 1;
@@ -56,17 +56,17 @@
                 </button>
             </span>
         <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                onclick="startFromScratch()"
                 title="Define a new network from scratches using our simple on-line interface">
             Define graph
         </button>
         <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
-                title="Upload a network from a file (PAJEK, CSV formats)"
+                title="Upload a network from a file (PAJEK format)"
                 onclick="uploadFile()">
             Upload
         </button>
 
         <input id="fileLoader" type="file" name="files[]"/>
-        <!--<a class="btn btn-lg btn-success" id="fileLoaderButton" \>Upload file!</a>-->
     </div>
 
 
@@ -75,7 +75,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Zachary’s Karate Club</h3>
-                    <button type="button" class="btn btn-primary">Choose</button>
+                    <button type="button" class="btn btn-primary" data-file="karate.net" onclick="uploadGraph(0)">
+                        Choose
+                    </button>
                 </div>
                 <div class="panel-body">
                     Social network of friendships between 34 members of a karate club at a US university in the 1970s.
@@ -88,7 +90,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Dolphin Social Network</h3>
-                    <button type="button" class="btn btn-primary">Choose</button>
+                    <button type="button" class="btn btn-primary" data-file="dolphins.net" onclick="uploadGraph(1)">
+                        Choose
+                    </button>
                 </div>
                 <div class="panel-body">
                     An undirected social network of frequent associations between 62 dolphins in a community living off
@@ -100,7 +104,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Les Miserables</h3>
-                    <button type="button" class="btn btn-primary">Choose</button>
+                    <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph(2)">
+                        Choose
+                    </button>
                 </div>
                 <div class="panel-body">
                     Coappearance network of characters in the novel Les Miserables. Please cite D. E. Knuth, The
@@ -122,8 +128,9 @@
         <div id="graph"></div>
         <div id="centralityMenu">
 
-            <a class="btn btn-primary btn-large" onclick="calculateResults()">Run computations!</a>
-            <a class="btn btn-primary btn-large" onclick="showFileLoader()">Upload new file</a>
+            <button type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#myModal">Run
+                computations!
+            </button>
             <br/>
             <hr>
 
@@ -135,6 +142,34 @@
             <div id="resultTable" style="border-bottom: 1px solid lightgray"></div>
         </div>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Additional parameters</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <p>Parameter K for second algorithm: </p>
+                    </div>
+                    <div class="row">
+                        <input type="number" id="kParam" name="quantity" class="input-group-lg" min="1" value="1"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="calculateResults()">
+                        Compute
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
     <!-- Footer -->
     <footer>
