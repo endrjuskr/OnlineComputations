@@ -1,9 +1,10 @@
 function calculateResults() {
+    var k = $("#kParam").val();
     var graph = globalGraph.graphData;
     var result = new Array();
     var degree = calculateDegree(graph.graph);
     var algorithm1 = calculateCentralityAlgorithm1(graph.graph);
-    var algorithm2 = calculateCentralityAlgorithm2(graph);
+    var algorithm2 = calculateCentralityAlgorithm2(graph.graph, k);
     var degreeResult = new Array();
     var algorithm1Result = new Array();
     var algorithm2Result = new Array();
@@ -33,7 +34,7 @@ function calculateResults() {
     });
 
     result.push({
-        title: "Centrality algorithm 2 (k = " + graph.params["k"] + ")",
+        title: "Centrality algorithm 2 (k = " + k + ")",
         values: algorithm2Result
     });
 
@@ -83,13 +84,9 @@ function calculateCentralityAlgorithm1(graph) {
     return sv;
 }
 
-function calculateCentralityAlgorithm2(graphWithParams) {
-    var graph = graphWithParams.graph;
-    var params = graphWithParams.params;
+function calculateCentralityAlgorithm2(graph, k) {
     var degree = calculateDegree(graph);
     var neighbours = calculateNeighbours(graph);
-    var k = parseInt(params["k"]);
-    console.log(k);
     var sv = new Array();
     for (var i = 0; i < graph.nodes.length; ++i) {
         var node = graph.nodes[i];
