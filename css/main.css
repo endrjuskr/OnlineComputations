@@ -17,6 +17,10 @@
     margin-top: 50px;
 }
 
+.topHead {
+	margin-top: 0px !important;
+}
+
 .sort {
     margin-left: 10px;
 }
@@ -43,7 +47,7 @@
     text-align: center;
 }
 
-.btn-wrap .btn-success {
+.btn-wrap .btn-primary {
     width: 200px;
     margin: 0 10px;
 }
