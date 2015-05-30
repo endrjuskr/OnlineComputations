@@ -126,7 +126,7 @@ function generateResultTable(resultDataJSON, sortElem) {
     });
 
     var tableHTML = "";
-    tableHTML += "<table class=\"table table-striped\">";
+    tableHTML += "<table class=\"table table-striped table-hover\">";
     tableHTML += "<thead><tr><th>Node<span class='glyphicon glyphicon-arrow-down sort' aria-hidden='true' onclick='sort(0)'></span></th>";
     for (var i = 0; i < resultDataJSON.length; ++i) {
         var centralityMethod = resultDataJSON[i];
