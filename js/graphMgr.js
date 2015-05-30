@@ -47,7 +47,7 @@ function GraphMgr(graphData) {
         });
     };
     this.fitPosition = function () {
-        this.printedGraph.fit();
+        this.printedGraph.layout();
     };
     this.addNode = function () {
         this.printedGraph.add({

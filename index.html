@@ -22,8 +22,8 @@
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
             a = s.createElement(o),
                     m = s.getElementsByTagName(o)[0];
             a.async = 1;
@@ -34,14 +34,17 @@
         ga('create', 'UA-63328693-1', 'auto');
         ga('send', 'pageview');
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            });
         });
     </script>
 </head>
 <body>
 <div class="container">
     <header class="jumbotron hero-spacer">
-        <h2 class="topHead" >On-line Computation Toolbox</h2>
+        <h2 class="topHead">On-line Computation Toolbox</h2>
+
         <h3 class="lead">Our on-line toolbox computes a choice of game-theoretic centralities in polynomial time.</h3>
     </header>
     <h3 style="text-align: center" class="lead">You can either:</h3>
@@ -133,10 +136,25 @@
             <br/>
             <hr>
 
-            <button class="btn btn-info" onclick="globalGraph.fitPosition()">Rearrange</button>
-            <button class="btn btn-success" onclick="globalGraph.addNode()">Add node</button>
-            <button class="btn btn-success" onclick="globalGraph.addEdge()">Add edge</button>
-            <button class="btn btn-danger" onclick="globalGraph.removeNodes()">Remove selected nodes</button>
+            <button class="btn btn-info" onclick="globalGraph.fitPosition()" data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Rearrange graph to fit viewport.">Rearrange
+            </button>
+            <button class="btn btn-success" onclick="globalGraph.addNode()" data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Click to add isolated vertex">Add node
+            </button>
+            <button class="btn btn-success" onclick="globalGraph.addEdge()" data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="To add edge hold down the shift key and select two nodes, which you want to connect.">Add
+                edge
+            </button>
+            <button class="btn btn-danger" onclick="globalGraph.removeNodes()" data-placement="bottom"
+                    data-toggle="tooltip"
+                    title="Select node which you want to be removed. You can select multiple by holding down the shift key.">
+                Remove selected
+                nodes
+            </button>
 
             <div id="resultTable" style="border-bottom: 1px solid lightgray"></div>
         </div>

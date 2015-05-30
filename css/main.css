@@ -2,9 +2,10 @@
     height: 300px;
     width: 100%;
 }
+
 #fileLoader {
-    position:absolute;
-    top:-100px;
+    position: absolute;
+    top: -100px;
 }
 
 .btn-wrap {
@@ -18,7 +19,7 @@
 }
 
 .topHead {
-	margin-top: 0px !important;
+    margin-top: 0px !important;
 }
 
 .sort {
@@ -60,4 +61,8 @@
     float: right;
     margin-top: -7px;
     margin-right: -12px;
+}
+
+#centralityMenu button {
+    margin: 5px;
 }
