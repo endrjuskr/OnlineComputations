@@ -6,6 +6,7 @@
     <title>On-line Computations Toolbox</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="css/heroic-features.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -13,11 +14,13 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
     <script type="text/javascript" src="js/graphMgr.js"></script>
     <script type="text/javascript" src="js/cytoscape.js"></script>
     <script type="text/javascript" src="js/fileHandler.js"></script>
     <script type="text/javascript" src="js/viewsMgr.js"></script>
     <script type="text/javascript" src="js/centralityMgr.js"></script>
+    <script type="text/javascript" src="js/randomGraphs.js"></script>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -38,6 +41,16 @@
                 container: 'body'
             });
         });
+        function loadSliders() {
+            var form = function(value) {
+                return 'Current value: ' + value;
+            };
+            $("#sliderN").slider({formatter: form});
+            $("#sliderEP").slider({formatter: form});
+            $("#sliderICS").slider({formatter: form});
+            $("#sliderLinks").slider({formatter: form});
+        }
+        window.onload = loadSliders;
     </script>
 </head>
 <body>
@@ -55,6 +68,14 @@
                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                         title="Use one of the pre-defined networks">
                     Use Pre-defined Graph
+                </button>
+            </span>
+
+            <span data-toggle="collapse" data-target="#collapseRandom" aria-expanded="false"
+                  aria-controls="collapseRandom">
+                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                        title="Generate Random Graph">
+                    Random Graph
                 </button>
             </span>
         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
@@ -113,6 +134,53 @@
                 <div class="panel-body lead">
                     Coappearance network of characters in the novel Les Miserables. Please cite D. E. Knuth, The
                     Stanford GraphBase: A Platform for Combinatorial Computing, Addison-Wesley, Reading, MA (1993).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseRandom">
+        <div class="well">
+            <h4>Number of nodes:<input id="sliderN" data-slider-id='numNodes' type="text"
+                                       data-slider-min="5" data-slider-max="100"
+                                       data-slider-step="1" data-slider-value="14"/></h4>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title lead">Erdos-Renyi Random Graph</h3>
+                    <b>Edge probability</b><input id="sliderEP" data-slider-id='erEdgeP' type="text"
+                                                  data-slider-min="0" data-slider-max="1"
+                                                  data-slider-step="0.05" data-slider-value="0.3"/>
+                    <button type="button" class="btn btn-primary" onclick="erdosRenyi($('#sliderN').slider('getValue'),
+                        $('#sliderEP').slider('getValue'))">
+                        Choose
+                    </button>
+                </div>
+                <div class="panel-body lead">
+                    Random graph, where every edge is in the graph with given probability.
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title lead">Preferential Attachment Model</h3>
+                    <b>Initial clique size</b><input id="sliderICS" data-slider-id='paICS' type="text"
+                                                  data-slider-min="0" data-slider-max="10"
+                                                  data-slider-step="1" data-slider-value="3"/>
+                    <b>Number of links created when joining</b>
+                                                <input id="sliderLinks" data-slider-id='paLinks' type="text"
+                                                  data-slider-min="1" data-slider-max="20"
+                                                  data-slider-step="1" data-slider-value="3"/>
+                    <button type="button" class="btn btn-primary"
+                            onclick="preferentialAttachment($('#sliderN').slider('getValue'),
+                            $('#sliderICS').slider('getValue'), $('#sliderLinks').slider('getValue'))">
+                        Choose
+                    </button>
+                </div>
+                <div class="panel-body lead">
+                    Preferential Attachment model is an algorithm for generating random scale-free networks
+                    using a preferential attachment mechanism. Scale-free networks are widely observed in
+                    natural and human-made systems, including the Internet, the world wide web, citation networks,
+                    and some social networks.
                 </div>
             </div>
         </div>
