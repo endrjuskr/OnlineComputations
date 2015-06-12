@@ -28,7 +28,7 @@ function erdosRenyi(numNodes, edgeProb) {
         for (var j = i + 1; j <= numNodes; ++j) {
             if (Math.random() < edgeProb) {
                 lines.push([i, j]);
-                lines.push([j, i]);
+                //lines.push([j, i]);
             }
         }
     }
@@ -52,7 +52,7 @@ function preferentialAttachment(numNodes, initialCliqueSize, neighborsSize) {
 
     for (var i = 1; i <= Math.min(numNodes, initialCliqueSize); ++i) {
         for (var j = i + 1; j <= initialCliqueSize; ++j) {
-            lines.push([i, j]);
+            //lines.push([i, j]);
             lines.push([j, i]);
             randomNodesArray.push(i);
             randomNodesArray.push(j);
@@ -73,7 +73,7 @@ function preferentialAttachment(numNodes, initialCliqueSize, neighborsSize) {
                 randomNodesArray.push(n);
                 randomNodesArray.push(i);
                 lines.push([i, n]);
-                lines.push([n, i]);
+                //lines.push([n, i]);
             }
         }
     }
