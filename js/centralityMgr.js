@@ -149,5 +149,5 @@ function generateResultTable(resultDataJSON, sortElem) {
     tableHTML += "</tbody>";
     tableHTML += "</table>";
 
-    $("#resultTable").html(tableHTML);
+    $("#result_content").html(tableHTML);
 }

@@ -1,0 +1,29 @@
+<h3 style="text-align: center" class="lead">You can either:</h3>
+
+<div class="btn-wrap">
+
+    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+            onclick="loadPredefinedView(); hideTooltips()"
+            title="Use one of the pre-defined networks">
+        Use Pre-defined Graph
+    </button>
+
+    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+            onclick="loadRandomView(); hideTooltips()"
+            title="Generate Random Graph">
+        Random Graph
+    </button>
+
+    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+            onclick="startFromScratch(); hideTooltips()"
+            title="Define a new network from scratches using our simple on-line interface">
+        Define Graph
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+            title="Upload a network from a file (PAJEK format)"
+            onclick="uploadFile(); hideTooltips()">
+        Upload
+    </button>
+
+    <input id="fileLoader" type="file" name="files[]"/>
+</div>

@@ -1,36 +1,14 @@
-$(document).ready(function () {
+function setFileHandler() {
     $("#fileLoader").change(function (evt) {
         handleFileSelect(evt);
     });
-    hideGraph();
-});
-
-function uploadFile() {
-    $("#fileLoader").click();
-}
-
-function startFromScratch() {
-    $("#collapseExample").collapse('hide');
-    var graphData = processData(graphs[3]);
-    globalGraph = new GraphMgr(graphData);
-    globalGraph.draw(document.getElementById("graph"));
-    showGraph();
-}
-
-function uploadGraph(elem) {
-    $("#collapseExample").collapse('hide');
-    var graphData = processData(graphs[elem]);
-    globalGraph = new GraphMgr(graphData);
-    globalGraph.draw(document.getElementById("graph"));
-    showGraph();
 }
 
 function handleFileSelect(evt) {
-    $("#collapseExample").collapse('hide');
     var file = evt.target.files[0];
 
     if (!file.name.match('(.*).net')) {
-        alert("We only accept PAJEK format.")
+        alert("We only accept PAJEK format.");
         return;
     }
 
@@ -40,8 +18,8 @@ function handleFileSelect(evt) {
         return function (e) {
             var graphData = processData(e.target.result);
             globalGraph = new GraphMgr(graphData);
-            globalGraph.draw(document.getElementById("graph"));
-            showGraph();
+            globalGraph.draw(hideStartContent);
+            hideTooltips();
         };
     })(file);
     reader.readAsText(file);
@@ -55,22 +33,22 @@ function processData(allText) {
     var params = allTextLines[0].split(" ");
     var nodesCount = parseInt(params[params.length - 1]);
 
-    for (var i = 1; i <= nodesCount ; ++i) {
+    for (var i = 1; i <= nodesCount; ++i) {
         params = allTextLines[i].split(" ");
         var j = 0;
-        while(params[j].length == 0) ++j;
+        while (params[j].length == 0) ++j;
         nodes.push([params[j], 1]);
     }
 
     for (var i = nodesCount + 2; i < allTextLines.length; ++i) {
-        if(allTextLines[i].length == 0) {
+        if (allTextLines[i].length == 0) {
             continue;
         }
         edge = allTextLines[i].split(' ');
         var j = 0;
-        while(edge[j].length == 0) ++j;
+        while (edge[j].length == 0) ++j;
         var k = j + 1;
-        while(edge[k].length == 0) ++k;
+        while (edge[k].length == 0) ++k;
         lines.push([edge[j].trim(), edge[k].trim()]);
     }
 

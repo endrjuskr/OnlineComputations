@@ -11,9 +11,10 @@ function createAndShow(nodes, lines) {
 
     var graphData = {graph: {nodes: nodesDataJson, edges: edgesDataJson}, params: paramList};
 
+    loadGraphView();
     globalGraph = new GraphMgr(graphData);
-    globalGraph.draw(document.getElementById("graph"));
-    showGraph();
+    globalGraph.draw();
+    hideStartContent();
 }
 
 function erdosRenyi(numNodes, edgeProb) {

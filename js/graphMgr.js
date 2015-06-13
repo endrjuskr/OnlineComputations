@@ -1,50 +1,58 @@
 function GraphMgr(graphData) {
+    loadGraphView();
     this.graphData = graphData;
     this.printedGraph = null;
     $("#kParam").attr({"max": this.graphData.graph.nodes.length});
-    this.draw = function (graphElement) {
-        this.printedGraph = cytoscape({
-            container: graphElement,
-            style: [
-                {
-                    selector: 'node',
-                    css: {
-                        'content': 'data(id)',
-                        'text-valign': 'center',
-                        'text-halign': 'center',
-                        'font-size': 'small'
+    this.draw = function (cb) {
+        loadGraphView(
+            function () {
+                globalGraph.printedGraph = cytoscape({
+                    container: document.getElementById("graph"),
+                    style: [
+                        {
+                            selector: 'node',
+                            css: {
+                                'content': 'data(id)',
+                                'text-valign': 'center',
+                                'text-halign': 'center',
+                                'font-size': 'small'
+                            }
+                        },
+                        {
+                            selector: '$node > node',
+                            css: {
+                                'padding-top': '10px',
+                                'padding-left': '10px',
+                                'padding-bottom': '10px',
+                                'padding-right': '10px',
+                                'text-valign': 'top',
+                                'text-halign': 'center'
+                            }
+                        },
+                        {
+                            selector: 'edge',
+                        },
+                        {
+                            selector: ':selected',
+                            css: {
+                                'background-color': 'black',
+                                'line-color': 'black',
+                                'target-arrow-color': 'black',
+                                'source-arrow-color': 'black'
+                            }
+                        }
+                    ],
+                    elements: globalGraph.graphData.graph,
+                    layout: {
+                        name: 'cose',
+                        padding: 5
                     }
-                },
-                {
-                    selector: '$node > node',
-                    css: {
-                        'padding-top': '10px',
-                        'padding-left': '10px',
-                        'padding-bottom': '10px',
-                        'padding-right': '10px',
-                        'text-valign': 'top',
-                        'text-halign': 'center'
-                    }
-                },
-                {
-                    selector: 'edge',
-                },
-                {
-                    selector: ':selected',
-                    css: {
-                        'background-color': 'black',
-                        'line-color': 'black',
-                        'target-arrow-color': 'black',
-                        'source-arrow-color': 'black'
-                    }
-                }
-            ],
-            elements: this.graphData.graph,
-            layout: {
-                name: 'cose',
-                padding: 5
-            }
-        });
+                });
+            });
+        if (cb) {
+            cb();
+            showStartPointMsg("Upload graph");
+        }
     };
     this.fitPosition = function () {
         this.printedGraph.layout();
