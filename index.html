@@ -15,6 +15,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="js/jsnetworkx.js"></script>
     <script type="text/javascript" src="js/graphMgr.js"></script>
     <script type="text/javascript" src="js/cytoscape.js"></script>
     <script type="text/javascript" src="js/fileHandler.js"></script>
@@ -65,10 +66,18 @@
                 </div>
                 <div class="modal-body lead">
                     <div class="row">
-                        <p>Parameter K for second algorithm: </p>
+                        <p>Parameter <code>k</code> for Shapley value-based degree centrality: </p>
                     </div>
                     <div class="row">
                         <input type="number" id="kParam" name="quantity" class="input-group-lg" min="1" value="1"/>
+                    </div>
+                </div>
+                <div class="modal-body lead">
+                    <div class="row">
+                        <p>Parameter <code>d_cutoff</code> for Algorithm 3: </p>
+                    </div>
+                    <div class="row">
+                        <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>
                     </div>
                 </div>
                 <div class="modal-footer">
