@@ -15,8 +15,6 @@ function calculateResults() {
     var algorithm3 = calculateCentralityAlgorithm3(graph.graph, d_cutoff);
     var algorithm4 = calculateCentralityAlgorithm4(graph.graph, function(x) { return Math.sqrt(x); })
 
-    debugger;
-
     var degreeResult = new Array();
     var closenessResult = new Array();
     var betweennessResult = new Array();
@@ -37,14 +35,28 @@ function calculateResults() {
             key: node,
             value: closeness[node]
         });
-        betweennessResult.push({
-            key: node,
-            value: betweenness.get(parseInt(node)).toFixed(decimal_points)
-        });
-        eigenvectorResult.push({
-            key: node,
-            value: eigenvector.get(parseInt(node)).toFixed(decimal_points)
-        });
+        if(betweenness.get(parseInt(node)) == undefined) {
+            betweennessResult.push({
+                key: node,
+                value: betweenness.get(node).toFixed(decimal_points)
+            });
+        } else {
+            betweennessResult.push({
+                key: node,
+                value: betweenness.get(parseInt(node)).toFixed(decimal_points)
+            });
+        }
+        if(eigenvector.get(parseInt(node)) == undefined) {
+            eigenvectorResult.push({
+                key: node,
+                value: eigenvector.get(node).toFixed(decimal_points)
+            });
+        } else {
+            eigenvectorResult.push({
+                key: node,
+                value: eigenvector.get(parseInt(node)).toFixed(decimal_points)
+            });
+        }
         algorithm1Result.push({
             key: node,
             value: algorithm1[node].toFixed(decimal_points)
@@ -62,8 +74,6 @@ function calculateResults() {
             value: algorithm4[node].toFixed(decimal_points)
         });
     }
-
-    debugger;
 
 
     result.push({
@@ -134,8 +144,15 @@ function calculateCloseness(graph) {
     graph.nodes.map(function(node) {
         var dist_sum = 0;
         var node_dists = paths.get(parseInt(node.data.id));
+        if(node_dists == undefined) {
+            node_dists = paths.get(node.data.id);
+        }
         graph.nodes.map(function(node2) {
-            dist_sum += node_dists.get(parseInt(node2.data.id));
+            var value = node_dists.get(parseInt(node2.data.id));
+            if(value == undefined) {
+                value = node_dists.get(node2.data.id);
+            }
+            dist_sum += value;
         });
         closeness[node.data.id] = dist_sum;
     });
@@ -209,9 +226,16 @@ function calculateCentralityAlgorithm3(graph, d_cutoff) {
         var nghbrs = new Array();
         var degree = 0;
         var dist_map = paths.get(parseInt(node.data.id));
+        if(dist_map == undefined) {
+            dist_map = paths.get(node.data.id);
+        }
         graph.nodes.map(function(node2) {
             if (node2.data.id != node.data.id)
-                if (dist_map.get(parseInt(node2.data.id)) <= d_cutoff) {
+                var value = dist_map.get(parseInt(node2.data.id));
+                if(value == undefined) {
+                    value = dist_map.get(node2.data.id);
+                }
+                if (value <= d_cutoff) {
                     nghbrs.push(node2.data.id);
                     ++degree;
                 }
@@ -242,6 +266,9 @@ function calculateCentralityAlgorithm4(graph, f) {
     });
     graph.nodes.map(function(node) {
         var distances = paths.get(parseInt(node.data.id));
+        if(distances == undefined) {
+            distances = paths.get(node.data.id);
+        }
         var nodes_by_dist = new Array();
 
         var distances_iter = distances.entries();

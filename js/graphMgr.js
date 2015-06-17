@@ -30,7 +30,7 @@ function GraphMgr(graphData) {
                             }
                         },
                         {
-                            selector: 'edge',
+                            selector: 'edge'
                         },
                         {
                             selector: ':selected',
