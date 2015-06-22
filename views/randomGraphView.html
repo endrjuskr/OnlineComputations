@@ -11,14 +11,14 @@
     loadSliders();
 </script>
 <div class="well">
-    <h4>Number of nodes:<input id="sliderN" data-slider-id='numNodes' type="text"
+    <h4>Number of nodes:<input id="sliderN" class="slider" data-slider-id='numNodes' type="text"
                                data-slider-min="5" data-slider-max="100"
                                data-slider-step="1" data-slider-value="14"/></h4>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title lead">Erdos-Renyi Random Graph</h3>
-            <b>Edge probability</b><input id="sliderEP" data-slider-id='erEdgeP' type="text"
+            <b>Edge probability</b><input id="sliderEP" class="slider" data-slider-id='erEdgeP' type="text"
                                           data-slider-min="0" data-slider-max="1"
                                           data-slider-step="0.05" data-slider-value="0.3"/>
             <button type="button" class="btn btn-primary" onclick="erdosRenyi($('#sliderN').slider('getValue'),
@@ -34,11 +34,11 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title lead">Preferential Attachment Model</h3>
-            <b>Initial clique size</b><input id="sliderICS" data-slider-id='paICS' type="text"
+            <b>Initial clique size</b><input id="sliderICS" class="slider" data-slider-id='paICS' type="text"
                                              data-slider-min="0" data-slider-max="10"
                                              data-slider-step="1" data-slider-value="3"/>
             <b>Number of links created when joining</b>
-            <input id="sliderLinks" data-slider-id='paLinks' type="text"
+            <input id="sliderLinks" class="slider" data-slider-id='paLinks' type="text"
                    data-slider-min="1" data-slider-max="20"
                    data-slider-step="1" data-slider-value="3"/>
             <button type="button" class="btn btn-primary"

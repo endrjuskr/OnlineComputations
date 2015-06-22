@@ -66,3 +66,15 @@
 #centralityMenu button {
     margin: 5px;
 }
+
+.slider {
+    margin-left:5px;
+}
+
+.slider .slider-selection {
+    background: #0088CC;
+}
+
+.slider .slider-handle {
+    background: #0088CC;
+}
