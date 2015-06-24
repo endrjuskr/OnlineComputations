@@ -20,6 +20,9 @@ function handleFileSelect(evt) {
             globalGraph = new GraphMgr(graphData);
             globalGraph.draw(hideStartContent);
             hideTooltips();
+            if (window._statusManager) {
+                window._statusManager.next();
+            }
         };
     })(file);
     reader.readAsText(file);

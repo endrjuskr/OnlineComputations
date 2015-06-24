@@ -1,5 +1,6 @@
 $(window).load(function () {
     loadStartContentView();
+    loadStatusView();
     $('body').tooltip({
         selector: '[data-toggle="tooltip"]',
         container: 'body'
@@ -27,8 +28,18 @@ function showStartContent() {
 }
 
 function loadStartContentView() {
+    // requiere fileHandler.js
     $("#start_content").load("views/defaultOptionsView.html", setFileHandler);
     showStartContent();
+    setStatus_FirstStep();
+}
+
+function loadStatusView() {
+    var statusManager = new window.statusManager();
+    $("#status_content").load("views/statusView.html", function(){
+        statusManager.init();
+        window._statusManager = statusManager;
+    });
 }
 
 function loadPredefinedView() {
@@ -42,6 +53,39 @@ function loadRandomView() {
     showStartPointMsg("Random Graph");
 }
 
+function loadCentralitiesView() {
+    $("#start_content").load("views/centralitiesView.html");
+    $("#centralityMenu").hide();
+    $("#graph_content").hide();
+    setStatus_NextStep();
+}
+
+function getCentralitiesNames(centrality){
+    return centrality.id;
+}
+
+function showComputedResults() {
+    var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
+    $("#start_content").hide();
+    $("#graph_content").show();
+    setStatus_NextStep();
+
+    window._centralitiesManager.calculate(centralities.map(getCentralitiesNames));
+}
+
+function setStatus_NextStep() {
+    var statusManager = window._statusManager;
+    if (statusManager) {
+        statusManager.next();
+    }
+}
+
+function setStatus_FirstStep() {
+    var statusManager = window._statusManager;
+    if (statusManager) {
+        statusManager.changeStep(0);
+    }
+}
 
 /*============================
  *       Graph content
