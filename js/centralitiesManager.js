@@ -269,6 +269,8 @@ var decimal_points = 4;
         tableHTML += "</tbody>";
         tableHTML += "</table>";
 
+        tableHTML += '<button type="button" class="btn btn-defaultt" onclick="saveResultsAsCSV()">Pobierz jako CSV</button>';
+
         $("#result_content").html(tableHTML);
     }
 
