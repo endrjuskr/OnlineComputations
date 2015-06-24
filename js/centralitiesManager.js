@@ -223,6 +223,7 @@ var decimal_points = 4;
     function generateResultTable(resultDataJSON, sortElem, sort_up) {
         ResultJSON = resultDataJSON;
         var results = new Array();
+
         for (var i = 0; i < resultDataJSON[0].values.length; ++i) {
             var point = resultDataJSON[0].values[i];
 

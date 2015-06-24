@@ -27,6 +27,10 @@ function showStartContent() {
     hideResultView();
 }
 
+function changeStatus() {
+    setStatus_NextStep();
+}
+
 function loadStartContentView() {
     // requiere fileHandler.js
     $("#start_content").load("views/defaultOptionsView.html", setFileHandler);
@@ -43,21 +47,20 @@ function loadStatusView() {
 }
 
 function loadPredefinedView() {
-    $("#start_content").load("views/predefinedGraphView.html");
+    $("#start_content").load("views/predefinedGraphView.html", changeStatus);
     showStartContent();
 }
 
 function loadRandomView() {
-    $("#start_content").load("views/randomGraphView.html");
+    $("#start_content").load("views/randomGraphView.html", changeStatus);
     showStartContent();
     showStartPointMsg("Random Graph");
 }
 
 function loadCentralitiesView() {
-    $("#start_content").load("views/centralitiesView.html");
+    $("#start_content").load("views/centralitiesView.html", changeStatus);
     $("#centralityMenu").hide();
     $("#graph_content").hide();
-    setStatus_NextStep();
 }
 
 function getCentralitiesNames(centrality){
@@ -68,8 +71,9 @@ function showComputedResults() {
     var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
     $("#start_content").hide();
     $("#graph_content").show();
-    setStatus_NextStep();
 
+    // todo - onloading widget
+    setStatus_NextStep();
     window._centralitiesManager.calculate(centralities.map(getCentralitiesNames));
 }
 
@@ -124,6 +128,7 @@ function startFromScratch() {
     globalGraph.draw();
     hideStartContent("Define Graph");
     showStartPointMsg("Define Graph");
+    changeStatus();
 }
 
 function uploadGraph(elem) {
