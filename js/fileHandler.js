@@ -20,6 +20,9 @@ function handleFileSelect(evt) {
             globalGraph = new GraphMgr(graphData);
             globalGraph.draw(hideStartContent);
             hideTooltips();
+            if (window._statusManager) {
+                window._statusManager.next();
+            }
         };
     })(file);
     reader.readAsText(file);
@@ -76,6 +79,42 @@ function getEdgesDataAsJSON(lines) {
         edgesDataJSON.push({data: {id: "e" + i.toString(), source: line[0], target: line[1]}});
     }
     return edgesDataJSON;
+}
+
+function saveResultsAsCSV() {
+
+    var textToWrite = "Node,";
+    for (var i = 0; i < ResultJSON.length - 1; ++i) {
+        var centralityMethod = ResultJSON[i];
+        textToWrite += centralityMethod.title + ",";
+    }
+    // last centrality name
+    textToWrite += ResultJSON[ResultJSON.length - 1].title + "\n";
+
+    //for every node
+    for (var i = 0; i < ResultJSON[0].values.length; ++i) {
+        //node key
+        textToWrite += ResultJSON[0].values[i].key + ",";
+        //for every centrality method
+        for (var j = 0; j < ResultJSON.length - 1; ++j)
+            textToWrite += ResultJSON[j].values[i].value + ",";
+        // last centrality value for given node
+        textToWrite += ResultJSON[ResultJSON.length - 1].values[i].value + "\n";
+    }
+
+    var textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
+    var downloadLink = document.createElement("a");
+    downloadLink.download = "result.csv";
+    downloadLink.innerHTML = "Download File";
+    if (window.webkitURL != null)
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    else {
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+    }
+    downloadLink.click();
 }
 
 var graphs = ['*Vertices 34\r\n\

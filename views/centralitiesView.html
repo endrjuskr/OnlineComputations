@@ -1,0 +1,111 @@
+<div class="jumbotron">
+    <h2>Choose centralities to count:</h2>
+
+    <div class="centralityChoose">
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Degree" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Degree" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Degree" class="btn btn-primary active">
+                    Degree
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Closeness" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Closeness" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Closeness" class="btn btn-primary active">
+                    Closeness
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Betweenness" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Betweenness" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Betweenness" class="btn btn-primary active">
+                    Betweenness
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Eigevector" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Eigevector" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Eigevector" class="btn btn-primary active">
+                    Eigevector Centrality
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Algorithm1" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Algorithm1" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Algorithm1" class="btn btn-primary active">
+                    SV-based degree centrality
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Algorithm2" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Algorithm2" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Algorithm2" class="btn btn-primary active">
+                    SV-based degree centrality (k = 1)
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Algorithm3" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Algorithm3" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Algorithm3" class="btn btn-primary active">
+                    Algorithm 3 (d_cutoff = 1)
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="centralities" id="Algorithm4" autocomplete="off" />
+            <div class="btn-group">
+                <label for="Algorithm4" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span> </span>
+                </label>
+                <label for="Algorithm4" class="btn btn-primary active">
+                    Algorithm 4
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <button id="showResultsBtn" type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#showResults">Show</button>
+</div>
