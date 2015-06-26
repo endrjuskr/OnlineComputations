@@ -9,7 +9,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Degree" class="btn btn-primary active">
+                <label for="Degree" class="btn btn-primary active centralityLabel">
                     Degree
                 </label>
             </div>
@@ -22,7 +22,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Closeness" class="btn btn-primary active">
+                <label for="Closeness" class="btn btn-primary active centralityLabel">
                     Closeness
                 </label>
             </div>
@@ -35,7 +35,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Betweenness" class="btn btn-primary active">
+                <label for="Betweenness" class="btn btn-primary active centralityLabel">
                     Betweenness
                 </label>
             </div>
@@ -48,7 +48,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Eigevector" class="btn btn-primary active">
+                <label for="Eigevector" class="btn btn-primary active centralityLabel">
                     Eigevector Centrality
                 </label>
             </div>
@@ -61,7 +61,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Algorithm1" class="btn btn-primary active">
+                <label for="Algorithm1" class="btn btn-primary active centralityLabel">
                     SV-based degree centrality
                 </label>
             </div>
@@ -74,8 +74,8 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Algorithm2" class="btn btn-primary active">
-                    SV-based degree centrality (k = 1)
+                <label for="Algorithm2" class="btn btn-primary active centralityLabel">
+                    SV-based degree centrality (k = <input type="number" id="kParam" name="quantity" class="input-group-lg" min="1" value="1"/>)
                 </label>
             </div>
         </div>
@@ -87,8 +87,8 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Algorithm3" class="btn btn-primary active">
-                    Algorithm 3 (d_cutoff = 1)
+                <label for="Algorithm3" class="btn btn-primary active centralityLabel">
+                    Algorithm 3 (d_cutoff =  <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>)
                 </label>
             </div>
         </div>
@@ -100,12 +100,10 @@
                     <span class="glyphicon glyphicon-ok"></span>
                     <span> </span>
                 </label>
-                <label for="Algorithm4" class="btn btn-primary active">
+                <label for="Algorithm4" class="btn btn-primary active centralityLabel">
                     Algorithm 4
                 </label>
             </div>
         </div>
     </div>
-
-    <button id="showResultsBtn" type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#showResults">Show</button>
 </div>

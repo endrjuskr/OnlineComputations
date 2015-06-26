@@ -9,6 +9,7 @@
 
     prototype.init = function () {
         this._elements = [
+            document.getElementById("statusStart"),
             document.getElementById("statusFirstStep"),
             document.getElementById("statusSecondStep"),
             document.getElementById("statusThirdStep"),
@@ -46,6 +47,10 @@
             element.removeClass("disabled active complete");
         }
     }
+
+    prototype.state = function () {
+        return this._step;
+    };
 
     prototype.next = function () {
         var self = this,

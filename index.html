@@ -18,10 +18,11 @@
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav id="header" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <span class="navbar-brand">Computations Toolbox</span>
+                <img src="img/header_icon.png"/>
+                <span id="headerTitle" class="navbar-brand" onclick="loadIntroductionView();">Computational Toolbox</span>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
@@ -56,44 +57,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Page Features -->
-    <div class="modal fade" id="showResults" tabindex="-1" role="dialog" aria-labelledby="showResultsBtn" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content lead">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title lead">Additional parameters</h4>
-                </div>
-                <div class="modal-body lead">
-                    <div class="row">
-                        <p>Parameter <code>k</code> for Shapley value-based degree centrality: </p>
-                    </div>
-                    <div class="row">
-                        <input type="number" id="kParam" name="quantity" class="input-group-lg" min="1" value="1"/>
-                    </div>
-                </div>
-                <div class="modal-body lead">
-                    <div class="row">
-                        <p>Parameter <code>d_cutoff</code> for Algorithm 3: </p>
-                    </div>
-                    <div class="row">
-                        <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="showComputedResults()">
-                        Compute
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
 
     <!-- Footer -->
     <footer>

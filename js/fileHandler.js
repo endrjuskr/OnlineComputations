@@ -21,7 +21,7 @@ function handleFileSelect(evt) {
             globalGraph.draw(hideStartContent);
             hideTooltips();
             if (window._statusManager) {
-                window._statusManager.next();
+                window._statusManager.changeStep(2);
             }
         };
     })(file);
