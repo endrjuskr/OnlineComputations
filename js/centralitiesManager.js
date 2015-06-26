@@ -214,7 +214,98 @@ var decimal_points = 4;
 
         return svs;
     }
+	
+	function calculateMyerson(graph, charFun) {
+		var res = new Array();
+		var n = graph.nodes.length;
+		for (var i = 0; i < n; ++i)
+			res[graph.nodes[i].data.id] = 0.;
+		
+		var weights = new Array();
+		for (var i = 0; i <= n + 1; ++i){
+			weights[i] = new Array();
+			for (var j = 0; j <= n + 1; ++j)
+				weights[i][j] = 0.;
+		}
+		for (var k = 0; k <= n; ++k)
+			for (var s = 0; s <= k; ++s)
+				weights[s][k] = weightOfCoalition(s, k);
+			
+		enumerateCCs(graph, function(c, cn){
+			var wIn = weights[c.length][c.length + cn.length];
+			var wOut = weights[c.length + 1][c.length + cn.length];
+			var cVal = charFun(c, graph);
+			c.forEach(function(v){
+				res[v] += wIn * cVal;
+			});
+			cn.forEach(function(v){
+				res[v] -= wOut * cVal;
+			});		
+		});
+		return res;
+	}
 
+	function weightOfCoalition(s, n){
+		var w = 1./s;
+		for (var i = s; i >= 1; --i)
+			w *= i * 1./(n - i + 1);
+		return w;
+	}
+
+	var GRAY = 1;
+	var WHITE = 0;
+	var ROOT = -1;
+	var RED = -2;
+	var RED_NEIGHBOUR = -3;
+
+	function enumerateCCs(graph, f){
+		graph.neighs = calculateNeighbours(graph);
+		
+		var neighsMap = new Array();
+		graph.nodes.forEach(function(v){
+			neighsMap[v.data.id] = new Array();
+		});
+		graph.nodes.forEach(function(v){
+			for (var i = 0; i < graph.neighs[v.data.id].length; ++i)
+				neighsMap[v.data.id][graph.neighs[v.data.id][i]] = i;
+		});	
+		graph.neighsMap = neighsMap;
+			
+		for (var i = 0; i < graph.nodes.length; ++i){
+			var color = new Array();
+			for (var j = 0; j < i; ++j)
+				color[graph.nodes[j].data.id] = RED;
+			color[graph.nodes[i].data.id] = ROOT;
+			for (var j = i + 1; j < graph.nodes.length; ++j)
+				color[graph.nodes[j].data.id] = WHITE;
+			enumerateCCsRec(graph, f, graph.nodes[i].data.id, color, 0);
+		};
+	}
+
+	function enumerateCCsRec(graph, f, nodeId, color, startIt){
+		for (var i = startIt; i < graph.neighs[nodeId].length; ++i){
+			var uId = graph.neighs[nodeId][i];
+			if (color[uId] == WHITE){
+				color[uId] = nodeId;
+				enumerateCCsRec(graph, f, uId, color.slice(), 0);
+				color[uId] = RED_NEIGHBOUR;
+			} else if (color[uId] <= RED)
+				color[uId] = RED_NEIGHBOUR;
+		}
+		if (color[nodeId] == ROOT){
+			color[nodeId] = GRAY;
+			var coalition = new Array();
+			var coalitionNeighs = new Array();
+			graph.nodes.forEach(function(v){
+				if (color[v.data.id] >= GRAY)
+					coalition.push(v.data.id);
+				if (color[v.data.id] == RED_NEIGHBOUR)
+					coalitionNeighs.push(v.data.id);
+			});
+			f(coalition, coalitionNeighs);
+		} else
+			enumerateCCsRec(graph, f, color[nodeId], color, graph.neighsMap[color[nodeId]][nodeId] + 1);
+	}
 
     prototype.sort = function(elem, sort_up) {
         generateResultTable(ResultJSON, elem, sort_up);
@@ -312,9 +403,14 @@ var decimal_points = 4;
                 toChange: 0
             },
             Algorithm4: {
-                name: "Algrithm 4",
+                name: "Algorithm 4",
                 method: calculateCentralityAlgorithm4,
                 params: [ function(x) { return Math.sqrt(x);} ]
+            },
+            Myerson: {
+                name: "Myerson",
+                method: calculateMyerson,
+                params: [ function(c, g){ return c.length * c.length; } ]
             }
         };
     };
@@ -377,6 +473,7 @@ var decimal_points = 4;
                     case "Algorithm2":
                     case "Algorithm3":
                     case "Algorithm4":
+                    case "Myerson":
                         result.push({
                             key: node,
                             value: algorithmResult[node].toFixed(decimal_points)
