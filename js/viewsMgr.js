@@ -70,13 +70,22 @@ function loadStatusView() {
         statusManager.init();
         window._statusManager = statusManager;
         $("#nextStep").on("click touchend", function() {
-            var state = statusManager.state();
+            var state = statusManager.state(),
+                centralities;
             if (state === 0) {
                 loadStartContentView();
             } else if (state === 2) {
                 loadCentralitiesView();
             } else if (state === 3) {
-                showComputedResults();
+                centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
+                if (centralities.length) {
+                    showComputedResults();
+                } else {
+                    $("#centralityAlert").show();
+                    setTimeout(function(){
+                        $("#centralityAlert").hide();
+                    }, 1500);
+                }
             }
         })
     });
@@ -94,7 +103,10 @@ function loadRandomView() {
 }
 
 function loadCentralitiesView() {
-    $("#start_content").load("views/centralitiesView.html", toThirdStep);
+    $("#start_content").load("views/centralitiesView.html", function(){
+        $("#centralityAlert").hide();
+        toThirdStep();
+    });
     $("#centralityMenu").hide();
     $("#graph_content").hide();
 }
