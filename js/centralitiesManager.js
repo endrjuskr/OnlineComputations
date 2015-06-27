@@ -361,6 +361,7 @@ var decimal_points = 4;
         tableHTML += "</table>";
 
         tableHTML += '<button type="button" class="btn btn-defaultt" onclick="saveResultsAsCSV()">Pobierz jako CSV</button>';
+		tableHTML += '<button type="button" class="btn btn-defaultt" onclick="saveResultsAsTex()">Pobierz jako Tex</button>';
 
         $("#result_content").html(tableHTML);
     }
