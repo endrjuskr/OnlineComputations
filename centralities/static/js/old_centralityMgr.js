@@ -1,19 +1,19 @@
 var decimal_points = 4;
 
 function calculateResults() {
-    var k = $("#kParam").val();
-    var d_cutoff = $("#d_cutoffParam").val();
-    var graph = globalGraph.graphData;
+    var k = parseInt($("#kParam").val(), 10) || 1;
+    var d_cutoff = parseInt($("#d_cutoffParam").val(), 10) || 1;
+    var graph = globalGraph.graphData.graph;
     var result = new Array();
 
-    var degree = calculateDegree(graph.graph);
-    var closeness = calculateCloseness(graph.graph);
-    var betweenness = calculateBetweenness(graph.graph);
-    var eigenvector = calculateEigenvector(graph.graph, 1000, 0.0001);
-    var algorithm1 = calculateCentralityAlgorithm1(graph.graph);
-    var algorithm2 = calculateCentralityAlgorithm2(graph.graph, k);
-    var algorithm3 = calculateCentralityAlgorithm3(graph.graph, d_cutoff);
-    var algorithm4 = calculateCentralityAlgorithm4(graph.graph, function(x) { return Math.sqrt(x); })
+    var degree = calculateDegree(graph);
+    var closeness = calculateCloseness(graph);
+    var betweenness = calculateBetweenness(graph);
+    var eigenvector = calculateEigenvector(graph, 1000, 0.0001);
+    var algorithm1 = calculateCentralityAlgorithm1(graph);
+    var algorithm2 = calculateCentralityAlgorithm2(graph, k);
+    var algorithm3 = calculateCentralityAlgorithm3(graph, d_cutoff);
+    var algorithm4 = calculateCentralityAlgorithm4(graph, function(x) { return Math.sqrt(x); })
 
     var degreeResult = new Array();
     var closenessResult = new Array();
@@ -24,8 +24,8 @@ function calculateResults() {
     var algorithm3Result = new Array();
     var algorithm4Result = new Array();
 
-    for (var i = 0; i < graph.graph.nodes.length; ++i) {
-        var node = graph.graph.nodes[i].data.id;
+    for (var i = 0; i < graph.nodes.length; ++i) {
+        var node = graph.nodes[i].data.id;
 
         degreeResult.push({
             key: node,
