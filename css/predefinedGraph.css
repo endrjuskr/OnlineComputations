@@ -12,8 +12,8 @@
     border: solid 1px;
 }
 #result_content button {
-    margin: auto;
-    display: block;
+    display: inline-block;
+    margin: 20px;
 }
 
 #start_content .centralities {

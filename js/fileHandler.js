@@ -117,6 +117,42 @@ function saveResultsAsCSV() {
     downloadLink.click();
 }
 
+function saveResultsAsTex() {
+
+    var textToWrite = "\\begin{tabular}{| l ";
+	for (var i = 0; i < ResultJSON.length; ++i)
+		textToWrite +="| l ";	
+	textToWrite +="|}\n\\hline\n";
+	textToWrite +="Node & ";
+    for (var i = 0; i < ResultJSON.length - 1; ++i) {
+        var centralityMethod = ResultJSON[i];
+        textToWrite += centralityMethod.title + " & ";
+    }
+    textToWrite += ResultJSON[ResultJSON.length - 1].title + " \\\\\n\\hline\n";
+
+    for (var i = 0; i < ResultJSON[0].values.length; ++i) {
+        textToWrite += ResultJSON[0].values[i].key + " & ";
+        for (var j = 0; j < ResultJSON.length - 1; ++j)
+            textToWrite += ResultJSON[j].values[i].value + " & ";
+        textToWrite += ResultJSON[ResultJSON.length - 1].values[i].value + " \\\\\n";
+    }
+	textToWrite += "\\hline\n\\end{tabular}\n";
+
+    var textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
+    var downloadLink = document.createElement("a");
+    downloadLink.download = "table.tex";
+    downloadLink.innerHTML = "Download File";
+    if (window.webkitURL != null)
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    else {
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+    }
+    downloadLink.click();
+}
+
 var graphs = ['*Vertices 34\r\n\
 1 "1"\r\n\
 2 "2"\r\n\
