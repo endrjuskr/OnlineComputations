@@ -46,6 +46,12 @@ function GraphMgr(graphData) {
                     layout: {
                         name: 'cose',
                         padding: 5
+                    },
+                    zoom: 1,
+                    zoomingEnabled: false,
+                    ready: function() {
+                        $("#graph").trigger("graphready");
+                        globalGraph.printedGraph.center();
                     }
                 });
             });
@@ -62,7 +68,7 @@ function GraphMgr(graphData) {
             group: "nodes",
             position: {x: 200, y: 200}
         });
-        this.fitPosition();
+        //this.fitPosition();
         this.reloadGraphData();
     };
     this.removeNodes = function () {
@@ -110,7 +116,9 @@ function GraphMgr(graphData) {
         }
         this.graphData = {graph: {nodes: nodesArray, edges: edgesArray}, params: this.graphData.params};
         $("#kParam").attr({"max": this.graphData.graph.nodes.length});
+        this.printedGraph.center();
     }
 }
 
 var globalGraph;
+var zoomingLevel = 1.0;

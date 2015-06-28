@@ -1,72 +1,134 @@
 ﻿<!DOCTYPE html>
 <html>
 <head lang="pl">
-    <link href="css/main.css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <title>On-line Computations Toolbox</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="css/heroic-features.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet"/>
+    <link href="css/mainPage.css" rel="stylesheet"/>
+    <link href="css/status.css" rel="stylesheet"/>
+    <link href="css/predefinedGraph.css" rel="stylesheet"/>
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body class="first">
+    <!-- BACKGROUND IMAGE -->
+    <header id="bodyImage">
+        <img src="img/background/image10.jpg"/>
+        <img src="img/background/image07.jpg"/>
+        <img src="img/background/image05.jpg"/>
+        <img src="img/background/image13.jpg"/>
+    </header>
+
+    <div class="container">
+        <!-- STATIC: HEADER -->
+        <nav id="header" class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="img/header_icon.png"/>
+                    <span id="headerTitle" class="navbar-brand" onclick="loadIntroductionView();">Computational Toolbox</span>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <form class="navbar-form navbar-right">
+                        <button id="startAgainBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#startAgain"> Start again</button>
+                    </form>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <!-- STATIC: STATUS -->
+        <div id="status_content">
+            <div class="row">
+                <div class="col-md-2 bs-wizard-step">
+                    <button id="previousStep" type="button" class="btn btn-warning btn-circle status-button" disabled="true" title="Start">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-md-8 bs-wizard" style="border-bottom:0;">
+
+                    <!-- complete/active/disabled -->
+                    <div id="statusStart" class="col-xs-2 col-xs-offset-1 bs-wizard-step active">
+                        <div class="text-center bs-wizard-stepnum">Start</div>
+                        <div class="progress"><div class="progress-bar progress-bar-info"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Introduction</div>
+                    </div>
+
+                    <div id="statusFirstStep" class="col-xs-2 bs-wizard-step disabled">
+                        <div class="text-center bs-wizard-stepnum">Step 1</div>
+                        <div class="progress"><div class="progress-bar progress-bar-info"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Choose graph</div>
+                    </div>
+
+                    <div id="statusSecondStep" class="col-xs-2 bs-wizard-step disabled">
+                        <div class="text-center bs-wizard-stepnum">Step 2</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Set graph</div>
+                    </div>
+
+                    <div id="statusThirdStep" class="col-xs-2 bs-wizard-step disabled">
+                        <div class="text-center bs-wizard-stepnum">Step 3</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Choose centralities</div>
+                    </div>
+
+                    <div id="statusForthStep" class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+                        <div class="text-center bs-wizard-stepnum">Finish</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Presentation</div>
+                    </div>
+                </div>
+                <div class="col-md-2 bs-wizard-step button-content-right">
+                    <button id="nextStep" type="button" class="btn btn-warning btn-circle status-button" title="Start">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIRST PAGE -->
+        <div id="page">
+            <div id="start_content"></div>
+            <div id="graph_content"></div>
+            <div id="result_content"></div>
+        </div>
+
+        <!-- Start again confirmation -->
+        <div class="modal fade" id="startAgain" tabindex="-1" role="dialog" aria-labelledby="startAgainBtn">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Start again</h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure that you want to start again?
+                        All changes will be lost.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="loadStartContentView()">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Copyright &copy; On-line Computations Toolbox 2015</p>
+    </footer>
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-slider.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <nav id="header" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <img src="img/header_icon.png"/>
-                <span id="headerTitle" class="navbar-brand" onclick="loadIntroductionView();">Computational Toolbox</span>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
-                    <button id="startAgainBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#startAgain"> Start again</button>
-                </form>
-            </div><!--/.navbar-collapse -->
-        </div>
-    </nav>
-
-    <div id="status_content"></div>
-    <div id="start_content"></div>
-    <div id="graph_content"></div>
-    <div id="result_content" style="border-bottom: 1px solid lightgray"></div>
-
-
-    <!-- Start again confirmation -->
-    <div class="modal fade" id="startAgain" tabindex="-1" role="dialog" aria-labelledby="startAgainBtn">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Start again</h4>
-                </div>
-                <div class="modal-body">
-                    Are you sure that you want to start again?
-                    All changes will be lost.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="loadStartContentView()">Yes</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12 lead">
-                <p>Copyright &copy; On-line Computations Toolbox 2015</p>
-            </div>
-        </div>
-    </footer>
-</div>
     <script type="text/javascript" src="js/jsnetworkx.js"></script>
     <script type="text/javascript" src="js/graphMgr.js"></script>
     <script type="text/javascript" src="js/cytoscape.js"></script>

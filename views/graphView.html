@@ -1,3 +1,11 @@
+<button class="btn btn-info" onclick="graphZooming(0);" data-toggle="tooltip"
+        data-placement="bottom"
+        title="Zoom.">-
+</button>
+<button class="btn btn-info" onclick="graphZooming(1)" data-toggle="tooltip"
+        data-placement="bottom"
+        title="Zoom.">+
+</button>
 <div id="graph"></div>
 <div id="centralityMenu">
     <br/>
@@ -5,7 +13,7 @@
             data-placement="bottom"
             title="Rearrange graph to fit viewport.">Rearrange
     </button>
-    <button class="btn btn-success" onclick="globalGraph.addNode()" data-toggle="tooltip"
+    <button class="btn btn-success" onclick="globalGraph.addNode();" data-toggle="tooltip"
             data-placement="bottom"
             title="Click to add isolated vertex">Add node
     </button>

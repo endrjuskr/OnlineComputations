@@ -93,6 +93,10 @@
         }
     };
 
+    statusManager.getInstance = function () {
+        return window._statusManager || (window._statusManager = new statusManager());
+    };
+
     window.statusManager = statusManager;
 
 })(window);

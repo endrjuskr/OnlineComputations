@@ -1,0 +1,25 @@
+#predefinedGraph h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#predefinedGraph button {
+    float: right;
+}
+
+
+#result_content table {
+    border: solid 1px;
+}
+#result_content button {
+    margin: auto;
+    display: block;
+}
+
+#start_content .centralities {
+    text-align: center;
+}
+
+#start_content .centralities h2 {
+    margin-bottom: 40px;
+}

@@ -9,27 +9,22 @@ $(window).load(function () {
 
 var toStartStep = function() {
         setStatus_Step(0);
-        $("#nextStep").text("Start");
         $("#nextStep").attr("disabled", false);
     },
     toFirstStep = function() {
         setStatus_Step(1);
-        $("#nextStep").text("Next");
         $("#nextStep").attr("disabled", true);
     },
     toSecondStep = function () {
         setStatus_Step(2);
-        $("#nextStep").text("Next");
         $("#nextStep").attr("disabled", false);
     },
     toThirdStep = function () {
         setStatus_Step(3);
-        $("#nextStep").text("Next");
         $("#nextStep").attr("disabled", false);
     },
     toResultStep = function() {
         setStatus_Step(4);
-        $("#nextStep").text("Next");
         $("#nextStep").attr("disabled", true);
     };
 
@@ -46,48 +41,53 @@ function hideStartContent() {
 }
 
 function showStartContent() {
-    $("#start_content").show();
+    $("#start_content > *").show();
     $("#start_point_msg").hide();
     hideGraphView();
     hideResultView();
 }
 
 function loadIntroductionView() {
-    $("#start_content").load("views/introductionView.html", toStartStep);
-    showStartContent();
+    $("#start_content").load("views/introductionView.html", function() {
+        $("body").addClass("first");
+        toStartStep();
+    });
+    $("#graph_content").html("");
+    $("#result_content").html("");
 }
 
 function loadStartContentView() {
     // requiere fileHandler.js
-    $("#start_content").load("views/defaultOptionsView.html", setFileHandler);
-    showStartContent();
-    toFirstStep();
+    $("#start_content").load("views/defaultOptionsView.html", function() {
+        setFileHandler();
+        $("body").removeClass("first");
+        showStartContent();
+        toFirstStep();
+    });
 }
 
 function loadStatusView() {
-    var statusManager = new window.statusManager();
-    $("#status_content").load("views/statusView.html", function(){
-        statusManager.init();
-        window._statusManager = statusManager;
-        $("#nextStep").on("click touchend", function() {
-            var state = statusManager.state(),
-                centralities;
-            if (state === 0) {
-                loadStartContentView();
-            } else if (state === 2) {
-                loadCentralitiesView();
-            } else if (state === 3) {
-                centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
-                if (centralities.length) {
-                    showComputedResults();
-                } else {
-                    $("#centralityAlert").show();
-                    setTimeout(function(){
-                        $("#centralityAlert").hide();
-                    }, 1500);
-                }
+    var statusManager = window.statusManager.getInstance();
+    statusManager.init();
+    $("#nextStep").on("click touchend", function() {
+        var state = statusManager.state(),
+            centralities;
+        if (state === 0) {
+            loadStartContentView();
+        } else if (state === 2) {
+            loadCentralitiesView();
+        } else if (state === 3) {
+            centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
+            if (centralities.length) {
+                showComputedResults();
+            } else {
+                // error - no centrality chosen
+                $("#centralityAlert").show();
+                setTimeout(function(){
+                    $("#centralityAlert").hide();
+                }, 2000);
             }
-        })
+        }
     });
 }
 
@@ -117,7 +117,7 @@ function getCentralitiesNames(centrality){
 
 function showComputedResults() {
     var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
-    $("#start_content").hide();
+    $("#start_content > *").hide();
     $("#graph_content").show();
 
     // todo - onloading widget
@@ -195,4 +195,18 @@ function uploadFile() {
  * */
 function hideTooltips(){
     $(".tooltip").hide();
+}
+
+function graphZooming(level) {
+    var currentGraph = globalGraph.printedGraph;
+    currentGraph.zoomingEnabled(true);
+    if (level) {
+        zoomingLevel += 0.1;
+    } else {
+        zoomingLevel -= 0.1;
+    }
+    zoomingLevel = zoomingLevel < 1.0 ? 1.0 : zoomingLevel;
+    currentGraph.zoom(zoomingLevel);
+    currentGraph.center();
+    currentGraph.zoomingEnabled(false);
 }
