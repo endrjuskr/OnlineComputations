@@ -16,11 +16,13 @@
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
 .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
-.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+.bs-wizard > .bs-wizard-step.active .bs-wizard-stepnum {font-weight: bold;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #6CA0CD; font-size: 14px;}
+.bs-wizard > .bs-wizard-step.active .bs-wizard-info {color: #337AB7; font-weight: bold;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 32px; height: 32px; border: solid 1px #66B1C8; display: block; background: #cce4ec; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #337ab7; border-radius: 50px; position: absolute; top: 8px; left: 8px; }
 .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
-.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #66B1C8;}
+.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #337AB7;}
 .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
 .bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
 .bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}

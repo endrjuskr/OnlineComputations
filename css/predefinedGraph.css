@@ -1,9 +1,10 @@
-#predefinedGraph h3 {
+#start_content .panel.panel-info .panel-heading h3.panel-title.lead {
     font-size: 20px;
     font-weight: bold;
 }
 
-#predefinedGraph button {
+#start_content .panel.panel-info .panel-heading button,
+#start_content .panel.panel-info .panel-heading .checkboxContainer {
     float: right;
 }
 
@@ -16,10 +17,22 @@
     margin: 20px;
 }
 
-#start_content .centralities {
-    text-align: center;
+#start_content #randomSettings > .row {
+    margin-bottom: 30px;
 }
 
-#start_content .centralities h2 {
-    margin-bottom: 40px;
+#start_content #randomSettings .slider.slider-horizontal {
+    width: 100%;
+}
+
+#start_content #randomSettings > .row h4 {
+    margin-top: 0;
+}
+
+#randomSettings .parameterInfo {
+    margin-top: 25px;
+}
+
+#randomSettings .parameterInfo:nth-of-type(1) {
+    margin-top: 5px;
 }

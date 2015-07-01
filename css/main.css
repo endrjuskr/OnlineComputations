@@ -13,6 +13,17 @@
     opacity: 0.3;
 }
 
+.btn-circle:hover {
+    background-color: #1971DD;
+    box-shadow: 0 0 20px #5BC0DE;
+    color: rgb(243, 221, 114);
+    border-color: #1971DD;
+}
+
+.checkboxContainer {
+    margin: 0;
+}
+
 #header img {
     width: 50px;
 }
@@ -54,12 +65,9 @@
     margin-top: 50px;
 }
 
-.centralityChoose label {
-    height: 38px;
-}
-
-.centralityLabel {
-    width: 340px;
+.centralityChoose h2 {
+    margin: 0 0 20px 0;
+    text-align: center;
 }
 
 #kParam, #d_cutoffParam {
