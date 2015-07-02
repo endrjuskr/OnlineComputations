@@ -47,6 +47,11 @@ function showStartContent() {
     hideResultView();
 }
 
+function logoClick () {
+
+    loadIntroductionView();
+}
+
 function loadIntroductionView() {
     $("#start_content").load("views/introductionView.html", function() {
         $("body").addClass("first");
@@ -77,16 +82,7 @@ function loadStatusView() {
         } else if (state === 2) {
             loadCentralitiesView();
         } else if (state === 3) {
-            centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
-            if (centralities.length) {
-                showComputedResults();
-            } else {
-                // error - no centrality chosen
-                $("#centralityAlert").show();
-                setTimeout(function(){
-                    $("#centralityAlert").hide();
-                }, 2000);
-            }
+            showComputedResults();
         }
     });
 }
@@ -116,14 +112,39 @@ function getCentralitiesNames(centrality){
 }
 
 function showComputedResults() {
-    var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked"));
-    $("#start_content > *").hide();
-    $("#graph_content").show();
+    var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked")),
+        nodeLength = (globalGraph && globalGraph.graphData && globalGraph.graphData.graph && globalGraph.graphData.graph.nodes) ?
+            globalGraph.graphData.graph.nodes.length : 0,
+        centralitiesNamesArray = centralities.map(getCentralitiesNames),
+        myerson = centralitiesNamesArray.indexOf("Myerson"),
+        // Myerson was not checked or graph has less nodes than 21
+        myersonCanBeComputed = (myerson === -1) || ((myerson > -1) && (nodeLength < 21));
 
-    // todo - onloading widget
-    toResultStep();
-    $("#nextStep").attr("disabled", true);
-    window._centralitiesManager.calculate(centralities.map(getCentralitiesNames));
+    if (centralitiesNamesArray.length) {
+        if (myersonCanBeComputed) {
+            $("#start_content > *").hide();
+            $("#graph_content").show();
+
+            // todo - onloading widget
+            toResultStep();
+            $("#nextStep").attr("disabled", true);
+            window._centralitiesManager.calculate(centralitiesNamesArray);
+        } else {
+            // error - no centrality chosen
+            $("#centralityAlert").html("<b>Error: </b> Sorry, Myerson can be computed only for graph with less than 21 nodes.");
+            $("#centralityAlert").show();
+            setTimeout(function(){
+                $("#centralityAlert").hide();
+            }, 3000);
+        }
+    } else {
+        // error - no centrality chosen
+        $("#centralityAlert").html("<b>Error: </b> No centrality was selected.")
+        $("#centralityAlert").show();
+        setTimeout(function(){
+            $("#centralityAlert").hide();
+        }, 3000);
+    }
 }
 
 function setStatus_Step(n) {

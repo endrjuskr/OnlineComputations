@@ -16,6 +16,8 @@
 .btn-circle:hover {
     background-color: #1971DD;
     box-shadow: 0 0 20px #5BC0DE;
+    -webkit-box-shadow: 0 0 20px #5BC0DE;
+    -moz-box-shadow: 0 0 20px #5BC0DE;
     color: rgb(243, 221, 114);
     border-color: #1971DD;
 }
@@ -23,6 +25,7 @@
 .checkboxContainer {
     margin: 0;
 }
+
 
 #header img {
     width: 50px;

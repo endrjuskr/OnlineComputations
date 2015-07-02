@@ -25,6 +25,23 @@
     width: 100%;
 }
 
+#start_content #randomSettings .slider-track {
+    background: rgb(201, 234, 250);
+}
+
+#start_content #randomSettings .slider .slider-selection {
+    background: #5bc0de;
+}
+
+#start_content #randomSettings .slider .slider-handle {
+    box-shadow: 0px 0px 10px #f5df73;
+    -webkit-box-shadow: 0px 0px 10px #f5df73;
+    -moz-box-shadow: 0px 0px 10px #f5df73;
+    background: rgb(14, 145, 211);
+}
+
+
+
 #start_content #randomSettings > .row h4 {
     margin-top: 0;
 }
