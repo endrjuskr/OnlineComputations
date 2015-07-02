@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <img src="img/header_icon.png"/>
-                    <span id="headerTitle" class="navbar-brand" onclick="loadIntroductionView();">Computational Toolbox</span>
+                    <span id="headerTitle" class="navbar-brand" data-toggle="modal" data-target="#logoClick">Computational Toolbox</span>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right">
@@ -114,6 +114,26 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="loadStartContentView()">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start again confirmation -->
+        <div class="modal fade" id="logoClick" tabindex="-1" role="dialog" aria-labelledby="headerTitle">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Start again</h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure that you want to start again?
+                        All changes will be lost.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="loadIntroductionView()">Yes</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
                     </div>
                 </div>
