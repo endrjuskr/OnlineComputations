@@ -4,6 +4,10 @@ function setFileHandler() {
     });
 }
 
+function destroyClickedElement(event) {
+    document.body.removeChild(event.target);
+}
+
 function handleFileSelect(evt) {
     var file = evt.target.files[0];
 

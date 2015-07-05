@@ -117,6 +117,25 @@ function GraphMgr(graphData) {
         this.graphData = {graph: {nodes: nodesArray, edges: edgesArray}, params: this.graphData.params};
         $("#kParam").attr({"max": this.graphData.graph.nodes.length});
         this.printedGraph.center();
+    };
+
+    this.saveGraphAsPNG = function () {
+        var pngGraph = this.printedGraph.png(),
+            downloadLink = document.createElement("a");
+
+        //@todo
+        // - check all browsers
+        if (navigator.msSaveBlob) {
+            // @todo
+            // - it does not work!
+            var imgAsBlob = new Blob([pngGraph]);
+            navigator.msSaveBlob(imgAsBlob, "graph.png");
+        } else {
+            downloadLink.download = "graph.png";
+            downloadLink.href = pngGraph;
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.click();
+        }
     }
 }
 

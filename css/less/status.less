@@ -1,13 +1,30 @@
 #status_content {
     margin-bottom: 30px;
-}
 
-#status_content .status-button {
-    margin-top: 10px;
-}
+    .status-button {
+        margin-top: 10px;
+    }
 
-#status_content .button-content-right {
-    text-align: right;
+    .button-content-right {
+        text-align: right;
+    }
+
+    .bs-wizard-step  {
+        &.active {
+            .progress-bar {
+                -webkit-transition-delay: 0.2s;
+                -o-transition-delay: 0.2s;
+                -moz-transition-delay: 0.2s;
+                transition-delay: 0.2s;
+            }
+        }
+        .progress-bar {
+            -webkit-transition: width .2s linear;
+            -o-transition: width .2s linear;
+            -moz-transition: width .2s linear;
+            transition: width .2s linear;
+        }
+    }
 }
 
 

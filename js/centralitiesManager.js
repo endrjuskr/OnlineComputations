@@ -362,6 +362,7 @@ var decimal_points = 4;
 
         tableHTML += '<button type="button" class="btn btn-info" onclick="saveResultsAsCSV()">Get results as CSV</button>';
 		tableHTML += '<button type="button" class="btn btn-info" onclick="saveResultsAsTex()">Get results as Tex</button>';
+        tableHTML += '<button type="button" class="btn btn-info" onclick="globalGraph.saveGraphAsPNG()">Save graph</button>';
 
         $("#result_content").html(tableHTML);
     }
