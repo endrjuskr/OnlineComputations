@@ -257,20 +257,16 @@ var decimal_points = 4;
 	var ROOT = -1;
 	var RED = -2;
 	var RED_NEIGHBOUR = -3;
+	
+	function clone(a){
+		var b = new Array()
+		for (var i in a)
+			b[i] = a[i];
+		return b;
+	}
 
 	function enumerateCCs(graph, f){
-		graph.neighs = calculateNeighbours(graph);
-		
-		var neighsMap = new Array();
-		graph.nodes.forEach(function(v){
-			neighsMap[v.data.id] = new Array();
-		});
-		graph.nodes.forEach(function(v){
-			for (var i = 0; i < graph.neighs[v.data.id].length; ++i)
-				neighsMap[v.data.id][graph.neighs[v.data.id][i]] = i;
-		});	
-		graph.neighsMap = neighsMap;
-			
+		graph.neighs = calculateNeighbours(graph);			
 		for (var i = 0; i < graph.nodes.length; ++i){
 			var color = new Array();
 			for (var j = 0; j < i; ++j)
@@ -287,9 +283,9 @@ var decimal_points = 4;
 			var uId = graph.neighs[nodeId][i];
 			if (color[uId] == WHITE){
 				color[uId] = nodeId;
-				enumerateCCsRec(graph, f, uId, color.slice(), 0);
+				enumerateCCsRec(graph, f, uId, clone(color), 0);
 				color[uId] = RED_NEIGHBOUR;
-			} else if (color[uId] <= RED)
+			} else if (color[uId] == RED || color[uId] == RED_NEIGHBOUR)
 				color[uId] = RED_NEIGHBOUR;
 		}
 		if (color[nodeId] == ROOT){
@@ -297,14 +293,14 @@ var decimal_points = 4;
 			var coalition = new Array();
 			var coalitionNeighs = new Array();
 			graph.nodes.forEach(function(v){
-				if (color[v.data.id] >= GRAY)
+				if (color[v.data.id] != WHITE && color[v.data.id] != ROOT && color[v.data.id] != RED && color[v.data.id] != RED_NEIGHBOUR)
 					coalition.push(v.data.id);
 				if (color[v.data.id] == RED_NEIGHBOUR)
 					coalitionNeighs.push(v.data.id);
 			});
 			f(coalition, coalitionNeighs);
 		} else
-			enumerateCCsRec(graph, f, color[nodeId], color, graph.neighsMap[color[nodeId]][nodeId] + 1);
+			enumerateCCsRec(graph, f, color[nodeId], color, graph.neighs[color[nodeId]].indexOf(nodeId) + 1);
 	}
 
     prototype.sort = function(elem, sort_up) {
