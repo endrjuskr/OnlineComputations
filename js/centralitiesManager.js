@@ -56,7 +56,7 @@ var decimal_points = 4;
                 }
                 dist_sum += value;
             });
-            closeness[node.data.id] = dist_sum;
+            closeness[node.data.id] = 1./dist_sum;
         });
         return closeness;
     }
