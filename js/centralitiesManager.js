@@ -327,8 +327,15 @@ var decimal_points = 4;
             return sort_up ? a[sortElem] - b[sortElem] : b[sortElem] - a[sortElem] ;
         });
 
+        var tableHTML = "<div>";
+        // buttons
+        tableHTML += '<button type="button" class="btn btn-info" onclick="saveResultsAsCSV()">Get results as CSV</button>';
+        tableHTML += '<button type="button" class="btn btn-info" onclick="saveResultsAsTex()">Get results as Tex</button>';
+        tableHTML += '<button type="button" class="btn btn-info" onclick="globalGraph.saveGraphAsPNG()">Save graph</button>';
+        tableHTML += "</div>";
+
+        // table
         var no_elements = resultDataJSON[0].values.length;
-        var tableHTML = "";
         tableHTML += "<table class=\"table table-striped table-hover\">";
         tableHTML += "<thead><tr><th><center>Node</center></th>";
         for (var i = 0; i < resultDataJSON.length; ++i) {
@@ -355,10 +362,6 @@ var decimal_points = 4;
 
         tableHTML += "</tbody>";
         tableHTML += "</table>";
-
-        tableHTML += '<button type="button" class="btn btn-info" onclick="saveResultsAsCSV()">Get results as CSV</button>';
-		tableHTML += '<button type="button" class="btn btn-info" onclick="saveResultsAsTex()">Get results as Tex</button>';
-        tableHTML += '<button type="button" class="btn btn-info" onclick="globalGraph.saveGraphAsPNG()">Save graph</button>';
 
         $("#result_content").html(tableHTML);
     }

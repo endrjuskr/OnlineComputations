@@ -47,11 +47,6 @@ function showStartContent() {
     hideResultView();
 }
 
-function logoClick () {
-
-    loadIntroductionView();
-}
-
 function loadIntroductionView() {
     $("#start_content").load("views/introductionView.html", function() {
         $("body").addClass("first");
@@ -100,7 +95,6 @@ function loadRandomView() {
 
 function loadCentralitiesView() {
     $("#start_content").load("views/centralitiesView.html", function(){
-        $("#centralityAlert").hide();
         toThirdStep();
     });
     $("#centralityMenu").hide();
@@ -131,18 +125,18 @@ function showComputedResults() {
             window._centralitiesManager.calculate(centralitiesNamesArray);
         } else {
             // error - no centrality chosen
-            $("#centralityAlert").html("<b>Error: </b> Sorry, Myerson can be computed only for graph with less than 21 nodes.");
-            $("#centralityAlert").show();
+            $("#alert").html("<b>Error: </b> Sorry, Myerson can be computed only for graph with less than 21 nodes.");
+            $("#alert").show("slow");
             setTimeout(function(){
-                $("#centralityAlert").hide();
+                $("#alert").hide("slow");
             }, 3000);
         }
     } else {
         // error - no centrality chosen
-        $("#centralityAlert").html("<b>Error: </b> No centrality was selected.")
-        $("#centralityAlert").show();
+        $("#alert").html("<b>Error: </b> No centrality was selected.")
+        $("#alert").show("slow");
         setTimeout(function(){
-            $("#centralityAlert").hide();
+            $("#alert").hide("slow");
         }, 3000);
     }
 }
@@ -152,6 +146,7 @@ function setStatus_Step(n) {
     if (statusManager) {
         statusManager.changeStep(n);
     }
+    $("#alert").hide();
 }
 
 /*============================

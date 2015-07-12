@@ -120,7 +120,9 @@ function GraphMgr(graphData) {
     };
 
     this.saveGraphAsPNG = function () {
-        var pngGraph = this.printedGraph.png(),
+        var pngGraph = this.printedGraph.png({
+                full: true
+            }),
             downloadLink = document.createElement("a");
 
         //@todo
@@ -129,11 +131,10 @@ function GraphMgr(graphData) {
             // @todo
             // - it does not work!
             var imgAsBlob = new Blob([pngGraph]);
-            navigator.msSaveBlob(imgAsBlob, "graph.png");
+            window.navigator.msSaveOrOpenBlob(imgAsBlob, "graph.png");
         } else {
             downloadLink.download = "graph.png";
             downloadLink.href = pngGraph;
-            downloadLink.onclick = destroyClickedElement;
             downloadLink.click();
         }
     }

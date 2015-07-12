@@ -104,10 +104,12 @@
 
         <!-- FIRST PAGE -->
         <div id="page">
+            <div id="alert" class="alert alert-danger" role="alert"><b>Error: </b></div>
             <div id="start_content"></div>
             <div id="graph_content"></div>
             <div id="result_content"></div>
         </div>
+
 
         <!-- Start again confirmation -->
         <div class="modal fade" id="goToComputation" tabindex="-1" role="dialog" aria-labelledby="computationalLink">
@@ -149,6 +151,27 @@
             </div>
         </div>
 
+        <!-- Not supported browsers
+           @todo this error will be eliminated by django.
+         -->
+
+        <div class="modal fade" id="notSupportedBrowser" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Problem with browser</h4>
+                    </div>
+                    <div class="modal-body">
+                        Upgrade your browser and start again.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="loadIntroductionView()">Exit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" >Stay on page</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
