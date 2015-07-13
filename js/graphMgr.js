@@ -15,7 +15,9 @@ function GraphMgr(graphData) {
                                 'content': 'data(id)',
                                 'text-valign': 'center',
                                 'text-halign': 'center',
-                                'font-size': 'small'
+                                'font-size': 'small',
+                                'color': 'white',
+                                'background-color': '#1971dd'
                             }
                         },
                         {
@@ -30,7 +32,11 @@ function GraphMgr(graphData) {
                             }
                         },
                         {
-                            selector: 'edge'
+                            selector: 'edge',
+                            css: {
+                                'width': '2px',
+                                'line-color': '#A1DEF0'
+                            }
                         },
                         {
                             selector: ':selected',
@@ -137,6 +143,25 @@ function GraphMgr(graphData) {
             downloadLink.href = pngGraph;
             downloadLink.click();
         }
+    };
+
+    this.graphZooming = function(level) {
+        var currentGraph = this.printedGraph;
+        currentGraph.zoomingEnabled(true);
+        if (level) {
+            zoomingLevel += 0.1;
+        } else {
+            zoomingLevel -= 0.1;
+        }
+        zoomingLevel = zoomingLevel < 1.0 ? 1.0 : zoomingLevel;
+        currentGraph.zoom(zoomingLevel);
+        currentGraph.center();
+        currentGraph.zoomingEnabled(false);
+    };
+
+    this.refresh = function () {
+        this.printedGraph.reset();
+        this.printedGraph.center();
     }
 }
 

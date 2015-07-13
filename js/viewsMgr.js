@@ -212,17 +212,3 @@ function uploadFile() {
 function hideTooltips(){
     $(".tooltip").hide();
 }
-
-function graphZooming(level) {
-    var currentGraph = globalGraph.printedGraph;
-    currentGraph.zoomingEnabled(true);
-    if (level) {
-        zoomingLevel += 0.1;
-    } else {
-        zoomingLevel -= 0.1;
-    }
-    zoomingLevel = zoomingLevel < 1.0 ? 1.0 : zoomingLevel;
-    currentGraph.zoom(zoomingLevel);
-    currentGraph.center();
-    currentGraph.zoomingEnabled(false);
-}

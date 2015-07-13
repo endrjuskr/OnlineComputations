@@ -10,7 +10,7 @@ function destroyClickedElement(event) {
 
 function requiredFeaturesSupported() {
     if (window.Blob || window.navigator.msSaveOrOpenBlob) {
-        //return true;
+        return true;
     }
     $("#notSupportedBrowser").modal("show");
     return false;
