@@ -21,10 +21,25 @@
     text-align: center;
 }
 
-.centralityChoose .checkboxContainer .btn-group > label {
-    background-color: rgb(25, 113, 221);
-}
+#centralityChooseSmall {
+    margin-bottom: 30px;
+    text-align: center;
+    span {
+        margin: 30px;
+        font-size: 20px;
+        text-shadow: -1px 0 #31708F,0 1px #979ba2,1px 0 #979ba2,0 -1px #979ba2;
+        color: rgb(217, 237, 247);
+        font-weight: bold;
+        font-style: italic;
 
-.centralityChoose .checkboxContainer .btn-group label > span.glyphicon {
-    color: rgb(243, 221, 114);
+        &:hover {
+            color: #337AB7;
+            text-shadow: -1px 0 #86F5F5,0 1px #86F5F5,1px 0 #86F5F5,0 -1px #86F5F5;
+        }
+
+        &.selected {
+            color: #3F7B98;
+            text-shadow: none;
+        }
+    }
 }

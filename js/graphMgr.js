@@ -153,7 +153,7 @@ function GraphMgr(graphData) {
         } else {
             zoomingLevel -= 0.1;
         }
-        zoomingLevel = zoomingLevel < 1.0 ? 1.0 : zoomingLevel;
+        zoomingLevel = zoomingLevel < 0.5 ? 0.1 : zoomingLevel;
         currentGraph.zoom(zoomingLevel);
         currentGraph.center();
         currentGraph.zoomingEnabled(false);

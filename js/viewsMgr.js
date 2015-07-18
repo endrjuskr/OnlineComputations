@@ -1,5 +1,6 @@
 $(window).load(function () {
-    loadIntroductionView();
+    //loadIntroductionView();
+    loadCentralitiesView();
     loadStatusView();
     $('body').tooltip({
         selector: '[data-toggle="tooltip"]',
@@ -211,4 +212,11 @@ function uploadFile() {
  * */
 function hideTooltips(){
     $(".tooltip").hide();
+}
+
+function selectCentralityOnList(element, centrality){
+    if (element) {
+        $(element).toggleClass("selected");
+        $("#" + centrality).click();
+    }
 }
