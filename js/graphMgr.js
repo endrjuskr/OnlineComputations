@@ -21,6 +21,13 @@ function GraphMgr(graphData) {
                             }
                         },
                         {
+                            selector: 'node:selected',
+                            css: {
+                                'content': 'data(weight)',
+                                'color': 'black'
+                            }
+                        },
+                        {
                             selector: '$node > node',
                             css: {
                                 'padding-top': '10px',
@@ -35,14 +42,25 @@ function GraphMgr(graphData) {
                             selector: 'edge',
                             css: {
                                 'width': '2px',
-                                'line-color': '#A1DEF0'
+                                'line-color': '#A1DEF0',
+                                'content': 'data(weight)',
+                                'color': '#99B9E4',
+                                'text-valign' : 'top'
+                            }
+                        },
+                        {
+                            selector: 'edge:selected',
+                            css: {
+                                'color': '#1971DD',
+                                'font-size': '24px',
+                                'font-weight': 'bold'
                             }
                         },
                         {
                             selector: ':selected',
                             css: {
-                                'background-color': 'black',
-                                'line-color': 'black',
+                                'background-color': '#DDD31B',
+                                'line-color': '#DDD31B',
                                 'target-arrow-color': 'black',
                                 'source-arrow-color': 'black'
                             }
@@ -51,7 +69,10 @@ function GraphMgr(graphData) {
                     elements: globalGraph.graphData.graph,
                     layout: {
                         name: 'cose',
-                        padding: 5
+                        padding: 5,
+                        ready: function() {
+                            globalGraph.printedGraph.center();
+                        }
                     },
                     zoom: 1,
                     zoomingEnabled: false,
@@ -70,11 +91,16 @@ function GraphMgr(graphData) {
         this.printedGraph.layout();
     };
     this.addNode = function () {
-        this.printedGraph.add({
+        var graph = this.printedGraph;
+        graph.add({
             group: "nodes",
+            data: {
+                id: "" + (graph.nodes().length + 1),
+                weight: 1
+            },
             position: {x: 200, y: 200}
         });
-        //this.fitPosition();
+        this.fitPosition();
         this.reloadGraphData();
     };
     this.removeNodes = function () {
@@ -98,7 +124,8 @@ function GraphMgr(graphData) {
             data: {
                 id: "e" + edges.length.toString(),
                 source: selectedNodes[0]._private.data.id,
-                target: selectedNodes[1]._private.data.id
+                target: selectedNodes[1]._private.data.id,
+                weight: 1
             }
         });
         this.reloadGraphData();
@@ -110,13 +137,19 @@ function GraphMgr(graphData) {
         for (var i = 0; i < graphElems.length; ++i) {
             var elem = graphElems[i];
             if (elem.isNode())
-                nodesArray.push({data: {id: elem._private.data.id, weight: elem._private.data.weight}});
+                nodesArray.push({
+                    data: {
+                        id: elem._private.data.id,
+                        weight: elem._private.data.weight
+                    }
+                });
             else if (elem.isEdge())
                 edgesArray.push({
                     data: {
                         id: elem._private.data.id,
                         source: elem._private.data.source,
-                        target: elem._private.data.target
+                        target: elem._private.data.target,
+                        weight:  elem._private.data.weight
                     }
                 });
         }
@@ -162,6 +195,25 @@ function GraphMgr(graphData) {
     this.refresh = function () {
         this.printedGraph.reset();
         this.printedGraph.center();
+    };
+
+    this.showEdgeWeight = function(show) {
+        if (show) {
+            this.printedGraph.style().selector("edge").style({content: 'data(weight)'}).update()
+        } else {
+            this.printedGraph.style().selector("edge").style({content: ''}).update();
+        }
+    };
+
+    this.changeWeight = function(value) {
+        var graph = this.printedGraph,
+            selected = graph && graph.$(":selected");
+
+        if (selected) {
+            selected.forEach(function (element, index, collection) {
+                element.data("weight", value);
+            });
+        }
     }
 }
 

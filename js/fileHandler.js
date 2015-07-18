@@ -104,7 +104,14 @@ function getEdgesDataAsJSON(lines) {
     var edgesDataJSON = [];
     for (var i = 0; i < lines.length; ++i) {
         var line = lines[i];
-        edgesDataJSON.push({data: {id: "e" + i.toString(), source: line[0], target: line[1]}});
+        edgesDataJSON.push({
+            data: {
+                id: "e" + i.toString(),
+                source: line[0],
+                target: line[1],
+                weight: 1
+            }
+        });
     }
     return edgesDataJSON;
 }

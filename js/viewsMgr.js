@@ -1,6 +1,6 @@
 $(window).load(function () {
-    //loadIntroductionView();
-    loadCentralitiesView();
+    loadIntroductionView();
+    //loadGraphView();
     loadStatusView();
     $('body').tooltip({
         selector: '[data-toggle="tooltip"]',
@@ -120,8 +120,9 @@ function showComputedResults() {
             $("#start_content > *").hide();
             $("#graph_content").show();
 
-            // todo - onloading widget
             toResultStep();
+            // todo - onloading widget
+            $("#changeWeight").hide();
             $("#nextStep").attr("disabled", true);
             window._centralitiesManager.calculate(centralitiesNamesArray);
         } else {
@@ -159,6 +160,7 @@ function hideGraphView() {
 
 function showGraphView() {
     $("#graph_content").show();
+    $("#changeWeight").show();
 }
 
 function loadGraphView(cb) {
@@ -177,6 +179,7 @@ function loadGraphView(cb) {
  * */
 function showResultView() {
     $("#result_content").show();
+    $("#changeWeight").hide();
 }
 
 function hideResultView() {
@@ -218,5 +221,26 @@ function selectCentralityOnList(element, centrality){
     if (element) {
         $(element).toggleClass("selected");
         $("#" + centrality).click();
+    }
+}
+
+function showHideEdgeWeight (element) {
+    var isShown = $(element).hasClass("shown");
+
+    globalGraph.showEdgeWeight(!isShown);
+    $(element).toggleClass("shown");
+
+    if (isShown) {
+        $(element).text("Show weight of edges");
+    } else {
+        $(element).text("Hide weight of edges");
+    }
+}
+
+function changeWeight() {
+    var value = parseInt($("#newWeightValue").val(), 10);
+
+    if (value) {
+       globalGraph.changeWeight(value);
     }
 }

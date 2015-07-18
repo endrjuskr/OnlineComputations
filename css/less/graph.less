@@ -1,22 +1,29 @@
 #graph_content {
-    > button {
-        position: absolute;
-        z-index: 1000;
-        margin-top: 10px;
+    > div.settings {
+        z-index: 500;
+        margin: 5px;
 
-        &.first {
-            margin-left: 10px;
+        #graphViewSettings {
+            padding: 0;
+            button {
+                margin: 2px;
+                &.forth {
+                    width: 165px;
+                    &.shown {
+                        background-color: #269abc;
+                    }
+                }
+            }
         }
-
-        &.second {
-            margin-left: 55px;
+        #changeWeight {
+            text-align: right;
+            > #newWeightValue {
+                display: inline-block;
+                width: 100px;
+            }
         }
-
-        &.third {
-            margin-left: 100px;
-        }
-
     }
+
     #graph {
         height: 500px;
         width: 100%;
