@@ -57,36 +57,37 @@ function handleFileSelect(evt) {
 }
 
 function processData(allText) {
-    var allTextLines = allText.split(/\r\n|\n/);
-    var lines = new Array();
-    var edge;
-    var nodes = new Array();
-    var params = allTextLines[0].split(" ");
-    var nodesCount = parseInt(params[params.length - 1]);
+    var regex = / +(?= )/g,
+        allTextLines = allText.split(/\r\n|\n/),
+        lines = new Array(),
+        nodes = new Array(),
+        paramList = new Array(),
+        edge,
+        params = allTextLines[0].split(" "),
+        nodesCount = parseInt(params[params.length - 1]),
+        nodesDataJson,
+        edgesDataJson,
+        weight,
+        i;
 
-    for (var i = 1; i <= nodesCount; ++i) {
-        params = allTextLines[i].split(" ");
-        var j = 0;
-        while (params[j].length == 0) ++j;
-        nodes.push([params[j], 1]);
+    for (i = 1; i <= nodesCount; ++i) {
+        params = allTextLines[i].replace(regex,'').trim().split(" ");
+        weight = parseInt(params[2]) ? params[2] : 1;
+        nodes.push([params[0], params[1], weight]);
     }
 
-    for (var i = nodesCount + 2; i < allTextLines.length; ++i) {
+    for (i = nodesCount + 2; i < allTextLines.length; ++i) {
         if (allTextLines[i].length == 0) {
             continue;
         }
-        edge = allTextLines[i].split(' ');
-        var j = 0;
-        while (edge[j].length == 0) ++j;
-        var k = j + 1;
-        while (edge[k].length == 0) ++k;
-        lines.push([edge[j].trim(), edge[k].trim()]);
+        edge = allTextLines[i].replace(regex,'').trim().split(' ');
+        weight = parseInt(edge[2]) ? edge[2] : 1;
+        lines.push([edge[0], edge[1], weight]);
     }
 
-    var paramList = new Array();
 
-    var nodesDataJson = getNodesDataAsJSON(nodes);
-    var edgesDataJson = getEdgesDataAsJSON(lines);
+    nodesDataJson = getNodesDataAsJSON(nodes);
+    edgesDataJson = getEdgesDataAsJSON(lines);
 
     return {graph: {nodes: nodesDataJson, edges: edgesDataJson}, params: paramList};
 }
@@ -94,7 +95,13 @@ function processData(allText) {
 function getNodesDataAsJSON(nodes) {
     var nodesDataJSON = [];
     for (var j = 0; j < nodes.length; ++j) {
-        nodesDataJSON.push({data: {id: nodes[j][0], weight: nodes[j][1]}});
+        nodesDataJSON.push({
+            data: {
+                id: nodes[j][0],
+                label: nodes[j][1],
+                weight: nodes[j][2]
+            }
+        });
     }
 
     return nodesDataJSON;
@@ -104,7 +111,14 @@ function getEdgesDataAsJSON(lines) {
     var edgesDataJSON = [];
     for (var i = 0; i < lines.length; ++i) {
         var line = lines[i];
-        edgesDataJSON.push({data: {id: "e" + i.toString(), source: line[0], target: line[1]}});
+        edgesDataJSON.push({
+            data: {
+                id: "e" + i.toString(),
+                source: line[0],
+                target: line[1],
+                weight: line[2] || 1
+            }
+        });
     }
     return edgesDataJSON;
 }
