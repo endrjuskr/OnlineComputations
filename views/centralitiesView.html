@@ -304,11 +304,64 @@
                 </div>
             </div>
             <div class="panel-body lead">
-                <span>
-                    Info
-                </span>
-                <div class="wikipedia">
-                    Wikipedia
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span>
+                            Info
+                        </span>
+                        <div class="wikipedia">
+                            Wikipedia
+                        </div>
+                    </div>
+                    <div class="col-sm-6 myerson">
+                        <div>
+                            Definition of the characteristic function of connected coalition S with with set
+                            of internal edges E(S):
+                        </div>
+                        <div>
+                            (1) Pre-defined functions
+                        </div>
+                        <div class="function">
+                            <div class="btn-group">
+                                <select id="myersonFunction" class="selectpicker" data-style="btn-primary">
+                                    <option>1</option>
+                                    <option>|S|</option>
+                                    <option>|S|^2</option>
+                                    <option>weight(S)</option>
+                                    <option>weight(S)^2</option>
+                                    <option>E(S)</option>
+                                    <option>E(S)^2</option>
+                                    <option>weight(E(S))</option>
+                                    <option>weight(E(S))^2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            (2) A pre-defined more general function
+                        </div>
+                        <div class="parameter">
+                            <div>
+                                <span class="parameterInfo">
+                                    a =
+                                </span>
+                                <input type="number" id="myerson_a" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                                <span class="parameterInfo">
+                                    b =
+                                </span>
+                                <input type="number" id="myerson_b" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                            </div>
+                            <div>
+                                <span class="parameterInfo">
+                                    c =
+                                </span>
+                                <input type="number" id="myerson_c" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                                <span class="parameterInfo">
+                                    d =
+                                </span>
+                                <input type="number" id="myerson_d" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

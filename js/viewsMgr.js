@@ -1,6 +1,6 @@
 $(window).load(function () {
     loadIntroductionView();
-    //loadGraphView();
+    //loadCentralitiesView();
     loadStatusView();
     $('body').tooltip({
         selector: '[data-toggle="tooltip"]',
