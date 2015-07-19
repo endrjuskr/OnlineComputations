@@ -116,7 +116,7 @@ function getEdgesDataAsJSON(lines) {
                 id: "e" + i.toString(),
                 source: line[0],
                 target: line[1],
-                weight: line[2] || 1
+                weight: line[2]
             }
         });
     }
