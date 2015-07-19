@@ -107,7 +107,7 @@ function getCentralitiesNames(centrality){
 }
 
 function showComputedResults() {
-    var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose :checked")),
+    var centralities = Array.prototype.slice.call(document.querySelectorAll(".centralityChoose input:checked")),
         nodeLength = (globalGraph && globalGraph.graphData && globalGraph.graphData.graph && globalGraph.graphData.graph.nodes) ?
             globalGraph.graphData.graph.nodes.length : 0,
         centralitiesNamesArray = centralities.map(getCentralitiesNames),
