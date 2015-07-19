@@ -43,7 +43,7 @@ function GraphMgr(graphData) {
                             css: {
                                 'width': '2px',
                                 'line-color': '#A1DEF0',
-                                'content': 'data(weight)',
+                                'content': '',
                                 'color': '#99B9E4',
                                 'text-valign' : 'top'
                             }
@@ -79,6 +79,7 @@ function GraphMgr(graphData) {
                     ready: function() {
                         $("#graph").trigger("graphready");
                         globalGraph.printedGraph.center();
+                        globalGraph.printedGraph.one("select", "node", onSelectedGraphElementInfo);
                     }
                 });
             });
@@ -214,6 +215,10 @@ function GraphMgr(graphData) {
                 element.data("weight", value);
             });
         }
+    }
+
+    this.getSelected = function() {
+        return this.printedGraph.$(":selected");
     }
 }
 

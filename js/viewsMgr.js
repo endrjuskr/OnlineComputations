@@ -244,3 +244,11 @@ function changeWeight() {
        globalGraph.changeWeight(value);
     }
 }
+
+function onSelectedGraphElementInfo(event) {
+    var element = $("#changeWeightAlert");
+    element.removeClass("hidden");
+    setTimeout(function(){
+       element.hide();
+    }, 10000);
+}

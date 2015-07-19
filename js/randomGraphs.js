@@ -9,7 +9,13 @@ function createAndShow(nodes, lines) {
     var nodesDataJson = getNodesDataAsJSON(nodes);
     var edgesDataJson = getEdgesDataAsJSON(lines);
 
-    var graphData = {graph: {nodes: nodesDataJson, edges: edgesDataJson}, params: paramList};
+    var graphData = {
+        graph: {
+            nodes: nodesDataJson,
+            edges: edgesDataJson
+        },
+        params: paramList
+    };
 
     loadGraphView();
     globalGraph = new GraphMgr(graphData);

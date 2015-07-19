@@ -12,19 +12,22 @@
                 data-placement="bottom"
                 title="Refresh"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
         </button>
-        <button class="btn btn-info forth shown" onclick="showHideEdgeWeight(this)" data-toggle="tooltip"
+        <button class="btn btn-info forth" onclick="showHideEdgeWeight(this)" data-toggle="tooltip"
                 data-placement="bottom"
                 title="Show/Hide weight of egdes">
-            Hide weight of edges
+            Show weight of edges
         </button>
     </div>
     <div id="changeWeight" class="col-sm-6">
-            <input id="newWeightValue" type="text" class="form-control"/>
-            <button class="btn btn-info" onclick="changeWeight();" data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Change weight">
-                Change weight for selected elements
-            </button>
+        <input id="newWeightValue" type="text" class="form-control"/>
+        <button class="btn btn-info" onclick="changeWeight();" data-toggle="tooltip"
+                data-placement="bottom"
+                title="Change weight">
+            Change weight for selected elements
+        </button>
+        <div id="changeWeightAlert" class="alert alert-warning hidden" role="alert">
+            Highlighted nodes are laballed with their weights.
+        </div>
     </div>
 </div>
 

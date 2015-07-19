@@ -67,13 +67,11 @@ function processData(allText) {
         nodesCount = parseInt(params[params.length - 1]),
         nodesDataJson,
         edgesDataJson,
-        weight,
         i;
 
     for (i = 1; i <= nodesCount; ++i) {
         params = allTextLines[i].replace(regex,'').trim().split(" ");
-        weight = parseInt(params[2]) ? params[2] : 1;
-        nodes.push([params[0], params[1], weight]);
+        nodes.push([params[0], params[1], params[2]]);
     }
 
     for (i = nodesCount + 2; i < allTextLines.length; ++i) {
@@ -81,8 +79,7 @@ function processData(allText) {
             continue;
         }
         edge = allTextLines[i].replace(regex,'').trim().split(' ');
-        weight = parseInt(edge[2]) ? edge[2] : 1;
-        lines.push([edge[0], edge[1], weight]);
+        lines.push([edge[0], edge[1], edge[2]]);
     }
 
 
@@ -99,7 +96,7 @@ function getNodesDataAsJSON(nodes) {
             data: {
                 id: nodes[j][0],
                 label: nodes[j][1],
-                weight: nodes[j][2]
+                weight: parseInt(nodes[j][2]) ?  parseInt(nodes[j][2]) : 1
             }
         });
     }
@@ -116,7 +113,7 @@ function getEdgesDataAsJSON(lines) {
                 id: "e" + i.toString(),
                 source: line[0],
                 target: line[1],
-                weight: line[2]
+                weight:  parseInt(line[2]) ?  parseInt(line[2]) : 1
             }
         });
     }
