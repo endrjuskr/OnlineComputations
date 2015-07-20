@@ -1,6 +1,5 @@
 $(window).load(function () {
     loadIntroductionView();
-    //loadCentralitiesView();
     loadStatusView();
     $('body').tooltip({
         selector: '[data-toggle="tooltip"]',
@@ -251,4 +250,9 @@ function onSelectedGraphElementInfo(event) {
     setTimeout(function(){
        element.hide();
     }, 10000);
+}
+
+function setFunction(element, index) {
+    $("#myersonFunction").html($(element).html());
+    $("#myersonFunction").val(index);
 }

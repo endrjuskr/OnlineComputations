@@ -50,6 +50,8 @@ var decimal_points = 4;
                 node_dists = paths.get(node.data.id);
             }
             graph.nodes.map(function(node2) {
+                // TODO
+                // - error; node not connected
                 var value = node_dists.get(parseInt(node2.data.id));
                 if(value == undefined) {
                     value = node_dists.get(node2.data.id);
@@ -216,6 +218,14 @@ var decimal_points = 4;
     }
 	
 	function calculateMyerson(graph, charFun) {
+        /** TODO
+         *
+         * var alpha = $("#myerson_a").val(),
+         *      beta = $("#myerson_b").val(),
+         *      gama = $("#myerson_c").val(),
+         *      delta = $("#myerson_d").val(),
+         *      whichFunction = $("#myersonFunction").val();
+         */
 		var res = new Array();
 		var n = graph.nodes.length;
 		for (var i = 0; i < n; ++i)
@@ -461,6 +471,8 @@ var decimal_points = 4;
                         if (algorithmResult.get(parseInt(node)) == undefined) {
                             result.push({
                                 key: node,
+                                // TODO
+                                //- error; node not connected
                                 value: algorithmResult.get(node).toFixed(decimal_points)
                             });
                         } else {

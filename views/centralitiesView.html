@@ -1,14 +1,109 @@
 <div class="centralities">
 
-    <div id="centralityChooseSmall">
-        <span onclick="selectCentralityOnList(this, 'Degree');">Degree</span>
-        <span onclick="selectCentralityOnList(this, 'Closeness');">Closeness</span>
-        <span onclick="selectCentralityOnList(this, 'Betweenness');">Betweenness</span>
-        <span onclick="selectCentralityOnList(this, 'Eigevector');">Eigevector Centrality</span>
-        <span onclick="selectCentralityOnList(this, 'Algorithm1');">SV-based degree centrality</span>
-        <span onclick="selectCentralityOnList(this, 'Algorithm3');">Algorithm 3</span>
-        <span onclick="selectCentralityOnList(this, 'Algorithm4');">Algorithm 4</span>
-        <span onclick="selectCentralityOnList(this, 'Myerson');">Myerson</span>
+    <div  id="centralityChooseSmall" class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="DegreeSmall" onclick="selectCentralityOnList(this, 'Degree');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="DegreeSmall" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Degree</span>
+            </div>
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="ClosenessSmall" onclick="selectCentralityOnList(this, 'Closeness');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="ClosenessSmall" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Closeness</span>
+            </div>
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="BetweennessSmall" onclick="selectCentralityOnList(this, 'Betweenness');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="BetweennessSmall" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Betweenness</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="EigevectorSmall" onclick="selectCentralityOnList(this, 'Eigevector');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="EigevectorSmall" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Eigevector Centrality</span>
+            </div>
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="Algorithm1Small" onclick="selectCentralityOnList(this, 'Algorithm1');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="Algorithm1Small" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>SV-based degree centrality</span>
+            </div>
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="Algorithm3Small" onclick="selectCentralityOnList(this, 'Algorithm3');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="Algorithm3Small" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Algorithm 3</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="Algorithm4Small" onclick="selectCentralityOnList(this, 'Algorithm4');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="Algorithm4Small" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Algorithm 4</span>
+            </div>
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="MyersonSmall" onclick="selectCentralityOnList(this, 'Myerson');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="MyersonSmall" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Myerson</span>
+            </div>
+        </div>
     </div>
 
     <div class="centralityChoose well">
@@ -305,15 +400,7 @@
             </div>
             <div class="panel-body lead">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <span>
-                            Info
-                        </span>
-                        <div class="wikipedia">
-                            Wikipedia
-                        </div>
-                    </div>
-                    <div class="col-sm-6 myerson">
+                    <div class="col-sm-12 myerson">
                         <div>
                             Definition of the characteristic function of connected coalition S with with set
                             of internal edges E(S):
@@ -321,46 +408,61 @@
                         <div>
                             (1) Pre-defined functions
                         </div>
+
                         <div class="function">
                             <div class="btn-group">
-                                <select id="myersonFunction" class="selectpicker" data-style="btn-primary">
-                                    <option>1</option>
-                                    <option>|S|</option>
-                                    <option>|S|^2</option>
-                                    <option>weight(S)</option>
-                                    <option>weight(S)^2</option>
-                                    <option>E(S)</option>
-                                    <option>E(S)^2</option>
-                                    <option>weight(E(S))</option>
-                                    <option>weight(E(S))^2</option>
-                                </select>
+                                $ value(S) = $
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span id="myersonFunction"> $ 1 $ </span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a onclick="setFunction(this, 1);">  $ 1 $ </a></li>
+                                        <li><a onclick="setFunction(this, 2);"> $ |S| $ </a></li>
+                                        <li><a onclick="setFunction(this, 3);"> $ |S|^{2} $ </a></li>
+                                        <li><a onclick="setFunction(this, 4);"> $ weight(S) $ </a></li>
+                                        <li><a onclick="setFunction(this, 5);"> $ weight(S)^2 $ </a></li>
+                                        <li><a onclick="setFunction(this, 6);"> $ E(S) $ </a></li>
+                                        <li><a onclick="setFunction(this, 7);"> $ E(S)^{2} $ </a></li>
+                                        <li><a onclick="setFunction(this, 8);"> $ weight(E(S)) $ </a></li>
+                                        <li><a onclick="setFunction(this, 9);"> $ weight(E(S))^2 $ </a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div>
                             (2) A pre-defined more general function
                         </div>
+                        <div class="definition">
+                            $ (|S|)^{\alpha} \times (|E(S)|)^{\beta} \times \left(\sum\nolimits_{v_i \in S} {w_i \over |S|}\right)^{\gamma} \times
+                            \left(\sum\nolimits_{(v_i, v_j) \in E(S)} {w_ij \over |E(S)|}\right)^{\delta} $
+                        </div>
                         <div class="parameter">
                             <div>
                                 <span class="parameterInfo">
-                                    a =
+                                    $ \alpha = $
                                 </span>
                                 <input type="number" id="myerson_a" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
                                 <span class="parameterInfo">
-                                    b =
+                                    $ \beta =  $
                                 </span>
                                 <input type="number" id="myerson_b" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
                             </div>
                             <div>
                                 <span class="parameterInfo">
-                                    c =
+                                    $ \gamma = $
                                 </span>
                                 <input type="number" id="myerson_c" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
                                 <span class="parameterInfo">
-                                    d =
+                                    $ \delta = $
                                 </span>
                                 <input type="number" id="myerson_d" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-12 wikipedia">
+                        Wikipedia
                     </div>
                 </div>
             </div>
@@ -368,3 +470,7 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    MathJax.Hub.Typeset();
+</script>
