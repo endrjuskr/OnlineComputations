@@ -217,8 +217,9 @@ function hideTooltips(){
 }
 
 function selectCentralityOnList(element, centrality){
+    var centralityToSet = $("#" + centrality);
     if (element) {
-        $("#" + centrality).click();
+        centralityToSet.prop("checked", !centralityToSet.prop("checked"));
     }
 }
 
