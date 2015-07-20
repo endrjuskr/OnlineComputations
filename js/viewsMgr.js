@@ -218,7 +218,6 @@ function hideTooltips(){
 
 function selectCentralityOnList(element, centrality){
     if (element) {
-        $(element).toggleClass("selected");
         $("#" + centrality).click();
     }
 }

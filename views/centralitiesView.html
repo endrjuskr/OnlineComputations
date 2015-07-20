@@ -67,6 +67,20 @@
             </div>
             <div>
                 <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="Algorithm2Small" onclick="selectCentralityOnList(this, 'Algorithm2');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="Algorithm2Small" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>SV-based degree centrality (k)</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <div class="checkboxContainer form-group small">
                     <input type="checkbox" name="centralitiesSmall" id="Algorithm3Small" onclick="selectCentralityOnList(this, 'Algorithm3');" autocomplete="off" />
                     <div class="btn-group">
                         <label for="Algorithm3Small" class="btn btn-primary">
@@ -77,8 +91,6 @@
                 </div>
                 <span>Algorithm 3</span>
             </div>
-        </div>
-        <div class="col-md-3">
             <div>
                 <div class="checkboxContainer form-group small">
                     <input type="checkbox" name="centralitiesSmall" id="Algorithm4Small" onclick="selectCentralityOnList(this, 'Algorithm4');" autocomplete="off" />
@@ -115,7 +127,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Degree" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Degree" onclick="selectCentralityOnList(this, 'DegreeSmall');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Degree" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -149,7 +161,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Closeness" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Closeness" onclick="selectCentralityOnList(this, 'ClosenessSmall');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Closeness" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -183,7 +195,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Betweenness" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Betweenness" onclick="selectCentralityOnList(this, 'BetweennessSmall');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Betweenness" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -217,7 +229,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Eigevector" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Eigevector" onclick="selectCentralityOnList(this, 'EigevectorSmall');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Eigevector" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -251,7 +263,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm1" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Algorithm1" onclick="selectCentralityOnList(this, 'Algorithm1Small');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Algorithm1" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -280,7 +292,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm2" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Algorithm2" onclick="selectCentralityOnList(this, 'Algorithm2Small');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Algorithm2" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -319,7 +331,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm3" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Algorithm3" onclick="selectCentralityOnList(this, 'Algorithm3Small');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Algorithm3" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -358,7 +370,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm4" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Algorithm4"onclick="selectCentralityOnList(this, 'Algorithm4Small');"  autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Algorithm4" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -387,7 +399,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Myerson" autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Myerson" onclick="selectCentralityOnList(this, 'MyersonSmall');" autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Myerson" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -435,8 +447,8 @@
                             (2) A pre-defined more general function
                         </div>
                         <div class="definition">
-                            $ (|S|)^{\alpha} \times (|E(S)|)^{\beta} \times \left(\sum\nolimits_{v_i \in S} {w_i \over |S|}\right)^{\gamma} \times
-                            \left(\sum\nolimits_{(v_i, v_j) \in E(S)} {w_ij \over |E(S)|}\right)^{\delta} $
+                            $ value(S) = (|S|)^{\alpha} \times (|E(S)|)^{\beta} \times \left(\sum\nolimits_{v_i \in S} {w_i \over |S|}\right)^{\gamma} \times
+                            \left(\sum\nolimits_{(v_i, v_j) \in E(S)} {w_{ij} \over |E(S)|}\right)^{\delta} $
                         </div>
                         <div class="parameter">
                             <div>
