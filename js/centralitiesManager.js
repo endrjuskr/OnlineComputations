@@ -92,6 +92,18 @@ var decimal_points = 4;
         return neighbours;
     }
 
+	function calculateWeightsMatrix(graph) {
+        var weightsMatrix = new Array();
+        for (var i = 0; i < graph.nodes.length; ++i)
+            weightsMatrix[graph.nodes[i].data.id] = new Array();
+        for (var i = 0; i < graph.edges.length; ++i){
+            var data = graph.edges[i].data;
+            weightsMatrix[data.source][data.target] = data.weight;
+            weightsMatrix[data.target][data.source] = data.weight;
+        }
+        return weightsMatrix;
+    }
+
     function calculateCentralityAlgorithm1(graph) {
         var degree = calculateCentralityDegree(graph),
             neighbours = calculateNeighbours(graph),
@@ -246,10 +258,10 @@ var decimal_points = 4;
 			var wOut = weights[c.length + 1][c.length + cn.length];
 			var cVal = charFun(c, graph);
 			c.forEach(function(v){
-				res[v] += wIn * cVal;
+				res[v.data.id] += wIn * cVal;
 			});
 			cn.forEach(function(v){
-				res[v] -= wOut * cVal;
+				res[v.data.id] -= wOut * cVal;
 			});		
 		});
 		return res;
@@ -304,9 +316,9 @@ var decimal_points = 4;
 			var coalitionNeighs = new Array();
 			graph.nodes.forEach(function(v){
 				if (color[v.data.id] != WHITE && color[v.data.id] != ROOT && color[v.data.id] != RED && color[v.data.id] != RED_NEIGHBOUR)
-					coalition.push(v.data.id);
+					coalition.push(v);
 				if (color[v.data.id] == RED_NEIGHBOUR)
-					coalitionNeighs.push(v.data.id);
+					coalitionNeighs.push(v);
 			});
 			f(coalition, coalitionNeighs);
 		} else
@@ -376,6 +388,13 @@ var decimal_points = 4;
         $("#result_content").html(tableHTML);
     }
 
+	function arrContains(arr, elem){
+		for (var i = 0; i < arr.length; ++i)
+			if (arr[i] == elem)
+				return true;
+		return false;
+	}
+
     prototype.init = function(){
         this._centralities = {
             Degree: {
@@ -421,7 +440,56 @@ var decimal_points = 4;
             Myerson: {
                 name: "Myerson",
                 method: calculateMyerson,
-                params: [ function(c, g){ return c.length * c.length; } ]
+                params: [
+					function(c, g){
+						var res = 0.;
+						var myerFun = $("#myersonFunction").val();
+						if (myerFun == "") 
+							myerFun = 1;
+						switch (myerFun){							
+						case 1:
+							res = 1.;
+							break;
+						case 2:
+						case 3:
+							res = c.length;
+							break;
+						case 4:
+						case 5:
+							c.forEach(function(v){ res += v.data.weight; });
+							break;
+						case 6:
+						case 7:
+							for (var i = 0; i < c.length; ++i)
+								for (var j = i + 1; j < c.length; ++j)
+									if (arrContains(g.neighs[c[i].data.id], c[j].data.id))
+										res += 1.;
+							break;
+						case 8:
+						case 9:
+							if (typeof graph.weightsMatrix === 'undefined')
+								graph.weightsMatrix = calculateWeightsMatrix(g);
+							for (var i = 0; i < c.length; ++i)
+								for (var j = i + 1; j < c.length; ++j)
+									if (arrContains(g.neighs[c[i].data.id], c[j].data.id))
+										res += graph.weightsMatrix[c[i].data.id][c[j].data.id];
+							break;
+						default:
+							break;						
+						}
+						switch (myerFun){
+						case 3:
+						case 5:
+						case 7:
+						case 9:
+							res = res * res;
+							break;
+						default:
+							break;						
+						}
+						return res;
+					}
+				]
             }
         };
     };
