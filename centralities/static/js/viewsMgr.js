@@ -207,7 +207,7 @@ function hideResultView() {
  *       Start actions
  * */
 function startFromScratch() {
-    var graphData = processData(graphs[3]);
+    var graphData = processData("");
     globalGraph = new GraphMgr(graphData);
     globalGraph.draw();
     hideStartContent("Define Graph");
@@ -216,7 +216,13 @@ function startFromScratch() {
 }
 
 function uploadGraph(elem) {
-    var graphData = processData(graphs[elem]);
+    var g = null;
+    for(var i = 0; i < graphs.length; ++i) {
+        if(graphs[i].key == elem) {
+            g = graphs[i].value
+        }
+    }
+    var graphData = processData(g);
     globalGraph = new GraphMgr(graphData);
     globalGraph.draw();
     hideStartContent();

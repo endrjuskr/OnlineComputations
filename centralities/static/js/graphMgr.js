@@ -108,7 +108,7 @@ function GraphMgr(graphData) {
                     }
                 });
         }
-        this.graphData = {graph: {nodes: nodesArray, edges: edgesArray}, params: this.graphData.params};
+        this.graphData = {graph: {nodes: nodesArray, edges: edgesArray}};
         $("#kParam").attr({"max": this.graphData.graph.nodes.length});
     }
 }
