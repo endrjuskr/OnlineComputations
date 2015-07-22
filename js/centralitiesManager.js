@@ -443,8 +443,8 @@ var decimal_points = 4;
                 params: [
 					function(c, g){
 						var res = 0.;
-						var myerFun = $("#myersonFunction").val();
-						if (myerFun == "") 
+						var myerFun = parseInt($("#myersonFunction").val());
+						if (isNaN(myerFun)) 
 							myerFun = 1;
 						switch (myerFun){							
 						case 1:
