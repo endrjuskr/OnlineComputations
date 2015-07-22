@@ -20,7 +20,16 @@
     <script src="{% static 'js/bootstrap-slider.min.js' %}"></script>
     <script src="{% static 'js/contants.js' %}"></script>
     <script type="text/javascript">
-        var graphs = ["{{ lesmis }}", "{{ dolphins }}", "{{ karate }}", ""];
+        var graphsList = "{{ graphs }}";
+        var graphs = [];
+        var t = graphsList.split("$");
+        for(var i = 0; i < t.length; ++i) {
+            var g = t[i];
+            graphs.push({
+                key : g.split("*")[0],
+                value : g.split("*")[1]
+            })
+        }
     </script>
 </head>
 <body>

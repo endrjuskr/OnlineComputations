@@ -5,22 +5,23 @@ import simplejson
 def home(request):
     import os
     module_dir = os.path.dirname(__file__)  # get current directory
-    file_path1 = os.path.join(module_dir, 'static/test_data/dolphins.net')
-    file_path2 = os.path.join(module_dir, 'static/test_data/karate.net')
-    file_path3 = os.path.join(module_dir, 'static/test_data/lesmis.net')
-
-    dolphins = netconv.Network()
-    netconv.importPajek(dolphins, file_path1)
-    karate = netconv.Network()
-    netconv.importPajek(karate, file_path2)
-    lesmis = netconv.Network()
-    netconv.importPajek(lesmis, file_path3)
-
-    print ";".join(",".join(x) for x in dolphins.toList())
+    from os import listdir
+    from os.path import isfile, join
+    mypath = os.path.join(module_dir, 'static/test_data/')
+    onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
 
 
-    return render(request, "centralities/index.html", {
-        'dolphins': ";".join(",".join(x) for x in dolphins.toList()),
-        'karate': ";".join(",".join(x) for x in karate.toList()),
-        'lesmis': ";".join(",".join(x) for x in lesmis.toList())
-    })
+    paths = {}
+
+    for f in onlyfiles:
+        net = netconv.Network()
+        if f.endswith('.net'):
+            netconv.importPajek(net, os.path.join(mypath, f))
+        else:
+            netconv.importGML(net, os.path.join(mypath, f))
+        name = f.split('.')[0]
+        paths[name] = ";".join(",".join(x) for x in net.toList())
+
+    t = "$".join("%s*%s" % (k, v) for (k, v) in paths.iteritems())
+
+    return render(request, "centralities/index.html", { 'graphs': t })

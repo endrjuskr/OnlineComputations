@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title lead">Zachary’s Karate Club</h3>
-            <button type="button" class="btn btn-primary" data-file="karate.net" onclick="uploadGraph(0)">
+            <button type="button" class="btn btn-primary" data-file="karate.net" onclick="uploadGraph('karate')">
                 Choose
             </button>
         </div>
@@ -17,7 +17,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title lead">Dolphin Social Network</h3>
-            <button type="button" class="btn btn-primary" data-file="dolphins.net" onclick="uploadGraph(1)">
+            <button type="button" class="btn btn-primary" data-file="dolphins.net" onclick="uploadGraph('dolphins')">
                 Choose
             </button>
         </div>
@@ -31,13 +31,126 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title lead">Les Miserables</h3>
-            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph(2)">
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('lesmis')">
                 Choose
             </button>
         </div>
         <div class="panel-body lead">
             Coappearance network of characters in the novel Les Miserables. Please cite D. E. Knuth, The
             Stanford GraphBase: A Platform for Combinatorial Computing, Addison-Wesley, Reading, MA (1993).
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Word adjacencies</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('adjnoun')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            Adjacency network of common adjectives and nouns in the novel David Copperfield by Charles Dickens.
+            Please cite M. E. J. Newman, Phys. Rev. E 74, 036104 (2006).
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">American College football</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('football')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            Network of American football games between Division IA colleges during regular season Fall 2000.
+            Please cite M. Girvan and M. E. J. Newman, Proc. Natl. Acad. Sci. USA 99, 7821-7826 (2002).
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Political blogs</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('polblogs')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            A directed network of hyperlinks between weblogs on US politics, recorded in 2005 by Adamic and Glance.
+            Please cite L. A. Adamic and N. Glance, "The political blogosphere and the 2004 US Election", in
+            Proceedings of the WWW-2005 Workshop on the Weblogging Ecosystem (2005). Thanks to Lada Adamic for
+            permission to post these data on this web site.
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Books about US politics</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('polbooks')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            A network of books about US politics published around the time of the 2004 presidential election and
+            sold by the online bookseller Amazon.com. Edges between books represent frequent copurchasing of books
+            by the same buyers. The network was compiled by V. Krebs and is unpublished, but can found on Krebs' web
+            site. Thanks to Valdis Krebs for permission to post these data on this web site.
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Neural network</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('celegansneural')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            A directed, weighted network representing the neural network of C. Elegans. Data compiled by D. Watts and
+            S. Strogatz and made available on the web here. Please cite D. J. Watts and S. H. Strogatz,
+            Nature 393, 440-442 (1998). Original experimental data taken from J. G. White, E. Southgate,
+            J. N. Thompson, and S. Brenner, Phil. Trans. R. Soc. London 314, 1-340 (1986).
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Condensed matter collaborations 1999</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('condmat')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            Weighted network of coauthorships between scientists posting preprints on the Condensed Matter E-Print
+            Archive between Jan 1, 1995 and December 31, 1999. Please cite M. E. J. Newman, The structure of scientific
+            collaboration networks, Proc. Natl. Acad. Sci. USA 98, 404-409 (2001).
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Condensed matter collaborations 2005</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('condmat2005')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            Updated network of coauthorships between scientists posting preprints on the Condensed Matter E-Print
+            Archive. This version includes all preprints posted between Jan 1, 1995 and March 31, 2005.
+            Please cite M. E. J. Newman, Proc. Natl. Acad. Sci. USA 98, 404-409 (2001).
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title lead">Astrophysics collaborations</h3>
+            <button type="button" class="btn btn-primary" data-file="lesmis.net" onclick="uploadGraph('astroph')">
+                Choose
+            </button>
+        </div>
+        <div class="panel-body lead">
+            Weighted network of coauthorships between scientists posting preprints on the Astrophysics E-Print
+            Archive between Jan 1, 1995 and December 31, 1999. Please cite M. E. J. Newman,
+            Proc. Natl. Acad. Sci. USA 98, 404-409 (2001).
         </div>
     </div>
 </div>
