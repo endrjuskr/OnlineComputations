@@ -516,8 +516,19 @@ MV_i(\nu,G)= SV_i(\nu^G)
                             Definition of the characteristic function of connected coalition $S$ with with set
                             of internal edges $E(S)$:
                         </div>
+
+
                         <div>
-                            (1) Pre-defined functions
+                            <div class="checkboxContainer form-group small">
+                                <input type="radio" name="choose" id="predefinedFunction" checked="true" value="predefined" autocomplete="off"/>
+                                <div class="btn-group">
+                                    <label for="predefinedFunction" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-triangle-right"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <span>Pre-defined functions</span>
                         </div>
 
                         <div class="function">
@@ -543,7 +554,16 @@ MV_i(\nu,G)= SV_i(\nu^G)
                             </div>
                         </div>
                         <div>
-                            (2) A pre-defined more general function
+                            <div class="checkboxContainer form-group small">
+                                <input type="radio" name="choose" id="generalFunction" value="general" autocomplete="off"/>
+                                <div class="btn-group">
+                                    <label for="generalFunction" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-triangle-right"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <span>A pre-defined more general function</span>
                         </div>
                         <div class="definition">
                             $ value(S) = (|S|)^{\alpha} \times (|E(S)|)^{\beta} \times \left(\sum\nolimits_{v_i \in S} {w_i \over |S|}\right)^{\gamma} \times

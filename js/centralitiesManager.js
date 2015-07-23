@@ -232,7 +232,8 @@ var decimal_points = 4;
 	function calculateMyerson(graph, charFun) {
         /** TODO
          *
-         * var alpha = $("#myerson_a").val(),
+         * var type = $(".centralityChoose input[name='choose']:checked").val(),
+         *      alpha = $("#myerson_a").val(),
          *      beta = $("#myerson_b").val(),
          *      gama = $("#myerson_c").val(),
          *      delta = $("#myerson_d").val(),
@@ -442,6 +443,12 @@ var decimal_points = 4;
                 method: calculateMyerson,
                 params: [
 					function(c, g){
+                        /**
+                         * $(".centralityChoose input[name='choose']:checked").val()
+                         *  === "general"
+                         *  === "predefined"
+                         *
+                         */
 						var res = 0.;
 						var myerFun = parseInt($("#myersonFunction").val());
 						if (isNaN(myerFun)) 
