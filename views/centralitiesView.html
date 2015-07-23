@@ -63,7 +63,7 @@
                         </label>
                     </div>
                 </div>
-                <span>SV-based degree centrality</span>
+                <span>SV-based degree </span>
             </div>
             <div>
                 <div class="checkboxContainer form-group small">
@@ -75,7 +75,7 @@
                         </label>
                     </div>
                 </div>
-                <span>SV-based degree centrality (k)</span>
+                <span>SV-based degree (extended)</span>
             </div>
         </div>
         <div class="col-md-3">
@@ -89,7 +89,7 @@
                         </label>
                     </div>
                 </div>
-                <span>Algorithm 3</span>
+                <span>SV-degree (extended, weighted)</span>
             </div>
             <div>
                 <div class="checkboxContainer form-group small">
@@ -101,7 +101,7 @@
                         </label>
                     </div>
                 </div>
-                <span>Algorithm 4</span>
+                <span>SV-degree (general, weighted)</span>
             </div>
             <div>
                 <div class="checkboxContainer form-group small">
@@ -141,14 +141,19 @@
             <div class="panel-body lead">
                 <span>
                     Degree centrality measures the importance of a node by the degree of the node,
-                    i.e. the number of edges incident to the node. The higher degree of a node,
+                    i.e. the number of edges incident to the node (which is euivalent to the number of its neighbours). The higher degree of a node,
                     the more important the node is.
+Formally, for all $v \in V$:
+
+\[c_{\mathit{degree}}(v) = |(v)|,\]
+
+where $N(v)$ denotes the set of neighbours of $v$.
                 </span>
                 <div class="wikipedia">
-                    Wikipedia: degree (graph theory)[
+                    Wikipedia: 
                     <a target="_blank" href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">
-                        https://en.wikipedia.org/wiki/Degree_(graph_theory)
-                    </a>]
+                        degree (graph theory)
+                    </a>
                 </div>
             </div>
         </div>
@@ -177,6 +182,13 @@
                     Closeness centrality quantifies importance of a node in terms of shortest distances from this
                     node to all other nodes in the graph. The most important node is the one with the shortest
                     average path length to all other nodes.
+
+Formally, for all $v \in V$:
+
+\[c_{\mathit{closeness}}(v) = \frac{1}{\sum{w \in V} d(w,v)},\]
+
+where $d(w,v)$ denotes the <i>length</i> of a shortest path from $w$ to $v$.
+
                 </span>
                 <div class="wikipedia">
                     Wikipedia: centrality [
@@ -210,8 +222,11 @@
                 <span>
                     Betweenness centrality quantifies the importance of a given node in the context of network flow.
                     If we consider all the shortest paths in the network, then the greater the proportion of such
-                    paths that goes through a given node, the more important the role of that node in the network.
-                </span>
+                    paths that goes through a given node, the more important the role of that node in the network. Formally, for all $v \in V$:
+
+\[c_{\mathit{betweenness}}(v) = \sum_{s \neq v \neq t \in V} \frac{|\{sp(s,t): v \in sp(s,t)\}|}{|\{sp(s,t)\}|},\]
+
+where $sp(s,t)$ denotes the shortest path between $s$ and $t$.                </span>
                 <div class="wikipedia">
                     Wikipedia: centrality [
                     <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
@@ -242,9 +257,14 @@
             </div>
             <div class="panel-body lead">
                 <span>
-                    Eigenvector centrality "assigns relative scores to all nodes in the network based on the
-                    concept that connections to high-scoring nodes contribute more to the score of the node
-                    in question than equal connections to low-scoring nodes."
+                    Eigenvector centrality ranks nodes based on the concept that connections to higher-ranked nodes contribute more to the ranking of the node
+                    in question than equal connections to lower-ranked nodes. To presents its formal definition, let us denote by $A$ the adjacency matrix of network $G=(V,E)$, \ie~$A_{i,j}=1$ when $(i,j) \in E$.
+Eigenvalue of matrix $A$ is $\lambda \in \mathbb{R}$ such that there exists corresponding eigenvector $x \in \mathbb{R}^{|V|}$ for which $A x = \lambda x$.
+Normalized eigenvector centrality of a node $v$ in a graph $G$ can be expressed as:
+\[
+	c_{\mathit{eigenvector}}(v) = \frac{x_v}{\sum_{w \in V} x_w}
+\]
+where $x$ is the eigenvector corresponding to the largest eigenvalue of the adjacency matrix of $G$.
                 </span>
                 <div class="wikipedia">
                     Wikipedia: centrality [
@@ -254,6 +274,31 @@
                 </div>
             </div>
         </div>
+
+            <div class="panel-body lead">
+			<br/>
+
+<h3> <b>Game-theoretic Centrality Measures </b></h3>
+			<br/>
+
+                <span>
+                    Game-theoretic measures use the combinatorial structure of coalitional games to get more refined understanding of which nodes are the most important in the network. To define the game-theoretic centrality we first need to specify the characteristic function, i.e., the value of any group (subset) of nodes that corresponds to centrality of this group. Next, we use a game-theoretic solution concept of choice (e.g., the Shapley value or the Banzhaf Index) to get a centrality scores of individual nodes.
+                </span>
+			<br/>
+			<br/>
+
+                <span>
+The key advantage of this approach is that nodes are ranked not only according to their individual roles in the network but also according to how they contribute to the role played by all possible subsets of nodes. 
+                </span>
+			<br/>
+			<br/>
+
+                <span>
+For more details and applications see our website <a target="_blank" href="game-theoretic-centrality.com">                        www.game-theoretic-centrality.com</a>.
+                </span>
+			<br/>
+			<br/>
+
 
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -276,11 +321,20 @@
             </div>
             <div class="panel-body lead">
                 <span>
-                    Info
+The value of any $C \subseteq V$ is defined as the number of neighbours of $C$. Note that $C$ does not have to necessarily connected.
+Formally:
+\[
+\nu(C,G) =
+\begin{cases}
+0 & \mbox{ if } C = \emptyset \\
+|N(C)| & \mbox{ otherwise.}
+\end{cases}
+\]
+where $N(C) = \{v \in V\setminus C: \exists w \in C \ (v,w) \in E\}$.
                 </span>
-                <div class="wikipedia">
-                    Wikipedia
-                </div>
+                        <div class="wikipedia">
+                            For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 1, page 622.
+                        </div>
             </div>
         </div>
 
@@ -288,9 +342,17 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h3 class="panel-title lead">SV-based degree centrality</h3>
+                        <h3 class="panel-title lead">SV-based degree centrality (extended)</h3>
                     </div>
-                    <div class="col-xs-6">
+
+                    <div class="col-sm-4">
+                        <span class="parameterInfo">
+                            $k =$
+                        </span>
+                        <input type="number" id="kParam" name="quantity" class="input-group-lg" min="2" value="2"/>
+                    </div>
+
+                    <div class="col-xs-2">
                         <div class="checkboxContainer form-group">
                             <input type="checkbox" name="centralities" id="Algorithm2" onclick="selectCentralityOnList(this, 'Algorithm2Small');" autocomplete="off" />
                             <div class="btn-group">
@@ -304,32 +366,43 @@
                 </div>
             </div>
             <div class="panel-body lead">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <span>
-                            Info
-                        </span>
+                        <span>  
+The value of any $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $k$ steps away. 
+Formally:\[
+\nu(C,G) =
+\begin{cases}
+0 & \mbox{ if } C = \emptyset \\
+|N^k(C)| & \mbox{ otherwise.}
+\end{cases}
+\]
+where $N^k(C) = \{v \in V\setminus C: \exists w \in C, \ sp(v,w)\leq k\}$, i.e., it is the set of all such nodes from $V \setminus C$ that can be reached from at least one node in $C$ with at most $k$ steps.
+<br/>
+<br/>
+Note that for $k=1$, the extended SV-degree centrality collapses to the SV-degree centrality.
+                      </span>
                         <div class="wikipedia">
-                            Wikipedia
+                            For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 2, page 624.
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <span class="parameterInfo">
-                            k =
-                        </span>
-                        <input type="number" id="kParam" name="quantity" class="input-group-lg" min="1" value="1"/>
-                    </div>
-                </div>
             </div>
         </div>
+
+
+
+
 
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h3 class="panel-title lead">Algorithm 3</h3>
+                        <h3 class="panel-title lead">SV-degree (extended, weighted networks)</h3>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-sm-3">
+                        <span class="parameterInfo">
+                            $d_{cutoff} =$
+                        </span>
+                        <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>
+                    </div>
+                    <div class="col-xs-3">
                         <div class="checkboxContainer form-group">
                             <input type="checkbox" name="centralities" id="Algorithm3" onclick="selectCentralityOnList(this, 'Algorithm3Small');" autocomplete="off" />
                             <div class="btn-group">
@@ -346,18 +419,20 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <span>
-                            Info
+The value of any $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $d_{cutoff}$ away. 
+\[
+\nu(C,G) =
+\begin{cases}
+0 & \mbox{ if } C = \emptyset \\
+|\{v \in V \setminus C : \exists w\in C\ \ sp(w,v)\leq d_{cutoff}\}| & \mbox{ otherwise.}
+\end{cases}
+\]
                         </span>
-                        <div class="wikipedia">
-                            Wikipedia
+<div class="wikipedia">
+                            For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 3, page 626.
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <span class="parameterInfo">
-                            d_cutoff =
-                        </span>
-                        <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>
-                    </div>
+
                 </div>
             </div>
          </div>
@@ -366,7 +441,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h3 class="panel-title lead">Algorithm 4</h3>
+                        <h3 class="panel-title lead">SV-degree (general, weighted networks)</h3>
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
@@ -383,7 +458,15 @@
             </div>
             <div class="panel-body lead">
                 <span>
-                    Info
+The value of any $C \subseteq V$ is defined as a function of the distance from $C$ to neighbours of $C$ that are not further than $d_{cutoff}$ away. This function is the sum over a decresing function...
+\[
+\nu(C,G) =
+\begin{cases}
+0 & \mbox{ if } C = \emptyset \\
+\sum_{v_{i}\in V(G)}f(d(v_{i},C)) & \mbox{ otherwise,}
+\end{cases}
+\]
+where $d(v_{i},C)$ is the minimum distance: $\mbox{min}\{\mbox{distance}(v_{i},v_{j})|v_{j}\in C\}$.
                 </span>
                 <div class="wikipedia">
                     Wikipedia
@@ -397,6 +480,7 @@
                     <div class="col-xs-6">
                         <h3 class="panel-title lead">Myerson</h3>
                     </div>
+
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
                             <input type="checkbox" name="centralities" id="Myerson" onclick="selectCentralityOnList(this, 'MyersonSmall');" autocomplete="off" />
@@ -414,8 +498,23 @@
                 <div class="row">
                     <div class="col-sm-12 myerson">
                         <div>
-                            Definition of the characteristic function of connected coalition S with with set
-                            of internal edges E(S):
+Myerson (1977) considered a coalitional game restricted by a graph each edge of which represents the communication link between two agents. In the Myerson model, only if players are <i>connected</i>, either directly <i>via</i> an edge or indirectly <i>via</i> intermediaries, can they effectively cooperate in a coalitional game and generate the value added.
+
+<br/>
+<br/>
+
+
+Mathematically, for the value function $v$ that specifies values of all connected coalitions,  the Myerson value of node $v_i$ is given by:
+
+\[
+MV_i(\nu,G)= SV_i(\nu^G)
+\]
+
+<br/>
+
+
+                            Definition of the characteristic function of connected coalition $S$ with with set
+                            of internal edges $E(S)$:
                         </div>
                         <div>
                             (1) Pre-defined functions
