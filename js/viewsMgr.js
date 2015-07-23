@@ -1,6 +1,8 @@
 $(window).load(function () {
     loadIntroductionView();
     loadStatusView();
+
+
     $('body').tooltip({
         selector: '[data-toggle="tooltip"]',
         container: 'body'
@@ -54,6 +56,9 @@ function loadIntroductionView() {
     });
     $("#graph_content").html("");
     $("#result_content").html("");
+    $("#page").show();
+    $("#status_content").show();
+    $("#about").hide();
 }
 
 function loadStartContentView() {
@@ -64,6 +69,9 @@ function loadStartContentView() {
         showStartContent();
         toFirstStep();
     });
+    $("#page").show();
+    $("#status_content").show();
+    $("#about").hide();
 }
 
 function loadStatusView() {
@@ -99,6 +107,14 @@ function loadCentralitiesView() {
     });
     $("#centralityMenu").hide();
     $("#graph_content").hide();
+}
+
+function loadAboutView() {
+    $("#about").load("views/aboutView.html", function(){
+        $("#page").hide();
+        $("#status_content").hide();
+        $("#about").show();
+    });
 }
 
 function getCentralitiesNames(centrality){
