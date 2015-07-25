@@ -321,7 +321,7 @@ For more details and applications see our website <a target="_blank" href="game-
             </div>
             <div class="panel-body lead">
                 <span>
-The value of any $C \subseteq V$ is defined as the number of neighbours of $C$. Note that $C$ does not have to necessarily connected.
+The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$. Note that $C$ does not have to necessarily connected.
 Formally:
 \[
 \nu(C,G) =
@@ -367,7 +367,7 @@ where $N(C) = \{v \in V\setminus C: \exists w \in C \ (v,w) \in E\}$.
             </div>
             <div class="panel-body lead">
                         <span>  
-The value of any $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $k$ steps away. 
+The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $k$ steps away. 
 Formally:\[
 \nu(C,G) =
 \begin{cases}
@@ -419,7 +419,7 @@ Note that for $k=1$, the extended SV-degree centrality collapses to the SV-degre
                 <div class="row">
                     <div class="col-sm-8">
                         <span>
-The value of any $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $d_{cutoff}$ away. 
+The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $d_{cutoff}$ away. 
 \[
 \nu(C,G) =
 \begin{cases}
@@ -458,15 +458,15 @@ The value of any $C \subseteq V$ is defined as the number of neighbours of $C$ t
             </div>
             <div class="panel-body lead">
                 <span>
-The value of any $C \subseteq V$ is defined as a function of the distance from $C$ to neighbours of $C$ that are not further than $d_{cutoff}$ away. This function is the sum over a decresing function...
+The value of a coalition $C \subseteq V$ is defined as the sum of the shotest distances between $C$ and all other nodes in the network. Formally:
 \[
 \nu(C,G) =
 \begin{cases}
 0 & \mbox{ if } C = \emptyset \\
-\sum_{v_{i}\in V(G)}f(d(v_{i},C)) & \mbox{ otherwise,}
+\sum_{v \in V\setminus C}f(min_{w \in C}\{sp(w,v)\}) & \mbox{ otherwise,}
 \end{cases}
 \]
-where $d(v_{i},C)$ is the minimum distance: $\mbox{min}\{\mbox{distance}(v_{i},v_{j})|v_{j}\in C\}$.
+where $min_{w \in C}\{sp(w,v)\}$ is the minimum distance of node $v \in V \setminus C$ from $C$ and $f$ is an arbitrary function.
                 </span>
                 <div class="wikipedia">
                     Wikipedia
