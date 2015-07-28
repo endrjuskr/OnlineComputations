@@ -230,15 +230,6 @@ var decimal_points = 4;
     }
 	
 	function calculateMyerson(graph, charFun) {
-        /** TODO
-         *
-         * var type = $(".centralityChoose input[name='choose']:checked").val(),
-         *      alpha = $("#myerson_a").val(),
-         *      beta = $("#myerson_b").val(),
-         *      gama = $("#myerson_c").val(),
-         *      delta = $("#myerson_d").val(),
-         *      whichFunction = $("#myersonFunction").val();
-         */
 		var res = new Array();
 		var n = graph.nodes.length;
 		for (var i = 0; i < n; ++i)
@@ -395,6 +386,32 @@ var decimal_points = 4;
 				return true;
 		return false;
 	}
+	
+	function edgeCount(c, g){
+		var res = 0.;
+		for (var i = 0; i < c.length; ++i)
+			for (var j = i + 1; j < c.length; ++j)
+				if (arrContains(g.neighs[c[i].data.id], c[j].data.id))
+					res += 1.;
+		return res;
+	}
+	
+	function vertexWeightSum(c, g){
+		var res = 0.;
+		c.forEach(function(v){ res += v.data.weight; });
+		return res;
+	}
+	
+	function edgeWeightSum(c, g){
+		var res = 0.;
+		if (typeof graph.weightsMatrix === 'undefined')
+			graph.weightsMatrix = calculateWeightsMatrix(g);
+		for (var i = 0; i < c.length; ++i)
+			for (var j = i + 1; j < c.length; ++j)
+				if (arrContains(g.neighs[c[i].data.id], c[j].data.id))
+					res += graph.weightsMatrix[c[i].data.id][c[j].data.id];
+		return res;
+	}
 
     prototype.init = function(){
         this._centralities = {
@@ -443,56 +460,56 @@ var decimal_points = 4;
                 method: calculateMyerson,
                 params: [
 					function(c, g){
-                        /**
-                         * $(".centralityChoose input[name='choose']:checked").val()
-                         *  === "general"
-                         *  === "predefined"
-                         *
-                         */
 						var res = 0.;
-						var myerFun = parseInt($("#myersonFunction").val());
-						if (isNaN(myerFun)) 
-							myerFun = 1;
-						switch (myerFun){							
-						case 1:
-							res = 1.;
-							break;
-						case 2:
-						case 3:
-							res = c.length;
-							break;
-						case 4:
-						case 5:
-							c.forEach(function(v){ res += v.data.weight; });
-							break;
-						case 6:
-						case 7:
-							for (var i = 0; i < c.length; ++i)
-								for (var j = i + 1; j < c.length; ++j)
-									if (arrContains(g.neighs[c[i].data.id], c[j].data.id))
-										res += 1.;
-							break;
-						case 8:
-						case 9:
-							if (typeof graph.weightsMatrix === 'undefined')
-								graph.weightsMatrix = calculateWeightsMatrix(g);
-							for (var i = 0; i < c.length; ++i)
-								for (var j = i + 1; j < c.length; ++j)
-									if (arrContains(g.neighs[c[i].data.id], c[j].data.id))
-										res += graph.weightsMatrix[c[i].data.id][c[j].data.id];
-							break;
-						default:
-							break;						
-						}
-						switch (myerFun){
-						case 3:
-						case 5:
-						case 7:
-						case 9:
-							res = res * res;
-							break;
-						default:
-							break;						
+						if ($(".centralityChoose input[name='choose']:checked").val() === "general"){
+							var alp = parseInt($("#myerson_a").val());
+							var bet = parseInt($("#myerson_b").val());
+							var gam = parseInt($("#myerson_c").val());
+							var del = parseInt($("#myerson_d").val());
+							var s = c.length;
+							var es = edgeCount(c, g);
+							res = Math.pow(s, alp) + Math.pow(es, bet);
+							if (s != 0)
+								res += Math.pow(vertexWeightSum(c, g) / s, gam);
+							if (es != 0)
+								res += Math.pow(edgeWeightSum(c, g) / es, del);							
+						} else if ($(".centralityChoose input[name='choose']:checked").val() === "predefined"){
+							var myerFun = parseInt($("#myersonFunction").val());
+							if (isNaN(myerFun)) 
+								myerFun = 1;
+							switch (myerFun){							
+							case 1:
+								res = 1.;
+								break;
+							case 2:
+							case 3:
+								res = c.length;
+								break;
+							case 4:
+							case 5:
+								res = vertexWeightSum(c, g);
+								break;
+							case 6:
+							case 7:
+								res = edgeCount(c, g);
+								break;
+							case 8:
+							case 9:
+								res = edgeWeightSum(c, g);
+								break;
+							default:
+								break;						
+							}
+							switch (myerFun){
+							case 3:
+							case 5:
+							case 7:
+							case 9:
+								res = res * res;
+								break;
+							default:
+								break;						
+							}
 						}
 						return res;
 					}
