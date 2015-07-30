@@ -115,6 +115,18 @@
                 </div>
                 <span>Myerson</span>
             </div>
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="DiffusionSmall" onclick="selectCentralityOnList(this, 'Diffusion');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="DiffusionSmall" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>Diffusion</span>
+            </div>
         </div>
     </div>
 
@@ -598,6 +610,41 @@ MV_i(\nu,G)= SV_i(\nu^G)
                 </div>
             </div>
         </div>
+		
+		<div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3 class="panel-title lead">Diffusion centrality</h3>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="parameterInfo">
+                            $q =$
+                        </span>
+                        <input type="number" id="qDiffusionParam" name="probability" class="input-group-lg" min="0" max="1" value="0.2" step="0.05"/>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="checkboxContainer form-group">
+                            <input type="checkbox" name="centralities" id="Diffusion" onclick="selectCentralityOnList(this, 'DiffusionSmall');" autocomplete="off" />
+                            <div class="btn-group">
+                                <label for="Diffusion" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span> </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body lead">
+                <div class="row">
+                    <div class="col-sm-8">
+                        TODO Diffusion description
+                    </div>
+
+                </div>
+            </div>
+         </div>
 
     </div>
 </div>

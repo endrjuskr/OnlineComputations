@@ -96,6 +96,9 @@ var decimal_points = 4;
         var weightsMatrix = new Array();
         for (var i = 0; i < graph.nodes.length; ++i)
             weightsMatrix[graph.nodes[i].data.id] = new Array();
+        for (var i = 0; i < graph.nodes.length; ++i)
+			for (var j = 0; j < graph.nodes.length; ++j)
+				weightsMatrix[graph.nodes[i].data.id][graph.nodes[j].data.id] = 0.;				
         for (var i = 0; i < graph.edges.length; ++i){
             var data = graph.edges[i].data;
             weightsMatrix[data.source][data.target] = data.weight;
@@ -255,6 +258,46 @@ var decimal_points = 4;
 			cn.forEach(function(v){
 				res[v.data.id] -= wOut * cVal;
 			});		
+		});
+		return res;
+	}
+
+	function calculateDiffusionCentrality(g, q, iter){
+		var res = new Array();
+		if (typeof g.weightsMatrix === 'undefined')
+			g.weightsMatrix = calculateWeightsMatrix(g);
+			
+		var acc = calculateWeightsMatrix(g);
+		var factor = calculateWeightsMatrix(g);
+        for (var i = 0; i < g.nodes.length; ++i)
+			for (var j = 0; j < g.nodes.length; ++j){
+				acc[g.nodes[i].data.id][g.nodes[j].data.id] *= q;
+				factor[g.nodes[i].data.id][g.nodes[j].data.id] *= q;
+			}
+			
+		for (var t = 2; t <= iter; ++t){		
+			for (var i = 0; i < g.nodes.length; ++i){
+				var tmp = new Array();
+				for (var j = 0; j < g.nodes.length; ++j)
+					tmp[g.nodes[j].data.id] = 0.;
+				for (var j = 0; j < g.nodes.length; ++j)
+					for (var k = 0; k < g.nodes.length; ++k)
+						tmp[g.nodes[j].data.id] +=
+							factor[g.nodes[i].data.id][g.nodes[k].data.id]
+							* q * g.weightsMatrix[g.nodes[k].data.id][g.nodes[j].data.id];
+				factor[g.nodes[i].data.id] = tmp;
+			}		
+			for (var i = 0; i < g.nodes.length; ++i)
+				for (var j = 0; j < g.nodes.length; ++j){
+					acc[g.nodes[i].data.id][g.nodes[j].data.id] +=
+						factor[g.nodes[i].data.id][g.nodes[j].data.id];
+				}
+		}
+		
+		g.nodes.forEach(function(v){
+			res[v.data.id] = 0.;
+			for (var i = 0; i < g.nodes.length; ++i)
+				res[v.data.id] += acc[v.data.id][g.nodes[i].data.id];
 		});
 		return res;
 	}
@@ -514,6 +557,13 @@ var decimal_points = 4;
 						return res;
 					}
 				]
+            },
+            Diffusion: {
+                name: "Diffusion",
+                description: "q",
+                method: calculateDiffusionCentrality,
+                params: ["q", 1000],
+                toChange: 0
             }
         };
     };
@@ -529,7 +579,8 @@ var decimal_points = 4;
             graph = globalGraph.graphData.graph,
             params = {
                 k: parseInt($("#kParam").val(), 10) || 1,
-                d_cuttoff: parseInt($("#d_cutoffParam").val(), 10) || 1
+                d_cuttoff: parseInt($("#d_cutoffParam").val(), 10) || 1,
+				q: parseFloat($("#qDiffusionParam").val(), 10) || 1
             },
             algorithmResult,
             description = "",
@@ -579,6 +630,7 @@ var decimal_points = 4;
                     case "Algorithm3":
                     case "Algorithm4":
                     case "Myerson":
+                    case "Diffusion":
                         result.push({
                             key: node,
                             value: algorithmResult[node].toFixed(decimal_points)
