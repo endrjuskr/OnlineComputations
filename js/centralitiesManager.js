@@ -231,7 +231,98 @@ var decimal_points = 4;
 
         return svs;
     }
-	
+
+    function calculateCentralityAlgorithm5(graph) {
+       function f_delta(d) {
+        return 1 / d;
+      }
+      function g_delta(d) {
+	  return (2 - d) / (2 * d);
+      }
+      return pbc(graph, f_delta, g_delta);
+    }
+
+    function pbc(graph, f_delta, g_delta) {
+	function Stack() {
+	    this.base_arr = [];
+	    this.pop = function() {
+		return this.base_arr.pop();
+	    }
+	    this.push = function(item) {
+		this.base_arr.push(item);
+	    }
+	    this.empty = function() {
+		return this.base_arr.length == 0;
+	    }
+	}
+
+	function Queue() {
+	    this.base_arr = [];
+	    this.dequeue = function() {
+		return this.base_arr.pop();
+	    }
+	    this.enqueue = function(item) {
+		this.base_arr.unshift(item);
+	    }
+	    this.empty = function() {
+		return this.base_arr.length == 0;
+	    }
+	}
+
+	var g = createGraph(graph);
+	var c_fg = [];
+	g.nodes().forEach(function(v) {
+	    c_fg[v] = 0;
+	});
+	g.nodes().forEach(function(s) {
+	    var queue = new Queue();
+	    var stack = new Stack();
+	    var d = [];
+	    var sigma = [];
+	    var delta = [];
+	    var pred = [];
+	    g.nodes().forEach(function(v) {
+		delta[v] = 0;
+		pred[v] = [];
+		d[v] = Number.POSITIVE_INFINITY;
+		sigma[v] = 0;
+	    });
+
+	    d[s] = 1;
+	    sigma[s] = 1;
+	    queue.enqueue(s);
+	    while (!queue.empty()) {
+		v = queue.dequeue();
+		console
+		stack.push(v);
+		jsnx.neighbors(g, v).forEach(function(w) {
+		    if (d[w] == Number.POSITIVE_INFINITY) {
+			d[w] = d[v] + 1;
+			queue.enqueue(w);
+		    }
+		    if (d[w] == d[v] + 1) {
+			sigma[w] += sigma[v];
+			pred[w].push(v);
+		    }
+		});
+	    }
+	    while (!stack.empty()) {
+		w = stack.pop();
+		pred[w].map(function(v) {
+		    return delta[v] += sigma[v] / sigma[w] * (f_delta(d[w]) + delta[w]);
+		});
+		if (w != s)
+		    c_fg[w] += delta[w] + 2 * g_delta(d[w]);
+	    }
+	});
+
+	c_fg.map(function(elt) {
+	    return elt / 2;
+	});
+
+	return c_fg;
+    }
+
 	function calculateMyerson(graph, charFun) {
 		var res = new Array();
 		var n = graph.nodes.length;
@@ -498,65 +589,69 @@ var decimal_points = 4;
                 method: calculateCentralityAlgorithm4,
                 params: [ function(x) { return Math.sqrt(x);} ]
             },
+	    Algorithm5: {
+                name: "New SV-based betweenness",
+                method: calculateCentralityAlgorithm5
+            },
             Myerson: {
                 name: "Myerson",
                 method: calculateMyerson,
                 params: [
-					function(c, g){
-						var res = 0.;
-						if ($(".centralityChoose input[name='choose']:checked").val() === "general"){
-							var alp = parseInt($("#myerson_a").val());
-							var bet = parseInt($("#myerson_b").val());
-							var gam = parseInt($("#myerson_c").val());
-							var del = parseInt($("#myerson_d").val());
-							var s = c.length;
-							var es = edgeCount(c, g);
-							res = Math.pow(s, alp) + Math.pow(es, bet);
-							if (s != 0)
-								res += Math.pow(vertexWeightSum(c, g) / s, gam);
-							if (es != 0)
-								res += Math.pow(edgeWeightSum(c, g) / es, del);							
-						} else if ($(".centralityChoose input[name='choose']:checked").val() === "predefined"){
-							var myerFun = parseInt($("#myersonFunction").val());
-							if (isNaN(myerFun)) 
-								myerFun = 1;
-							switch (myerFun){							
-							case 1:
-								res = 1.;
-								break;
-							case 2:
-							case 3:
-								res = c.length;
-								break;
-							case 4:
-							case 5:
-								res = vertexWeightSum(c, g);
-								break;
-							case 6:
-							case 7:
-								res = edgeCount(c, g);
-								break;
-							case 8:
-							case 9:
-								res = edgeWeightSum(c, g);
-								break;
-							default:
-								break;						
-							}
-							switch (myerFun){
-							case 3:
-							case 5:
-							case 7:
-							case 9:
-								res = res * res;
-								break;
-							default:
-								break;						
-							}
-						}
-						return res;
-					}
-				]
+			  function(c, g){
+				  var res = 0.;
+				  if ($(".centralityChoose input[name='choose']:checked").val() === "general"){
+					  var alp = parseInt($("#myerson_a").val());
+					  var bet = parseInt($("#myerson_b").val());
+					  var gam = parseInt($("#myerson_c").val());
+					  var del = parseInt($("#myerson_d").val());
+					  var s = c.length;
+					  var es = edgeCount(c, g);
+					  res = Math.pow(s, alp) + Math.pow(es, bet);
+					  if (s != 0)
+						  res += Math.pow(vertexWeightSum(c, g) / s, gam);
+					  if (es != 0)
+						  res += Math.pow(edgeWeightSum(c, g) / es, del);							
+				  } else if ($(".centralityChoose input[name='choose']:checked").val() === "predefined"){
+					  var myerFun = parseInt($("#myersonFunction").val());
+					  if (isNaN(myerFun)) 
+						  myerFun = 1;
+					  switch (myerFun){							
+					  case 1:
+						  res = 1.;
+						  break;
+					  case 2:
+					  case 3:
+						  res = c.length;
+						  break;
+					  case 4:
+					  case 5:
+						  res = vertexWeightSum(c, g);
+						  break;
+					  case 6:
+					  case 7:
+						  res = edgeCount(c, g);
+						  break;
+					  case 8:
+					  case 9:
+						  res = edgeWeightSum(c, g);
+						  break;
+					  default:
+						  break;						
+					  }
+					  switch (myerFun){
+					  case 3:
+					  case 5:
+					  case 7:
+					  case 9:
+						  res = res * res;
+						  break;
+					  default:
+						  break;						
+					  }
+				  }
+				  return res;
+			  }
+		  ]
             },
             Diffusion: {
                 name: "Diffusion",
@@ -580,7 +675,7 @@ var decimal_points = 4;
             params = {
                 k: parseInt($("#kParam").val(), 10) || 1,
                 d_cuttoff: parseInt($("#d_cutoffParam").val(), 10) || 1,
-				q: parseFloat($("#qDiffusionParam").val(), 10) || 1
+		q: parseFloat($("#qDiffusionParam").val(), 10) || 1
             },
             algorithmResult,
             description = "",
@@ -629,11 +724,12 @@ var decimal_points = 4;
                     case "Algorithm2":
                     case "Algorithm3":
                     case "Algorithm4":
+		    case "Algorithm5":
                     case "Myerson":
                     case "Diffusion":
                         result.push({
                             key: node,
-                            value: algorithmResult[node].toFixed(decimal_points)
+                            value: (algorithmResult[node] || 0).toFixed(decimal_points)
                         });
                         break;
                 }

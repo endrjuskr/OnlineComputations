@@ -1,5 +1,6 @@
 $(window).load(function () {
     loadIntroductionView();
+    //loadCentralitiesView();
     loadStatusView();
 
     $('body').tooltip({

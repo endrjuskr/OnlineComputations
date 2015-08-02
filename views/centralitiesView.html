@@ -39,8 +39,6 @@
                 </div>
                 <span>Betweenness</span>
             </div>
-        </div>
-        <div class="col-md-3">
             <div>
                 <div class="checkboxContainer form-group small">
                     <input type="checkbox" name="centralitiesSmall" id="EigevectorSmall" onclick="selectCentralityOnList(this, 'Eigevector');" autocomplete="off" />
@@ -53,6 +51,8 @@
                 </div>
                 <span>Eigevector Centrality</span>
             </div>
+        </div>
+        <div class="col-md-3">
             <div>
                 <div class="checkboxContainer form-group small">
                     <input type="checkbox" name="centralitiesSmall" id="Algorithm1Small" onclick="selectCentralityOnList(this, 'Algorithm1');" autocomplete="off" />
@@ -77,8 +77,6 @@
                 </div>
                 <span>SV-based degree (extended)</span>
             </div>
-        </div>
-        <div class="col-md-3">
             <div>
                 <div class="checkboxContainer form-group small">
                     <input type="checkbox" name="centralitiesSmall" id="Algorithm3Small" onclick="selectCentralityOnList(this, 'Algorithm3');" autocomplete="off" />
@@ -102,6 +100,20 @@
                     </div>
                 </div>
                 <span>SV-degree (general, weighted)</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <div class="checkboxContainer form-group small">
+                    <input type="checkbox" name="centralitiesSmall" id="Algorithm5Small" onclick="selectCentralityOnList(this, 'Algorithm5');" autocomplete="off" />
+                    <div class="btn-group">
+                        <label for="Algorithm5Small" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span> </span>
+                        </label>
+                    </div>
+                </div>
+                <span>New SV-based betweenness</span>
             </div>
             <div>
                 <div class="checkboxContainer form-group small">
@@ -306,7 +318,7 @@ The key advantage of this approach is that nodes are ranked not only according t
 			<br/>
 
                 <span>
-For more details and applications see our website <a target="_blank" href="game-theoretic-centrality.com">                        www.game-theoretic-centrality.com</a>.
+For more details and applications see our website <a target="_blank" href="www.game-theoretic-centrality.com">                        www.game-theoretic-centrality.com</a>.
                 </span>
 			<br/>
 			<br/>
@@ -429,7 +441,7 @@ Note that for $k=1$, the extended SV-degree centrality collapses to the SV-degre
             </div>
             <div class="panel-body lead">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <span>
 The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $d_{cutoff}$ away. 
 \[
@@ -457,7 +469,7 @@ The value of a coalition $C \subseteq V$ is defined as the number of neighbours 
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm4"onclick="selectCentralityOnList(this, 'Algorithm4Small');"  autocomplete="off" />
+                            <input type="checkbox" name="centralities" id="Algorithm4" onclick="selectCentralityOnList(this, 'Algorithm4Small');"  autocomplete="off" />
                             <div class="btn-group">
                                 <label for="Algorithm4" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-ok"></span>
@@ -485,6 +497,40 @@ where $min_{w \in C}\{sp(w,v)\}$ is the minimum distance of node $v \in V \setmi
                 </div>
             </div>
         </div>
+        
+        
+        
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3 class="panel-title lead">New SV-based betweenness</h3>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="checkboxContainer form-group">
+                            <input type="checkbox" name="centralities" id="Algorithm5" onclick="selectCentralityOnList(this, 'Algorithm5Small');"  autocomplete="off" />
+                            <div class="btn-group">
+                                <label for="Algorithm5" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span> </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body lead">
+                <span>
+                TODO
+                </span>
+                <div class="wikipedia">
+                    Wikipedia
+                </div>
+            </div>
+        </div>
+        
+        
+        
 
         <div class="panel panel-info">
             <div class="panel-heading">
