@@ -113,7 +113,7 @@
                         </label>
                     </div>
                 </div>
-                <span>New SV-based betweenness</span>
+                <span>SV-based betweenness</span>
             </div>
             <div>
                 <div class="checkboxContainer form-group small">
@@ -504,7 +504,7 @@ where $min_{w \in C}\{sp(w,v)\}$ is the minimum distance of node $v \in V \setmi
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h3 class="panel-title lead">New SV-based betweenness</h3>
+                        <h3 class="panel-title lead">SV-based betweenness</h3>
                     </div>
                     <div class="col-xs-6">
                         <div class="checkboxContainer form-group">
@@ -521,10 +521,14 @@ where $min_{w \in C}\{sp(w,v)\}$ is the minimum distance of node $v \in V \setmi
             </div>
             <div class="panel-body lead">
                 <span>
-                TODO
+The value of a coalition $C \subseteq V$ is defined as the fraction of shortest paths passing through $C$. Formally:
+\[
+\nu(C,G) = \sum_{ s,t \notin C } \frac{|\{sp(s,t): C \cap sp(s,t) \neq \emptyset \}| }{|\{sp(s,t)\}|} 
+\]
+where $sp(s,t)$ denotes the shortest path between $s$ and $t$. 
                 </span>
                 <div class="wikipedia">
-                    Wikipedia
+  For more see <a href="http://www.ifaamas.org/Proceedings/aamas2012/papers/1B_4.pdf" target="_blank">Szczepański et al. (2012) </a>, Algorithm 1.
                 </div>
             </div>
         </div>
