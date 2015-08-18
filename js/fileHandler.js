@@ -1,3 +1,13 @@
+function loadFile(element, file, callback) {
+    var jqueryElement = $(element);
+    if (jqueryElement.html() === "") {
+        // if empty
+        jqueryElement.load(file, callback);
+    } else {
+        callback();
+    }
+}
+
 function setFileHandler() {
     $("#fileLoader").change(function (evt) {
         handleFileSelect(evt);

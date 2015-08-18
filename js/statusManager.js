@@ -62,6 +62,7 @@
         // change step
         currentStep = currentStep < elements.length - 1 ? currentStep + 1 : currentStep;
         self._step = currentStep;
+        project.setStep(self._step);
 
         // active element
         activeStep( $(elements[currentStep]))
@@ -75,6 +76,7 @@
             i = 0;
 
         self._step = step < length ? step : length - 1;
+        project.setStep(self._step);
 
         for (i = 0; i < step; i++) {
             element = $(elements[i]);

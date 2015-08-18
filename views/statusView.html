@@ -8,35 +8,35 @@
         <div id="statusStart" class="col-xs-1 bs-wizard-step active">
             <div class="text-center bs-wizard-stepnum">Start</div>
             <div class="progress"><div class="progress-bar progress-bar-info"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
+            <a href="#" class="bs-wizard-dot" onclick="jumpToStep(0);"></a>
             <div class="bs-wizard-info text-center">Introduction</div>
         </div>
 
         <div id="statusFirstStep" class="col-xs-3 bs-wizard-step active">
             <div class="text-center bs-wizard-stepnum">Step 1</div>
             <div class="progress"><div class="progress-bar progress-bar-info"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
+            <a href="#" class="bs-wizard-dot" onclick="jumpToStep(1);"></a>
             <div class="bs-wizard-info text-center">Choose graph</div>
         </div>
 
         <div id="statusSecondStep" class="col-xs-3 bs-wizard-step disabled">
             <div class="text-center bs-wizard-stepnum">Step 2</div>
             <div class="progress"><div class="progress-bar"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
+            <a href="#" class="bs-wizard-dot" onclick="jumpToStep(2);"></a>
             <div class="bs-wizard-info text-center">Set graph</div>
         </div>
 
         <div id="statusThirdStep" class="col-xs-3 bs-wizard-step disabled">
             <div class="text-center bs-wizard-stepnum">Step 3</div>
             <div class="progress"><div class="progress-bar"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
+            <a href="#" class="bs-wizard-dot" onclick="jumpToStep(3);"></a>
             <div class="bs-wizard-info text-center">Choose centralities</div>
         </div>
 
         <div id="statusForthStep" class="col-xs-1 bs-wizard-step disabled"><!-- active -->
             <div class="text-center bs-wizard-stepnum">Finish</div>
             <div class="progress"><div class="progress-bar"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
+            <a href="#" class="bs-wizard-dot" onclick="jumpToStep(4);"></a>
             <div class="bs-wizard-info text-center">Presentation</div>
         </div>
     </div>

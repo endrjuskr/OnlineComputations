@@ -1,0 +1,59 @@
+body {
+  #page > * {
+    display: none;
+  }
+  #about {
+    display: none;
+  }
+
+  &.first {
+    #page #introduction_content,
+    #status_content {
+      display: block;
+    }
+  }
+  &.start {
+    #page #start_content,
+    #status_content {
+      display: block;
+    }
+    &.predefined, &.random {
+      #page #start_next_content {
+        display: block;
+      }
+    }
+  }
+  &.modify {
+    #graph_content,
+    #changeWeight {
+      display: block;
+    }
+  }
+
+  &.centralities {
+    #centralities_content {
+      display: block;
+    }
+  }
+
+  &.results {
+    #result_content,
+    #graph_content {
+      display: block;
+    }
+    #centralityMenu,
+    #changeWeight {
+      display: none;
+    }
+  }
+
+  &.about {
+    #page,
+    #status_content {
+      display: none;
+    }
+    #about {
+      display: block;
+    }
+  }
+}

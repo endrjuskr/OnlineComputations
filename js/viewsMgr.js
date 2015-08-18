@@ -1,6 +1,5 @@
 $(window).load(function () {
     loadIntroductionView();
-    //loadCentralitiesView();
     loadStatusView();
 
     $('body').tooltip({
@@ -12,22 +11,31 @@ $(window).load(function () {
 var toStartStep = function() {
         setStatus_Step(0);
         $("#nextStep").attr("disabled", false);
+        $("#previousStep").attr("disabled", true);
     },
     toFirstStep = function() {
         setStatus_Step(1);
-        $("#nextStep").attr("disabled", true);
+        if (project.canShowStep(2)) {
+            $("#nextStep").attr("disabled", false);
+        } else {
+            $("#nextStep").attr("disabled", true);
+        }
+        $("#previousStep").attr("disabled", false);
     },
     toSecondStep = function () {
         setStatus_Step(2);
         $("#nextStep").attr("disabled", false);
+        $("#previousStep").attr("disabled", false);
     },
     toThirdStep = function () {
         setStatus_Step(3);
         $("#nextStep").attr("disabled", false);
+        $("#previousStep").attr("disabled", false);
     },
     toResultStep = function() {
         setStatus_Step(4);
         $("#nextStep").attr("disabled", true);
+        $("#previousStep").attr("disabled", false);
     };
 
 function showStartPointMsg(msg) {
@@ -45,75 +53,87 @@ function hideStartContent() {
 function showStartContent() {
     $("#start_content > *").show();
     $("#start_point_msg").hide();
-    hideGraphView();
-    hideResultView();
 }
 
 function loadIntroductionView() {
-    $("#start_content").load("views/introductionView.html", function() {
-        $("body").addClass("first");
-        toStartStep();
-    });
-    $("#graph_content").html("");
-    $("#result_content").html("");
-    $("#page").show();
-    $("#status_content").show();
-    $("#about").hide();
+    introductionManager.load();
 }
 
 function loadStartContentView() {
-    // requiere fileHandler.js
-    $("#start_content").load("views/defaultOptionsView.html", function() {
-        setFileHandler();
-        $("body").removeClass("first");
-        showStartContent();
-        toFirstStep();
-    });
-    $("#page").show();
-    $("#status_content").show();
-    $("#about").hide();
+    startManager.load();
+}
+
+function loadDefiningGraph() {
+    startFromScratch();
+    toSecondStep();
+    $("body").removeClass().addClass("modify");
+}
+
+function loadModifyingGraph () {
+    toSecondStep();
+    $("body").removeClass().addClass("modify");
+}
+
+
+function jumpToStep(state) {
+    if (project.canGoToNextStep(state)) {
+        if (state === 0) {
+            loadIntroductionView();
+        } else if (state === 1) {
+            window.project.new();
+        } else if (state === 2) {
+            if (project.canShowStep(state)) {
+                loadModifyingGraph();
+            }
+        } else if (state === 3) {
+            loadCentralitiesView();
+        } else if (state === 4) {
+            showComputedResults();
+        }
+    }
 }
 
 function loadStatusView() {
     var statusManager = window.statusManager.getInstance();
     statusManager.init();
+
     $("#nextStep").on("click touchend", function() {
-        var state = statusManager.state(),
-            centralities;
-        if (state === 0) {
-            loadStartContentView();
-        } else if (state === 2) {
-            loadCentralitiesView();
-        } else if (state === 3) {
-            showComputedResults();
-        }
+        var state = statusManager.state() + 1;
+        jumpToStep(state);
+    });
+    $("#previousStep").on("click touchend", function() {
+        var state = statusManager.state() - 1;
+        jumpToStep(state);
     });
 }
 
 function loadPredefinedView() {
-    $("#start_content").load("views/predefinedGraphView.html", toFirstStep);
+    $("#start_next_content").load("views/predefinedGraphView.html", function(){
+        toFirstStep();
+        $("body").removeClass().addClass("start predefined");
+    });
     showStartContent();
 }
 
 function loadRandomView() {
-    $("#start_content").load("views/randomGraphView.html", toFirstStep);
+    $("#start_next_content").load("views/randomGraphView.html", function(){
+        toFirstStep();
+        $("body").removeClass().addClass("start random");
+    });
     showStartContent();
     showStartPointMsg("Random Graph");
 }
 
 function loadCentralitiesView() {
-    $("#start_content").load("views/centralitiesView.html", function(){
+    loadFile("#centralities_content", "views/centralitiesView.html", function(){
         toThirdStep();
+        $("body").removeClass().addClass("centralities");
     });
-    $("#centralityMenu").hide();
-    $("#graph_content").hide();
 }
 
 function loadAboutView() {
-    $("#about").load("views/aboutView.html", function(){
-        $("#page").hide();
-        $("#status_content").hide();
-        $("#about").show();
+    loadFile("#about", "views/aboutView.html", function(){
+        $("body").removeClass().addClass("about");
     });
 }
 
@@ -132,14 +152,12 @@ function showComputedResults() {
 
     if (centralitiesNamesArray.length) {
         if (myersonCanBeComputed) {
-            $("#start_content > *").hide();
-            $("#graph_content").show();
-
             toResultStep();
             // todo - onloading widget
             $("#changeWeight").hide();
             $("#nextStep").attr("disabled", true);
             window._centralitiesManager.calculate(centralitiesNamesArray);
+            $("body").removeClass().addClass("results");
         } else {
             // error - no centrality chosen
             $("#alert").html("<b>Error: </b> Sorry, Myerson can be computed only for graph with less than 21 nodes.");
@@ -169,37 +187,20 @@ function setStatus_Step(n) {
 /*============================
  *       Graph content
  * */
-function hideGraphView() {
-    $("#graph_content").html("");
-}
-
-function showGraphView() {
-    $("#graph_content").show();
-    $("#changeWeight").show();
-}
 
 function loadGraphView(cb) {
     $("#graph_content").load("views/graphView.html", function() {
         if (cb) {
             cb();
         }
-        toSecondStep();
+        loadModifyingGraph();
     });
-    showGraphView();
 }
 
 
 /*============================
  *       Result content
  * */
-function showResultView() {
-    $("#result_content").show();
-    $("#changeWeight").hide();
-}
-
-function hideResultView() {
-    $("#result_content").html("");
-}
 
 /*============================
  *       Start actions
@@ -210,7 +211,6 @@ function startFromScratch() {
     globalGraph.draw();
     hideStartContent("Define Graph");
     showStartPointMsg("Define Graph");
-    toSecondStep();
 }
 
 function uploadGraph(elem) {
