@@ -590,7 +590,7 @@ var decimal_points = 4;
                 params: [ function(x) { return Math.sqrt(x);} ]
             },
 	    Algorithm5: {
-                name: "New SV-based betweenness",
+                name: "SV-based betweenness",
                 method: calculateCentralityAlgorithm5
             },
             Myerson: {
