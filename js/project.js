@@ -6,6 +6,7 @@
 
     prototype.configure = function () {
         this._maxstep = 0;
+        $("#status_content").removeClass().addClass("max0");
     };
 
     project.getInstance = function () {
@@ -35,6 +36,7 @@
 
         if (instance._maxstep < step) {
             instance._maxstep = step;
+            $("#status_content").removeClass().addClass("max" + step);
         }
     };
 
