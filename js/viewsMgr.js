@@ -137,6 +137,17 @@ function loadAboutView() {
     });
 }
 
+function showStandardCentralitesView() {
+    $("#myersonDescriptionContainer").hide();
+    $("#standardDescriptionContainer").show();
+}
+
+function showMyersonCentralitesView() {
+    $("#standardDescriptionContainer").hide();
+    $("#myersonDescriptionContainer").show();
+}
+
+
 function getCentralitiesNames(centrality){
     return centrality.id;
 }

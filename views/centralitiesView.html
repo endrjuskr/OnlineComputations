@@ -140,27 +140,43 @@
         </div>
     </div>
 
-    <div class="centralityChoose well">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">Degree</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Degree" onclick="selectCentralityOnList(this, 'DegreeSmall');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Degree" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+    <div id="centralitiesSectionChosen" class="btn-wrap">
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                onclick="showStandardCentralitesView();"
+                title="Show centralities">
+            Definitions of Centralities
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                onclick="showMyersonCentralitesView();"
+                title="Show Myerson centralities">
+            Definitions of Myerson Centralities
+        </button>
+    </div>
+
+
+
+    <div id="standardDescriptionContainer" style="display: none;">
+        <div class="centralityChoose well">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title lead">Degree</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkboxContainer form-group">
+                                <input type="checkbox" name="centralities" id="Degree" onclick="selectCentralityOnList(this, 'DegreeSmall');" autocomplete="off" />
+                                <div class="btn-group">
+                                    <label for="Degree" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body lead">
+                <div class="panel-body lead">
                 <span>
                     Degree centrality measures the importance of a node by the degree of the node,
                     i.e. the number of edges incident to the node (which is euivalent to the number of its neighbours). The higher degree of a node,
@@ -171,35 +187,35 @@ Formally, for all $v \in V$:
 
 where $N(v)$ denotes the set of neighbours of $v$.
                 </span>
-                <div class="wikipedia">
-                    Wikipedia: 
-                    <a target="_blank" href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">
-                        degree (graph theory)
-                    </a>
+                    <div class="wikipedia">
+                        Wikipedia:
+                        <a target="_blank" href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">
+                            degree (graph theory)
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">Closeness</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Closeness" onclick="selectCentralityOnList(this, 'ClosenessSmall');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Closeness" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title lead">Closeness</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkboxContainer form-group">
+                                <input type="checkbox" name="centralities" id="Closeness" onclick="selectCentralityOnList(this, 'ClosenessSmall');" autocomplete="off" />
+                                <div class="btn-group">
+                                    <label for="Closeness" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body lead">
+                <div class="panel-body lead">
                 <span>
                     Closeness centrality quantifies importance of a node in terms of shortest distances from this
                     node to all other nodes in the graph. The most important node is the one with the shortest
@@ -212,35 +228,35 @@ Formally, for all $v \in V$:
 where $d(w,v)$ denotes the <i>length</i> of a shortest path from $w$ to $v$.
 
                 </span>
-                <div class="wikipedia">
-                    Wikipedia: centrality [
-                    <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
-                        https://en.wikipedia.org/wiki/Centrality
-                    </a>]
+                    <div class="wikipedia">
+                        Wikipedia: centrality [
+                        <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
+                            https://en.wikipedia.org/wiki/Centrality
+                        </a>]
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">Betweenness</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Betweenness" onclick="selectCentralityOnList(this, 'BetweennessSmall');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Betweenness" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title lead">Betweenness</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkboxContainer form-group">
+                                <input type="checkbox" name="centralities" id="Betweenness" onclick="selectCentralityOnList(this, 'BetweennessSmall');" autocomplete="off" />
+                                <div class="btn-group">
+                                    <label for="Betweenness" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body lead">
+                <div class="panel-body lead">
                 <span>
                     Betweenness centrality quantifies the importance of a given node in the context of network flow.
                     If we consider all the shortest paths in the network, then the greater the proportion of such
@@ -249,35 +265,35 @@ where $d(w,v)$ denotes the <i>length</i> of a shortest path from $w$ to $v$.
 \[c_{\mathit{betweenness}}(v) = \sum_{s \neq v \neq t \in V} \frac{|\{sp(s,t): v \in sp(s,t)\}|}{|\{sp(s,t)\}|},\]
 
 where $sp(s,t)$ denotes the shortest path between $s$ and $t$.                </span>
-                <div class="wikipedia">
-                    Wikipedia: centrality [
-                    <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
-                        https://en.wikipedia.org/wiki/Centrality
-                    </a>]
+                    <div class="wikipedia">
+                        Wikipedia: centrality [
+                        <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
+                            https://en.wikipedia.org/wiki/Centrality
+                        </a>]
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead"> Eigevector Centrality</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Eigevector" onclick="selectCentralityOnList(this, 'EigevectorSmall');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Eigevector" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title lead"> Eigevector Centrality</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkboxContainer form-group">
+                                <input type="checkbox" name="centralities" id="Eigevector" onclick="selectCentralityOnList(this, 'EigevectorSmall');" autocomplete="off" />
+                                <div class="btn-group">
+                                    <label for="Eigevector" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body lead">
+                <div class="panel-body lead">
                 <span>
                     Eigenvector centrality ranks nodes based on the concept that connections to higher-ranked nodes contribute more to the ranking of the node
                     in question than equal connections to lower-ranked nodes. To presents its formal definition, let us denote by $A$ the adjacency matrix of network $G=(V,E)$, \ie~$A_{i,j}=1$ when $(i,j) \in E$.
@@ -288,60 +304,60 @@ Normalized eigenvector centrality of a node $v$ in a graph $G$ can be expressed 
 \]
 where $x$ is the eigenvector corresponding to the largest eigenvalue of the adjacency matrix of $G$.
                 </span>
-                <div class="wikipedia">
-                    Wikipedia: centrality [
-                    <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
-                        https://en.wikipedia.org/wiki/Centrality
-                    </a>]
+                    <div class="wikipedia">
+                        Wikipedia: centrality [
+                        <a target="_blank" href="https://en.wikipedia.org/wiki/Centrality">
+                            https://en.wikipedia.org/wiki/Centrality
+                        </a>]
+                    </div>
                 </div>
             </div>
-        </div>
 
             <div class="panel-body lead">
-			<br/>
+                <br/>
 
-<h3> <b>Game-theoretic Centrality Measures </b></h3>
-			<br/>
+                <h3> <b>Game-theoretic Centrality Measures </b></h3>
+                <br/>
 
                 <span>
                     Game-theoretic measures use the combinatorial structure of coalitional games to get more refined understanding of which nodes are the most important in the network. To define the game-theoretic centrality we first need to specify the characteristic function, i.e., the value of any group (subset) of nodes that corresponds to centrality of this group. Next, we use a game-theoretic solution concept of choice (e.g., the Shapley value or the Banzhaf Index) to get a centrality scores of individual nodes.
                 </span>
-			<br/>
-			<br/>
+                <br/>
+                <br/>
 
                 <span>
-The key advantage of this approach is that nodes are ranked not only according to their individual roles in the network but also according to how they contribute to the role played by all possible subsets of nodes. 
+The key advantage of this approach is that nodes are ranked not only according to their individual roles in the network but also according to how they contribute to the role played by all possible subsets of nodes.
                 </span>
-			<br/>
-			<br/>
+                <br/>
+                <br/>
 
                 <span>
 For more details and applications see our website <a target="_blank" href="www.game-theoretic-centrality.com">                        www.game-theoretic-centrality.com</a>.
                 </span>
-			<br/>
-			<br/>
+                <br/>
+                <br/>
 
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">SV-based degree centrality</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm1" onclick="selectCentralityOnList(this, 'Algorithm1Small');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Algorithm1" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 class="panel-title lead">SV-based degree centrality</h3>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkboxContainer form-group">
+                                    <input type="checkbox" name="centralities" id="Algorithm1" onclick="selectCentralityOnList(this, 'Algorithm1Small');" autocomplete="off" />
+                                    <div class="btn-group">
+                                        <label for="Algorithm1" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="panel-body lead">
+                    <div class="panel-body lead">
                 <span>
 The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$. Note that $C$ does not have to necessarily connected.
 Formally:
@@ -357,39 +373,39 @@ where $N(C) = \{v \in V\setminus C: \exists w \in C \ (v,w) \in E\}$.
                         <div class="wikipedia">
                             For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 1, page 622.
                         </div>
-            </div>
-        </div>
-
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">SV-based degree centrality (extended)</h3>
                     </div>
+                </div>
 
-                    <div class="col-sm-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 class="panel-title lead">SV-based degree centrality (extended)</h3>
+                            </div>
+
+                            <div class="col-sm-4">
                         <span class="parameterInfo">
                             $k =$
                         </span>
-                        <input type="number" id="kParam" name="quantity" class="input-group-lg" min="2" value="2"/>
-                    </div>
+                                <input type="number" id="kParam" name="quantity" class="input-group-lg" min="2" value="2"/>
+                            </div>
 
-                    <div class="col-xs-2">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm2" onclick="selectCentralityOnList(this, 'Algorithm2Small');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Algorithm2" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+                            <div class="col-xs-2">
+                                <div class="checkboxContainer form-group">
+                                    <input type="checkbox" name="centralities" id="Algorithm2" onclick="selectCentralityOnList(this, 'Algorithm2Small');" autocomplete="off" />
+                                    <div class="btn-group">
+                                        <label for="Algorithm2" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="panel-body lead">
-                        <span>  
-The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $k$ steps away. 
+                    <div class="panel-body lead">
+                        <span>
+The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $k$ steps away.
 Formally:\[
 \nu(C,G) =
 \begin{cases}
@@ -405,43 +421,39 @@ Note that for $k=1$, the extended SV-degree centrality collapses to the SV-degre
                         <div class="wikipedia">
                             For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 2, page 624.
                         </div>
-            </div>
-        </div>
-
-
-
-
-
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">SV-degree (extended, weighted networks)</h3>
                     </div>
-                    <div class="col-sm-3">
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 class="panel-title lead">SV-degree (extended, weighted networks)</h3>
+                            </div>
+                            <div class="col-sm-3">
                         <span class="parameterInfo">
                             $d_{cutoff} =$
                         </span>
-                        <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm3" onclick="selectCentralityOnList(this, 'Algorithm3Small');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Algorithm3" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+                                <input type="number" id="d_cutoffParam" name="quantity" class="input-group-lg" min="1" value="1"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="checkboxContainer form-group">
+                                    <input type="checkbox" name="centralities" id="Algorithm3" onclick="selectCentralityOnList(this, 'Algorithm3Small');" autocomplete="off" />
+                                    <div class="btn-group">
+                                        <label for="Algorithm3" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="panel-body lead">
-                <div class="row">
-                    <div class="col-sm-12">
+                    <div class="panel-body lead">
+                        <div class="row">
+                            <div class="col-sm-12">
                         <span>
-The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $d_{cutoff}$ away. 
+The value of a coalition $C \subseteq V$ is defined as the number of neighbours of $C$ that are not further than $d_{cutoff}$ away.
 \[
 \nu(C,G) =
 \begin{cases}
@@ -450,35 +462,35 @@ The value of a coalition $C \subseteq V$ is defined as the number of neighbours 
 \end{cases}
 \]
                         </span>
-<div class="wikipedia">
-                            For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 3, page 626.
+                                <div class="wikipedia">
+                                    For more see <a href="http://arxiv.org/ftp/arxiv/papers/1402/1402.0567.pdf" target="_blank">Michalak et al. (2013) </a>, Algorithm 3, page 626.
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
-            </div>
-         </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">SV-degree (general, weighted networks)</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm4" onclick="selectCentralityOnList(this, 'Algorithm4Small');"  autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Algorithm4" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 class="panel-title lead">SV-degree (general, weighted networks)</h3>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkboxContainer form-group">
+                                    <input type="checkbox" name="centralities" id="Algorithm4" onclick="selectCentralityOnList(this, 'Algorithm4Small');"  autocomplete="off" />
+                                    <div class="btn-group">
+                                        <label for="Algorithm4" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="panel-body lead">
+                    <div class="panel-body lead">
                 <span>
 The value of a coalition $C \subseteq V$ is defined as the sum of the shotest distances between $C$ and all other nodes in the network. Formally:
 \[
@@ -490,209 +502,210 @@ The value of a coalition $C \subseteq V$ is defined as the sum of the shotest di
 \]
 where $min_{w \in C}\{sp(w,v)\}$ is the minimum distance of node $v \in V \setminus C$ from $C$ and $f$ is an arbitrary function.
                 </span>
-                <div class="wikipedia">
-                    Wikipedia
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">SV-based betweenness</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Algorithm5" onclick="selectCentralityOnList(this, 'Algorithm5Small');"  autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Algorithm5" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
-                            </div>
+                        <div class="wikipedia">
+                            Wikipedia
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body lead">
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 class="panel-title lead">SV-based betweenness</h3>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkboxContainer form-group">
+                                    <input type="checkbox" name="centralities" id="Algorithm5" onclick="selectCentralityOnList(this, 'Algorithm5Small');"  autocomplete="off" />
+                                    <div class="btn-group">
+                                        <label for="Algorithm5" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body lead">
                 <span>
 The value of a coalition $C \subseteq V$ is defined as the fraction of shortest paths passing through $C$. Formally:
 \[
-\nu(C,G) = \sum_{ s,t \notin C } \frac{|\{sp(s,t): C \cap sp(s,t) \neq \emptyset \}| }{|\{sp(s,t)\}|} 
+\nu(C,G) = \sum_{ s,t \notin C } \frac{|\{sp(s,t): C \cap sp(s,t) \neq \emptyset \}| }{|\{sp(s,t)\}|}
 \]
-where $sp(s,t)$ denotes the shortest path between $s$ and $t$. 
+where $sp(s,t)$ denotes the shortest path between $s$ and $t$.
                 </span>
-                <div class="wikipedia">
-  For more see <a href="http://www.ifaamas.org/Proceedings/aamas2012/papers/1B_4.pdf" target="_blank">Szczepański et al. (2012) </a>, Algorithm 1.
-                </div>
-            </div>
-        </div>
-        
-        
-        
-
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">Myerson</h3>
-                    </div>
-
-                    <div class="col-xs-6">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Myerson" onclick="selectCentralityOnList(this, 'MyersonSmall');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Myerson" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
-                            </div>
+                        <div class="wikipedia">
+                            For more see <a href="http://www.ifaamas.org/Proceedings/aamas2012/papers/1B_4.pdf" target="_blank">Szczepański et al. (2012) </a>, Algorithm 1.
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body lead">
-                <div class="row">
-                    <div class="col-sm-12 myerson">
-                        <div>
-Myerson (1977) considered a coalitional game restricted by a graph each edge of which represents the communication link between two agents. In the Myerson model, only if players are <i>connected</i>, either directly <i>via</i> an edge or indirectly <i>via</i> intermediaries, can they effectively cooperate in a coalitional game and generate the value added.
 
-<br/>
-<br/>
-
-
-Mathematically, for the value function $v$ that specifies values of all connected coalitions,  the Myerson value of node $v_i$ is given by:
-
-\[
-MV_i(\nu,G)= SV_i(\nu^G)
-\]
-
-<br/>
-
-
-                            Definition of the characteristic function of connected coalition $S$ with with set
-                            of internal edges $E(S)$:
-                        </div>
-
-
-                        <div>
-                            <div class="checkboxContainer form-group small">
-                                <input type="radio" name="choose" id="predefinedFunction" checked="true" value="predefined" autocomplete="off"/>
-                                <div class="btn-group">
-                                    <label for="predefinedFunction" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-triangle-right"></span>
-                                        <span> </span>
-                                    </label>
-                                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 class="panel-title lead">Diffusion centrality</h3>
                             </div>
-                            <span>Pre-defined functions</span>
-                        </div>
-
-                        <div class="function">
-                            <div class="btn-group">
-                                $ value(S) = $
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <span id="myersonFunction"> $ 1 $ </span>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a onclick="setFunction(this, 1);">  $ 1 $ </a></li>
-                                        <li><a onclick="setFunction(this, 2);"> $ |S| $ </a></li>
-                                        <li><a onclick="setFunction(this, 3);"> $ |S|^{2} $ </a></li>
-                                        <li><a onclick="setFunction(this, 4);"> $ weight(S) $ </a></li>
-                                        <li><a onclick="setFunction(this, 5);"> $ weight(S)^2 $ </a></li>
-                                        <li><a onclick="setFunction(this, 6);"> $ E(S) $ </a></li>
-                                        <li><a onclick="setFunction(this, 7);"> $ E(S)^{2} $ </a></li>
-                                        <li><a onclick="setFunction(this, 8);"> $ weight(E(S)) $ </a></li>
-                                        <li><a onclick="setFunction(this, 9);"> $ weight(E(S))^2 $ </a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="checkboxContainer form-group small">
-                                <input type="radio" name="choose" id="generalFunction" value="general" autocomplete="off"/>
-                                <div class="btn-group">
-                                    <label for="generalFunction" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-triangle-right"></span>
-                                        <span> </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <span>A pre-defined more general function</span>
-                        </div>
-                        <div class="definition">
-                            $ value(S) = (|S|)^{\alpha} \times (|E(S)|)^{\beta} \times \left(\sum\nolimits_{v_i \in S} {w_i \over |S|}\right)^{\gamma} \times
-                            \left(\sum\nolimits_{(v_i, v_j) \in E(S)} {w_{ij} \over |E(S)|}\right)^{\delta} $
-                        </div>
-                        <div class="parameter">
-                            <div>
-                                <span class="parameterInfo">
-                                    $ \alpha = $
-                                </span>
-                                <input type="number" id="myerson_a" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
-                                <span class="parameterInfo">
-                                    $ \beta =  $
-                                </span>
-                                <input type="number" id="myerson_b" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
-                            </div>
-                            <div>
-                                <span class="parameterInfo">
-                                    $ \gamma = $
-                                </span>
-                                <input type="number" id="myerson_c" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
-                                <span class="parameterInfo">
-                                    $ \delta = $
-                                </span>
-                                <input type="number" id="myerson_d" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 wikipedia">
-                        Wikipedia
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-		<div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3 class="panel-title lead">Diffusion centrality</h3>
-                    </div>
-                    <div class="col-sm-3">
+                            <div class="col-sm-3">
                         <span class="parameterInfo">
                             $q =$
                         </span>
-                        <input type="number" id="qDiffusionParam" name="probability" class="input-group-lg" min="0" max="1" value="0.2" step="0.05"/>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="checkboxContainer form-group">
-                            <input type="checkbox" name="centralities" id="Diffusion" onclick="selectCentralityOnList(this, 'DiffusionSmall');" autocomplete="off" />
-                            <div class="btn-group">
-                                <label for="Diffusion" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span> </span>
-                                </label>
+                                <input type="number" id="qDiffusionParam" name="probability" class="input-group-lg" min="0" max="1" value="0.2" step="0.05"/>
                             </div>
+                            <div class="col-xs-3">
+                                <div class="checkboxContainer form-group">
+                                    <input type="checkbox" name="centralities" id="Diffusion" onclick="selectCentralityOnList(this, 'DiffusionSmall');" autocomplete="off" />
+                                    <div class="btn-group">
+                                        <label for="Diffusion" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body lead">
+                        <div class="row">
+                            <div class="col-sm-8">
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-body lead">
-                <div class="row">
-                    <div class="col-sm-8">
-                    </div>
+        </div>
+    </div>
 
+
+    <div id="myersonDescriptionContainer" style="display: none;">
+        <div class="centralityChoose well">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title lead">Myerson</h3>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="checkboxContainer form-group">
+                                <input type="checkbox" name="centralities" id="Myerson" onclick="selectCentralityOnList(this, 'MyersonSmall');" autocomplete="off" />
+                                <div class="btn-group">
+                                    <label for="Myerson" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span> </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body lead">
+                    <div class="row">
+                        <div class="col-sm-12 myerson">
+                            <div>
+                                Myerson (1977) considered a coalitional game restricted by a graph each edge of which represents the communication link between two agents. In the Myerson model, only if players are <i>connected</i>, either directly <i>via</i> an edge or indirectly <i>via</i> intermediaries, can they effectively cooperate in a coalitional game and generate the value added.
+
+                                <br/>
+                                <br/>
+
+
+                                Mathematically, for the value function $v$ that specifies values of all connected coalitions,  the Myerson value of node $v_i$ is given by:
+
+                                \[
+                                MV_i(\nu,G)= SV_i(\nu^G)
+                                \]
+
+                                <br/>
+
+
+                                Definition of the characteristic function of connected coalition $S$ with with set
+                                of internal edges $E(S)$:
+                            </div>
+
+
+                            <div>
+                                <div class="checkboxContainer form-group small">
+                                    <input type="radio" name="choose" id="predefinedFunction" checked="true" value="predefined" autocomplete="off"/>
+                                    <div class="btn-group">
+                                        <label for="predefinedFunction" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-triangle-right"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <span>Pre-defined functions</span>
+                            </div>
+
+                            <div class="function">
+                                <div class="btn-group">
+                                    $ value(S) = $
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <span id="myersonFunction"> $ 1 $ </span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a onclick="setFunction(this, 1);">  $ 1 $ </a></li>
+                                            <li><a onclick="setFunction(this, 2);"> $ |S| $ </a></li>
+                                            <li><a onclick="setFunction(this, 3);"> $ |S|^{2} $ </a></li>
+                                            <li><a onclick="setFunction(this, 4);"> $ weight(S) $ </a></li>
+                                            <li><a onclick="setFunction(this, 5);"> $ weight(S)^2 $ </a></li>
+                                            <li><a onclick="setFunction(this, 6);"> $ E(S) $ </a></li>
+                                            <li><a onclick="setFunction(this, 7);"> $ E(S)^{2} $ </a></li>
+                                            <li><a onclick="setFunction(this, 8);"> $ weight(E(S)) $ </a></li>
+                                            <li><a onclick="setFunction(this, 9);"> $ weight(E(S))^2 $ </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="checkboxContainer form-group small">
+                                    <input type="radio" name="choose" id="generalFunction" value="general" autocomplete="off"/>
+                                    <div class="btn-group">
+                                        <label for="generalFunction" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-triangle-right"></span>
+                                            <span> </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <span>A pre-defined more general function</span>
+                            </div>
+                            <div class="definition">
+                                $ value(S) = (|S|)^{\alpha} \times (|E(S)|)^{\beta} \times \left(\sum\nolimits_{v_i \in S} {w_i \over |S|}\right)^{\gamma} \times
+                                \left(\sum\nolimits_{(v_i, v_j) \in E(S)} {w_{ij} \over |E(S)|}\right)^{\delta} $
+                            </div>
+                            <div class="parameter">
+                                <div>
+                                    <span class="parameterInfo">
+                                        $ \alpha = $
+                                    </span>
+                                    <input type="number" id="myerson_a" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                                    <span class="parameterInfo">
+                                        $ \beta =  $
+                                    </span>
+                                    <input type="number" id="myerson_b" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                                </div>
+                                <div>
+                                    <span class="parameterInfo">
+                                        $ \gamma = $
+                                    </span>
+                                    <input type="number" id="myerson_c" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                                    <span class="parameterInfo">
+                                        $ \delta = $
+                                    </span>
+                                    <input type="number" id="myerson_d" name="myersonParameters" class="input-group-lg" min="1" value="1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 wikipedia">
+                            Wikipedia
+                        </div>
+                    </div>
                 </div>
             </div>
-         </div>
-
+        </div>
     </div>
 
 
